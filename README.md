@@ -2,7 +2,7 @@
 
 ## Versions
 
-We use Unity LTS 2018.4.33f1
+We use Unity LTS 2020.3.1f1 
 
 ## Timeline
 
