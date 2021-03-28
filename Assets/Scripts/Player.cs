@@ -23,13 +23,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            jumpKeyPressed = true;
-        }
-
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            jumpKeyPressed = true;
     }
 
 
