@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
 
-        listenForKeys();
+        ListenForKeys();
     }
 
 
@@ -37,19 +37,19 @@ public class Player : MonoBehaviour
     // do physic-ish stuff here so that low fps don't slow physics down
      void FixedUpdate()
     {
-        jump();
-        move();
+        Jump();
+        Move();
     }
 
 
-    void listenForKeys()
+    void ListenForKeys()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             _jumpKeyPressed = true;
     }
 
 
-    void jump()
+    void Jump()
     {
         if (_jumpKeyPressed)
         {
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     }
 
 
-    void move()
+    void Move()
     {
         _rigidBodyComponent.velocity = new Vector3(_rigidBodyComponent.velocity.x, _rigidBodyComponent.velocity.y, _verticalInput);
     }
