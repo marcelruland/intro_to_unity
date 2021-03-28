@@ -10,15 +10,16 @@ public class Player : MonoBehaviour
     private bool _jumpKeyPressed;
     private float _horizontalInput;
     private float _verticalInput;
-    private Rigidbody _rigidbodyComponent;
+    private Rigidbody _rigidBodyComponent;
 
+    [SerializeField] private float _speed = 3;
     private float _rotation;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _rigidbodyComponent = GetComponent<Rigidbody>();
+        _rigidBodyComponent = GetComponent<Rigidbody>();
     }
 
 
@@ -28,20 +29,38 @@ public class Player : MonoBehaviour
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
 
+        listenForKeys();
+    }
+
+
+    // FixedUpdate is called once every physics update
+    // do physic-ish stuff here so that low fps don't slow physics down
+     void FixedUpdate()
+    {
+        jump();
+        move();
+    }
+
+
+    void listenForKeys()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
             _jumpKeyPressed = true;
     }
 
 
-    // FixedUpdate is called once every physics update
-    private void FixedUpdate()
+    void jump()
     {
         if (_jumpKeyPressed)
         {
-            _rigidbodyComponent.AddForce(Vector3.up * 3, ForceMode.VelocityChange);
+            _rigidBodyComponent.AddForce(Vector3.up * _speed, ForceMode.VelocityChange);
             _jumpKeyPressed = false;
         }
+    }
 
-        _rigidbodyComponent.velocity = new Vector3(_rigidbodyComponent.velocity.x, _rigidbodyComponent.velocity.y, _verticalInput);
+
+    void move()
+    {
+        _rigidBodyComponent.velocity = new Vector3(_rigidBodyComponent.velocity.x, _rigidBodyComponent.velocity.y, _verticalInput);
     }
 }
