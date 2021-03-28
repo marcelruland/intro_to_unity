@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     // declare player fields
+    private bool isAirborn;
+    private bool jumpKeyPressed;
     private float horizontalInput;
+    private float verticalInput;
+    private Rigidbody rigidbodyComponent;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbodyComponent = GetComponent<Rigidbody>();
     }
 
 
@@ -20,16 +25,23 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
+            jumpKeyPressed = true;
         }
 
         horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
     }
 
 
     // FixedUpdate is called once every physics update
     private void FixedUpdate()
     {
-        // bla
+        if (jumpKeyPressed)
+        {
+            rigidbodyComponent.AddForce(Vector3.up * 3, ForceMode.VelocityChange);
+            jumpKeyPressed = false;
+        }
+
+        rigidbodyComponent.velocity = new Vector3(rigidbodyComponent.velocity.x, rigidbodyComponent.velocity.y, verticalInput);
     }
 }
