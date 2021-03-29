@@ -13,7 +13,7 @@ We use Unity LTS 2020.3.1f1
 ## Units
 
 | value | unit |
-----------------
+|-------|------|
 | length | meters (one "square" in the unity grid is $1m^2$) |
 | Mass | kg |
 | Velocity | m/s |
