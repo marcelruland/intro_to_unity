@@ -17,8 +17,8 @@ public class Controller : MonoBehaviour
 
     private float horizontalKeyboardInput;
     private float verticalKeyboardInput;
-    private float horizontalMouseMovement;
-    private float verticalMouseMovement;
+    //private float horizontalMouseMovement;
+    //private float verticalMouseMovement;
 
     protected float RotationSpeed = 0.7f;
 
@@ -32,8 +32,8 @@ public class Controller : MonoBehaviour
     {
         horizontalKeyboardInput = Input.GetAxis("Horizontal");
         verticalKeyboardInput = Input.GetAxis("Vertical");
-        horizontalMouseMovement = Input.GetAxis("Mouse X");
-        verticalMouseMovement = Input.GetAxis("Mouse Y");
+        //horizontalMouseMovement = Input.GetAxis("Mouse X");
+        //verticalMouseMovement = Input.GetAxis("Mouse Y");
         Vector3 mousePos = Input.mousePosition;
 
         InputRotationX = (mousePos.x * RotationSpeed) % 360f;
