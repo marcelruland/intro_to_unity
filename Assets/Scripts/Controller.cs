@@ -20,7 +20,7 @@ public class Controller : MonoBehaviour
     private float horizontalMouseMovement;
     private float verticalMouseMovement;
 
-    protected float RotationSpeed = 1;
+    protected float RotationSpeed = 0.7f;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class Controller : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
 
         InputRotationX = (mousePos.x * RotationSpeed) % 360f;
-        InputRotationY = Mathf.Clamp(InputRotationY - verticalKeyboardInput * RotationSpeed * Time.deltaTime, -88f, 88f);
+        InputRotationY = Mathf.Clamp(InputRotationY - mousePos.y * RotationSpeed * Time.deltaTime, -88f, 88f);
 
         // left and forward
         var characterForward = Quaternion.AngleAxis(InputRotationX, Vector3.up) * Vector3.forward;
