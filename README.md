@@ -14,13 +14,15 @@ We use Unity LTS 2020.3.1f1
 
 | value | unit |
 |-------|------|
-| length | meters (one "square" in the unity grid is $1m^2$) |
+| length | meters (one "square" in the unity grid is 1m^2) |
 | Mass | kg |
 | Velocity | m/s |
 
-## Timeline
+## Keybindings
 
-1. 25.03.21: Videos ansehen, Konzept brainstormen
-1. Konzept entwerfen
-1. Implementierung in Code
-1. Deadline 12.4.21!
+| function | key   |
+|----------|-------|
+| jump     | space |
+| pick up  | E     |
+| throw    | R (change to E) |
+| hoard    | F     |
