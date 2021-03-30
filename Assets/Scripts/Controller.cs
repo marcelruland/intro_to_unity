@@ -1,5 +1,5 @@
 /*
- * This script only applies to the playable character.
+ * This script only applies to the playable character
  * Do NOT use for NPCs.
  */
 

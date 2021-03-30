@@ -1,5 +1,5 @@
 /*
- * This script can be applied to both PC and NPC
+ * This script can be applied to both PC and NPC.
  */
 
 using System.Collections;
