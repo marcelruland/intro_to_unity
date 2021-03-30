@@ -34,10 +34,8 @@ public class Player : MonoBehaviour
 
     /*
      * Awake is called when
-     * (a) the script is loaded
-     * OR
-     * (b) when an object it is attached to is instantiated
-     * See wonderful diagram at 
+     * (a) the script is loaded OR (b) when an object it is attached to is
+     * instantiated. See wonderful diagram at 
      * https://gamedevbeginner.com/start-vs-awake-in-unity/
      */
     private void Awake()
@@ -83,10 +81,16 @@ public class Player : MonoBehaviour
         /*
          * ROTATION
          * If we get rotational input, then:
-         * TODO: assign angle to separate variable before calling AngleAxis
+         * We calculate the angle of the current input and move the LookRotation
+         * to it.
+         * Or something like this, I swear I understood it at some point in the
+         * middle of the night...
          */
         if (inputLook.magnitude > 0.01f)
-            LookRotation = Quaternion.AngleAxis(Vector3.SignedAngle(Vector3.forward, inputLook, Vector3.up), Vector3.up);
+        {
+            float angle = Vector3.SignedAngle(Vector3.forward, inputLook, Vector3.up);
+            LookRotation = Quaternion.AngleAxis(angle, Vector3.up);
+        }
 
         transform.rotation = LookRotation;
 

@@ -13,19 +13,26 @@ public class Controller : MonoBehaviour
 {
     // input
     protected Player Player;
-    protected float InputRotationX; // ]0, 360]
-    protected float InputRotationY; // ]-90, 90[
-
     private float horizontalKeyboardInput;
+    private float verticalKeyboardInput;
     private bool jumpButton;
 
+    // movement
+    [SerializeField] private float RotationSpeed = 0.7f;
+    protected float InputRotationX; // ]0, 360]
+    protected float InputRotationY; // ]-80, 80[
 
     // camera control
     public Vector3 CameraPivot;
     public float CameraDistance;  // 0 for first, 3 for third person
 
-    protected float RotationSpeed = 0.7f;
 
+    /*
+     * Awake is called when
+     * (a) the script is loaded OR (b) when an object it is attached to is
+     * instantiated. See wonderful diagram at 
+     * https://gamedevbeginner.com/start-vs-awake-in-unity/
+     */
     private void Awake()
     {
         // returns the first active loaded object of type Player
@@ -36,22 +43,30 @@ public class Controller : MonoBehaviour
     // FixedUpdate is called once every physics update
     private void FixedUpdate()
     {
-        // input
+        /* 
+         * INPUT
+         * - keyboard input for movement
+         * - jump button (Space) for jumping (duh...)
+         * - mousePosition for view rotation (Probably not the best way in the
+         *   world but Siriusly who cares if it works?)
+         */
         horizontalKeyboardInput = Input.GetAxis("Horizontal");
+        verticalKeyboardInput = Input.GetAxis("Vertical");
         jumpButton = Input.GetKeyDown(KeyCode.Space);
         Vector3 mousePos = Input.mousePosition;
 
         // rotation for camera position
         InputRotationX = (mousePos.x * RotationSpeed) % 360f;
-        InputRotationY = Mathf.Clamp(-mousePos.y / 2 * RotationSpeed, -88f, 88f);
+        InputRotationY = Mathf.Clamp(-mousePos.y / 2 * RotationSpeed, -80f, 80f);
 
-        // left and forward
-        var characterForward = Quaternion.AngleAxis(InputRotationX, Vector3.up) * Vector3.forward;
-        var characterLeft = Quaternion.AngleAxis(InputRotationX + 90, Vector3.up) * Vector3.forward;
+        // forward and left relative to the player
+        // useful for calculating run and look direction
+        var playerForward = Quaternion.AngleAxis(InputRotationX, Vector3.up) * Vector3.forward;
+        var playerLeft = Quaternion.AngleAxis(InputRotationX + 90, Vector3.up) * Vector3.forward;
 
         // run and look direction
-        var runDirection = characterForward * Input.GetAxisRaw("Vertical") + characterLeft * horizontalKeyboardInput;
-        var lookDirection = Quaternion.AngleAxis(InputRotationY, characterLeft) * characterForward;
+        var runDirection = playerForward * verticalKeyboardInput + playerLeft * horizontalKeyboardInput;
+        var lookDirection = Quaternion.AngleAxis(InputRotationY, playerLeft) * playerForward;
 
         // set values
         Player.Input.RunX = runDirection.x;
