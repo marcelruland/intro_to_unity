@@ -4,6 +4,7 @@
  */
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,28 +17,37 @@ public class Controller : MonoBehaviour
     protected float InputRotationY; // ]-90, 90[
 
     private float horizontalKeyboardInput;
-    private float verticalKeyboardInput;
+    //private float verticalKeyboardInput;
     //private float horizontalMouseMovement;
     //private float verticalMouseMovement;
+
+
+    // camera control
+    public Vector3 CameraPivot;
+    public float CameraDistance;  // 0 for first, 3 for third person
 
     protected float RotationSpeed = 0.7f;
 
     private void Awake()
     {
+        // returns the first active loaded object of type Player
         Player = FindObjectOfType<Player>();
     }
 
 
+    // FixedUpdate is called once every physics update
     private void FixedUpdate()
     {
         horizontalKeyboardInput = Input.GetAxis("Horizontal");
-        verticalKeyboardInput = Input.GetAxis("Vertical");
-        //horizontalMouseMovement = Input.GetAxis("Mouse X");
-        //verticalMouseMovement = Input.GetAxis("Mouse Y");
+        //verticalKeyboardInput = Input.GetAxis("Vertical");
         Vector3 mousePos = Input.mousePosition;
 
+        // may become useful in the future
+        //horizontalMouseMovement = Input.GetAxis("Mouse X");
+        //verticalMouseMovement = Input.GetAxis("Mouse Y");
+
         InputRotationX = (mousePos.x * RotationSpeed) % 360f;
-        InputRotationY = Mathf.Clamp(InputRotationY - mousePos.y * RotationSpeed * Time.deltaTime, -88f, 88f);
+        InputRotationY = Mathf.Clamp(-mousePos.y / 2 * RotationSpeed, -88f, 88f);
 
         // left and forward
         var characterForward = Quaternion.AngleAxis(InputRotationX, Vector3.up) * Vector3.forward;
@@ -53,5 +63,17 @@ public class Controller : MonoBehaviour
         Player.Input.LookX = lookDirection.x;
         Player.Input.LookZ = lookDirection.z;
         //Player.Input.Jump = JumpButton.Pressed;
+
+        var characterPivot = Quaternion.AngleAxis(InputRotationX, Vector3.up) * CameraPivot;
+
+        StartCoroutine(SetCamera(lookDirection, characterPivot));
+    }
+
+    private IEnumerator SetCamera(Vector3 lookDirection, Vector3 characterPivot)
+    {
+        yield return new WaitForFixedUpdate();
+
+        Camera.main.transform.position = (transform.position + characterPivot) - lookDirection * CameraDistance;
+        Camera.main.transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
     }
 }
