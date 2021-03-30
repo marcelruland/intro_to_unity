@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine.SceneManagement;
+
 public class Countdown : MonoBehaviour
 {
     private const float initialTime = 60f;
@@ -24,9 +26,15 @@ public class Countdown : MonoBehaviour
     {
         // set timer to zero once time is up, else count down
         if (timeRemaining <= 0)
+        {
             timeRemaining = 0f;
+            // restart scene
+            SceneManager.LoadScene("SampleScene");
+        }
         else
+        {
             timeRemaining -= Time.deltaTime;
+        }
 
         CountdownText.text = timeRemaining.ToString("0.0");
 
