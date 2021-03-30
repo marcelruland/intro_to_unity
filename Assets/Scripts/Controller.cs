@@ -17,9 +17,7 @@ public class Controller : MonoBehaviour
     protected float InputRotationY; // ]-90, 90[
 
     private float horizontalKeyboardInput;
-    //private float verticalKeyboardInput;
-    //private float horizontalMouseMovement;
-    //private float verticalMouseMovement;
+    private bool jumpButton;
 
 
     // camera control
@@ -38,14 +36,12 @@ public class Controller : MonoBehaviour
     // FixedUpdate is called once every physics update
     private void FixedUpdate()
     {
+        // input
         horizontalKeyboardInput = Input.GetAxis("Horizontal");
-        //verticalKeyboardInput = Input.GetAxis("Vertical");
+        jumpButton = Input.GetKeyDown(KeyCode.Space);
         Vector3 mousePos = Input.mousePosition;
 
-        // may become useful in the future
-        //horizontalMouseMovement = Input.GetAxis("Mouse X");
-        //verticalMouseMovement = Input.GetAxis("Mouse Y");
-
+        // rotation for camera position
         InputRotationX = (mousePos.x * RotationSpeed) % 360f;
         InputRotationY = Mathf.Clamp(-mousePos.y / 2 * RotationSpeed, -88f, 88f);
 
@@ -62,12 +58,13 @@ public class Controller : MonoBehaviour
         Player.Input.RunZ = runDirection.z;
         Player.Input.LookX = lookDirection.x;
         Player.Input.LookZ = lookDirection.z;
-        //Player.Input.Jump = JumpButton.Pressed;
+        Player.Input.Jump = jumpButton;
 
+        // camera position
         var characterPivot = Quaternion.AngleAxis(InputRotationX, Vector3.up) * CameraPivot;
-
         StartCoroutine(SetCamera(lookDirection, characterPivot));
     }
+
 
     private IEnumerator SetCamera(Vector3 lookDirection, Vector3 characterPivot)
     {

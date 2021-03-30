@@ -98,6 +98,11 @@ public class Player : MonoBehaviour
          */
         if (Input.Jump)
         {
+            /*
+             * The character's pivot is on the ground (y=0). We cast a ray
+             * downwards by 0.1. The Raycast function returns true if the ray
+             * collides with a collider, false otherwise
+             */
             var grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, 1);
             if (grounded)
             {
