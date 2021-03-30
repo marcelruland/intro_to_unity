@@ -16,6 +16,7 @@ public class Controller : MonoBehaviour
     private float horizontalKeyboardInput;
     private float verticalKeyboardInput;
     private bool jumpButton;
+    private bool throwButton;
 
     // movement
     [SerializeField] private float rotationSpeed = 0.7f;
@@ -40,19 +41,28 @@ public class Controller : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        /*
+         * Get input for jumping and throwing and pass on.
+         */
+        jumpButton = Input.GetKeyDown(KeyCode.Space);
+        throwButton = Input.GetKeyDown(KeyCode.E);
+        Player.Input.JumpButton = jumpButton;
+        Player.Input.ThrowButton = throwButton;
+    }
+
     // FixedUpdate is called once every physics update
     private void FixedUpdate()
     {
         /* 
          * INPUT
          * - keyboard input for movement
-         * - jump button (Space) for jumping (duh...)
          * - mousePosition for view rotation (Probably not the best way in the
          *   world but Siriusly who cares if it works?)
          */
         horizontalKeyboardInput = Input.GetAxis("Horizontal");
         verticalKeyboardInput = Input.GetAxis("Vertical");
-        jumpButton = Input.GetKeyDown(KeyCode.Space);
         Vector3 mousePos = Input.mousePosition;
 
         // rotation for camera position
@@ -73,7 +83,6 @@ public class Controller : MonoBehaviour
         Player.Input.RunZ = runDirection.z;
         Player.Input.LookX = lookDirection.x;
         Player.Input.LookZ = lookDirection.z;
-        Player.Input.Jump = jumpButton;
 
         // camera position
         var characterPivot = Quaternion.AngleAxis(inputRotationX, Vector3.up) * cameraPivot;

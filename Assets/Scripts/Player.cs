@@ -21,12 +21,16 @@ public class Player : MonoBehaviour
         public float LookZ;
         public float RunX;
         public float RunZ;
-        public bool Jump;
+        public bool JumpButton;
+        public bool ThrowButton;
     }
 
     // How fast should a player be and how high should they jump?
     public float speed = 3f;
     public float jumpForce = 4f;
+
+    // throwing stuff
+    [SerializeField] private GameObject carriedObject;
 
     protected Rigidbody Rigidbody;
     protected Quaternion LookRotation;
@@ -53,54 +57,28 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Throw();
+        Jump();
     }
     
 
     // FixedUpdate is called once every physics update
      void FixedUpdate()
     {
+        UpdatePosition();
+        UpdateRotation();
+    }
 
-        /*
-         * INPUT
-         * inputRun and inputLook take the data from the InputStr and convert it
-         * to Vector3's.
-         * ClampMagnitude sets the value of a vector to 1, IF it is < 1.
-         * This is necessary because the actual speed should never be higher
-         * than the value stored in the Speed variable.
-         */
-        var inputRun = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
-        var inputLook = Vector3.ClampMagnitude(new Vector3(Input.LookX, 0, Input.LookZ), 1);
 
-        /*
-         * POSITION
-         * use the inputRun Vector3 to calculate the new velocity
-         */
-        Rigidbody.velocity = new Vector3(inputRun.x * speed, Rigidbody.velocity.y, inputRun.z * speed);
-
-        /*
-         * ROTATION
-         * If we get rotational input, then:
-         * We calculate the angle of the current input and move the LookRotation
-         * to it.
-         * Or something like this, I swear I understood it at some point in the
-         * middle of the night...
-         */
-        if (inputLook.magnitude > 0.01f)
-        {
-            float angle = Vector3.SignedAngle(Vector3.forward, inputLook, Vector3.up);
-            LookRotation = Quaternion.AngleAxis(angle, Vector3.up);
-        }
-
-        transform.rotation = LookRotation;
-
+    private void Jump()
+    {
         /*
          * JUMPING
          * if jump input is true (key pressed etc) then
          * check if the character is on the ground (can't jump if airborne)
          * set y-velocity to jumpForce, leave other axes be
          */
-        if (Input.Jump)
+        if (Input.JumpButton)
         {
             /*
              * The character's pivot is on the ground (y=0). We cast a ray
@@ -112,4 +90,45 @@ public class Player : MonoBehaviour
                 Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, jumpForce, Rigidbody.velocity.z);
         }
     }
+
+
+    private void UpdatePosition()
+    {
+        /*
+         * ClampMagnitude sets the value of a vector to 1, IF it is < 1.
+         * This is necessary because the actual speed should never be higher
+         * than the value stored in the Speed variable.
+         */
+        var inputRun = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
+        Rigidbody.velocity = new Vector3(inputRun.x * speed, Rigidbody.velocity.y, inputRun.z * speed);
+    }
+
+
+    private void UpdateRotation()
+    {
+        /*
+         * If we get rotational input, then:
+         * We calculate the angle of the current input and move the LookRotation
+         * to it.
+         * Or something like this, I swear I understood it at some point in the
+         * middle of the night...
+         */
+        var inputLook = Vector3.ClampMagnitude(new Vector3(Input.LookX, 0, Input.LookZ), 1);
+        if (inputLook.magnitude > 0.01f)
+        {
+            float angle = Vector3.SignedAngle(Vector3.forward, inputLook, Vector3.up);
+            LookRotation = Quaternion.AngleAxis(angle, Vector3.up);
+        }
+        transform.rotation = LookRotation;
+    }
+
+    private void Throw()
+    {
+        if (Input.ThrowButton)
+        {
+            Instantiate(carriedObject, transform.position, Quaternion.identity);
+        }
+    }
 }
+
+
