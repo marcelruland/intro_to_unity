@@ -18,13 +18,13 @@ public class Controller : MonoBehaviour
     private bool jumpButton;
 
     // movement
-    [SerializeField] private float RotationSpeed = 0.7f;
-    protected float InputRotationX; // ]0, 360]
-    protected float InputRotationY; // ]-80, 80[
+    [SerializeField] private float rotationSpeed = 0.7f;
+    protected float inputRotationX; // ]0, 360]
+    protected float inputRotationY; // ]-80, 80[
 
     // camera control
-    public Vector3 CameraPivot;
-    public float CameraDistance;  // 0 for first, 3 for third person
+    public Vector3 cameraPivot = new Vector3(0f, 1.42f, 0f);
+    public float cameraDistance = 2.2f;  // 0 for first, 3 for third person
 
 
     /*
@@ -56,19 +56,19 @@ public class Controller : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
 
         // rotation for camera position
-        InputRotationX = (mousePos.x * RotationSpeed) % 360f;
-        InputRotationY = Mathf.Clamp(-mousePos.y / 2 * RotationSpeed, -80f, 80f);
+        inputRotationX = (mousePos.x * rotationSpeed) % 360f;
+        inputRotationY = Mathf.Clamp(-mousePos.y / 2 * rotationSpeed, -80f, 80f);
 
         // forward and left relative to the player
         // useful for calculating run and look direction
-        var playerForward = Quaternion.AngleAxis(InputRotationX, Vector3.up) * Vector3.forward;
-        var playerLeft = Quaternion.AngleAxis(InputRotationX + 90, Vector3.up) * Vector3.forward;
+        var playerForward = Quaternion.AngleAxis(inputRotationX, Vector3.up) * Vector3.forward;
+        var playerLeft = Quaternion.AngleAxis(inputRotationX + 90, Vector3.up) * Vector3.forward;
 
         // run and look direction
         var runDirection = playerForward * verticalKeyboardInput + playerLeft * horizontalKeyboardInput;
-        var lookDirection = Quaternion.AngleAxis(InputRotationY, playerLeft) * playerForward;
+        var lookDirection = Quaternion.AngleAxis(inputRotationY, playerLeft) * playerForward;
 
-        // set values
+        // feed calculated values to player object
         Player.Input.RunX = runDirection.x;
         Player.Input.RunZ = runDirection.z;
         Player.Input.LookX = lookDirection.x;
@@ -76,7 +76,7 @@ public class Controller : MonoBehaviour
         Player.Input.Jump = jumpButton;
 
         // camera position
-        var characterPivot = Quaternion.AngleAxis(InputRotationX, Vector3.up) * CameraPivot;
+        var characterPivot = Quaternion.AngleAxis(inputRotationX, Vector3.up) * cameraPivot;
         StartCoroutine(SetCamera(lookDirection, characterPivot));
     }
 
@@ -85,7 +85,7 @@ public class Controller : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
 
-        Camera.main.transform.position = (transform.position + characterPivot) - lookDirection * CameraDistance;
+        Camera.main.transform.position = (transform.position + characterPivot) - lookDirection * cameraDistance;
         Camera.main.transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
     }
 }

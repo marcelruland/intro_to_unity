@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
     }
 
     // How fast should a player be and how high should they jump?
-    public float Speed = 3f;
-    public float JumpForce = 4f;
+    public float speed = 3f;
+    public float jumpForce = 4f;
 
     protected Rigidbody Rigidbody;
     protected Quaternion LookRotation;
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
          * POSITION
          * use the inputRun Vector3 to calculate the new velocity
          */
-        Rigidbody.velocity = new Vector3(inputRun.x * Speed, Rigidbody.velocity.y, inputRun.z * Speed);
+        Rigidbody.velocity = new Vector3(inputRun.x * speed, Rigidbody.velocity.y, inputRun.z * speed);
 
         /*
          * ROTATION
@@ -109,9 +109,7 @@ public class Player : MonoBehaviour
              */
             var grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, 1);
             if (grounded)
-            {
-                Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, JumpForce, Rigidbody.velocity.z);
-            }
+                Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, jumpForce, Rigidbody.velocity.z);
         }
     }
 }
