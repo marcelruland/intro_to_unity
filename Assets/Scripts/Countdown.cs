@@ -22,13 +22,12 @@ public class Countdown : MonoBehaviour
         if (TimeRemaining <= 0)
             TimeRemaining = 0f;
         else
-            // maybe we can increase the 1 at some point to really really mess with people
-            TimeRemaining -= 1 * Time.deltaTime;
+            TimeRemaining -= Time.deltaTime;
 
         CountdownText.text = TimeRemaining.ToString("0.0");
 
-        // colour
-        // this can definitely by optimsed, but idc right now
+        // COLOUR
+        // this can definitely by optimised, but idc right now
         if (TimeRemaining < 30)
             CountdownText.color = Color.yellow;
         if (TimeRemaining < 20)
