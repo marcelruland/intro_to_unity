@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         public float RunX;
         public float RunZ;
         public bool JumpButton;
-        public bool ThrowButton;
+        public bool PrimaryActionButton;
     }
 
     // How fast should a player be and how high should they jump?
@@ -75,6 +75,12 @@ public class Player : MonoBehaviour
 
     private void PickUpCollectable()
     {
+        /*
+         * 1. find closest Collectable
+         * 2. destroy it
+         * 3. put value into carriedObject variable
+         */
+
         Physics.OverlapSphere();
     }
 
@@ -135,7 +141,7 @@ public class Player : MonoBehaviour
 
     private void Throw()
     {
-        if (Input.ThrowButton)
+        if (Input.PrimaryActionButton)
         {
             Instantiate(carriedObject, transform.position, Quaternion.identity);
         }

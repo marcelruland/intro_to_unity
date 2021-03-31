@@ -16,7 +16,7 @@ public class Controller : MonoBehaviour
     private float horizontalKeyboardInput;
     private float verticalKeyboardInput;
     private bool jumpButton;
-    private bool throwButton;
+    private bool primaryActionButton;
 
     // movement
     [SerializeField] private float rotationSpeed = 0.7f;
@@ -47,9 +47,9 @@ public class Controller : MonoBehaviour
          * Get input for jumping and throwing and pass on.
          */
         jumpButton = Input.GetKeyDown(KeyCode.Space);
-        throwButton = Input.GetKeyDown(KeyCode.E);
+        primaryActionButton = Input.GetKeyDown(KeyCode.E);
         Player.Input.JumpButton = jumpButton;
-        Player.Input.ThrowButton = throwButton;
+        Player.Input.PrimaryActionButton = primaryActionButton;
     }
 
     // FixedUpdate is called once every physics update
