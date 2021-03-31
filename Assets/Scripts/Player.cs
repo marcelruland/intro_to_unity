@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
         public float RunZ;
         public bool JumpButton;
         public bool PrimaryActionButton;
+        public bool SecondaryActionButton;
     }
 
     // How fast should a player be and how high should they jump?
