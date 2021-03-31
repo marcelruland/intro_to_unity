@@ -30,10 +30,10 @@ public class Player : MonoBehaviour
     // How fast should a player be and how high should they jump?
     private readonly float speed = 3f;
     private readonly float jumpForce = 4f;
-    private readonly float detectObjectsInRadius = 1f;
+    private readonly float detectObjectsInRadius = 4f;
 
     // carrying collectables
-    [SerializeField] private GameObject carriedObject;
+    [SerializeField] private string carriedObject;
 
     protected Rigidbody Rigidbody;
     protected Quaternion LookRotation;
@@ -60,9 +60,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Throw();
         Jump();
-        PickUpCollectable();
+        
+        var carriesNothing = carriedObject != "";
+        if (carriesNothing)
+            PickUpCollectable();
+        else
+            PerformActionWithCollectable();
     }
     
 
@@ -85,7 +89,7 @@ public class Player : MonoBehaviour
          */
 
         // do nothing if already carrying something
-        if (carriedObject != null)
+        if (carriedObject != "")
             return;
 
         // all the things we can collect (definitely not the ideal way but idc)
@@ -98,15 +102,18 @@ public class Player : MonoBehaviour
         };
 
         // check for objects within radius
-        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
+        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, 5);
 
         //iterate over found objects
         foreach (var objectInRadius in objectsInRadius){
             // if one of the objects within radius is a collectable
+
             var isCollectable = Array.Exists(collectables, element => element == objectInRadius.tag);
             if (isCollectable && Input.PrimaryActionButton)
             {
-                Destroy(objectInRadius);
+                // write tag to carriedObject variable and destroy gameObject
+                carriedObject = objectInRadius.tag;
+                Destroy(objectInRadius.gameObject);
             };
         }
     }
@@ -166,7 +173,7 @@ public class Player : MonoBehaviour
     }
 
 
-    private void Throw()
+    private void PerformActionWithCollectable()
     {
         if (Input.PrimaryActionButton)
         {
