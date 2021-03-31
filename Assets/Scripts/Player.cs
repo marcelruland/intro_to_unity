@@ -33,10 +33,19 @@ public class Player : MonoBehaviour
     private readonly float detectObjectsInRadius = 4f;
 
     // carrying collectables
-    [SerializeField] private string carriedObject;
+    [SerializeField] private string carriedCollectable;
 
     protected Rigidbody Rigidbody;
     protected Quaternion LookRotation;
+
+    // all the things we can collect (definitely not the ideal way but idc)
+    private readonly string[] collectables = new string[] {
+        "Banana",
+        "Disinfectant",
+        "Flour",
+        "ToiletRoll",
+        "Yeast",
+    };
 
 
     /*
@@ -62,7 +71,7 @@ public class Player : MonoBehaviour
     {
         Jump();
         
-        var carriesNothing = carriedObject != "";
+        var carriesNothing = carriedCollectable == "";
         if (carriesNothing)
             PickUpCollectable();
         else
@@ -89,17 +98,9 @@ public class Player : MonoBehaviour
          */
 
         // do nothing if already carrying something
-        if (carriedObject != "")
+        if (carriedCollectable != "")
             return;
 
-        // all the things we can collect (definitely not the ideal way but idc)
-        string[] collectables = new string[] {
-            "Banana",
-            "Disinfectant",
-            "Flour",
-            "ToiletRoll",
-            "Yeast",
-        };
 
         // check for objects within radius
         Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, 5);
@@ -112,7 +113,7 @@ public class Player : MonoBehaviour
             if (isCollectable && Input.PrimaryActionButton)
             {
                 // write tag to carriedObject variable and destroy gameObject
-                carriedObject = objectInRadius.tag;
+                carriedCollectable = objectInRadius.tag;
                 Destroy(objectInRadius.gameObject);
             };
         }
@@ -173,12 +174,21 @@ public class Player : MonoBehaviour
     }
 
 
+
     private void PerformActionWithCollectable()
     {
         if (Input.PrimaryActionButton)
         {
-            //Instantiate(carriedObject, transform.position, Quaternion.identity);
+            ThrowCollectable();
         }
+    }
+
+
+    private void ThrowCollectable()
+    {
+        var pathToPrefab = "Prefabs/" + carriedCollectable;
+        var thrownCollectable = Instantiate(Resources.Load(pathToPrefab, typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+        carriedCollectable = "";
     }
 }
 
