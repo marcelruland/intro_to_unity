@@ -26,6 +26,9 @@
 # Rider editor files
 .idea/
 
+# DS_store bla
+.DS_Store
+
 # Gradle cache directory
 .gradle/
 
