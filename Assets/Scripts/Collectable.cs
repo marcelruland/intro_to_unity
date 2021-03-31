@@ -23,7 +23,6 @@ public class Collectable : MonoBehaviour
          * that the action can be performed with
          */
         string[] hordables = new string[] {
-            "Banana",
             "Disinfectant",
             "Flour",
             "ToiletRoll",
