@@ -2,6 +2,7 @@
  * This script can be applied to both PC and NPC.
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,10 +28,11 @@ public class Player : MonoBehaviour
     }
 
     // How fast should a player be and how high should they jump?
-    public float speed = 3f;
-    public float jumpForce = 4f;
+    private readonly float speed = 3f;
+    private readonly float jumpForce = 4f;
+    private readonly float detectObjectsInRadius = 1f;
 
-    // throwing stuff
+    // carrying collectables
     [SerializeField] private GameObject carriedObject;
 
     protected Rigidbody Rigidbody;
@@ -82,7 +84,31 @@ public class Player : MonoBehaviour
          * 3. put value into carriedObject variable
          */
 
-        Physics.OverlapSphere();
+        // do nothing if already carrying something
+        if (carriedObject != null)
+            return;
+
+        // all the things we can collect (definitely not the ideal way but idc)
+        string[] collectables = new string[] {
+            "Banana",
+            "Disinfectant",
+            "Flour",
+            "ToiletRoll",
+            "Yeast",
+        };
+
+        // check for objects within radius
+        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
+
+        //iterate over found objects
+        foreach (var objectInRadius in objectsInRadius){
+            // if one of the objects within radius is a collectable
+            var isCollectable = Array.Exists(collectables, element => element == objectInRadius.tag);
+            if (isCollectable && Input.PrimaryActionButton)
+            {
+                Destroy(objectInRadius);
+            };
+        }
     }
 
 
@@ -144,7 +170,7 @@ public class Player : MonoBehaviour
     {
         if (Input.PrimaryActionButton)
         {
-            Instantiate(carriedObject, transform.position, Quaternion.identity);
+            //Instantiate(carriedObject, transform.position, Quaternion.identity);
         }
     }
 }
