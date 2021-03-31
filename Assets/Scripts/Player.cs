@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     // How fast should a player be and how high should they jump?
     private readonly float speed = 3f;
     private readonly float jumpForce = 4f;
-    private readonly float throwForce = 4f;
+    private readonly float throwForce = 8f;
     private readonly float detectObjectsInRadius = 4f;
 
     // carrying collectables
