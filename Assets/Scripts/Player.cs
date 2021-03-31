@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
     {
         Throw();
         Jump();
+        PickUpCollectable();
     }
     
 
@@ -68,6 +69,15 @@ public class Player : MonoBehaviour
         UpdatePosition();
         UpdateRotation();
     }
+
+
+
+
+    private void PickUpCollectable()
+    {
+        Physics.OverlapSphere();
+    }
+
 
 
     private void Jump()
@@ -121,6 +131,7 @@ public class Player : MonoBehaviour
         }
         transform.rotation = LookRotation;
     }
+
 
     private void Throw()
     {
