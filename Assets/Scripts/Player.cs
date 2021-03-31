@@ -30,13 +30,14 @@ public class Player : MonoBehaviour
     // How fast should a player be and how high should they jump?
     private readonly float speed = 3f;
     private readonly float jumpForce = 4f;
+    private readonly float throwForce = 4f;
     private readonly float detectObjectsInRadius = 4f;
 
     // carrying collectables
     [SerializeField] private string carriedCollectable;
 
     protected Rigidbody Rigidbody;
-    protected Quaternion LookRotation;
+    protected Quaternion lookRotation;
 
     // all the things we can collect (definitely not the ideal way but idc)
     private readonly string[] collectables = new string[] {
@@ -103,7 +104,7 @@ public class Player : MonoBehaviour
 
 
         // check for objects within radius
-        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, 5);
+        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
 
         //iterate over found objects
         foreach (var objectInRadius in objectsInRadius){
@@ -168,9 +169,9 @@ public class Player : MonoBehaviour
         if (inputLook.magnitude > 0.01f)
         {
             float angle = Vector3.SignedAngle(Vector3.forward, inputLook, Vector3.up);
-            LookRotation = Quaternion.AngleAxis(angle, Vector3.up);
+            lookRotation = Quaternion.AngleAxis(angle, Vector3.up);
         }
-        transform.rotation = LookRotation;
+        transform.rotation = lookRotation;
     }
 
 
@@ -186,9 +187,30 @@ public class Player : MonoBehaviour
 
     private void ThrowCollectable()
     {
+        /*
+         * INSTANTIATION
+         * instantiate carried collectable
+         */
         var pathToPrefab = "Prefabs/" + carriedCollectable;
         var thrownCollectable = Instantiate(Resources.Load(pathToPrefab, typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+        // can't carry what you threw away can ya?
         carriedCollectable = "";
+
+        /*
+        * POSITION
+        * move instantiated collectable in front of player
+        */
+        thrownCollectable.transform.position =
+            transform.position
+            + transform.forward
+            + transform.right
+            + Vector3.up;
+
+        // VELOCITY
+        // same velocity as player
+        var currentPlayerVelocity = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
+
+        thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + transform.forward * throwForce;
     }
 }
 
