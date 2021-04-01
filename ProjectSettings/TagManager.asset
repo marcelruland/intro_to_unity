@@ -9,6 +9,7 @@ TagManager:
   - Banana
   - Yeast
   - Flour
+  - Milk
   layers:
   - Default
   - TransparentFX

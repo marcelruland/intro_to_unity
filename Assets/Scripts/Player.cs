@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     private readonly float speed = 3f;
     private readonly float jumpForce = 4f;
     private readonly float throwForce = 8f;
-    private readonly float detectObjectsInRadius = 4f;
+    private readonly float detectObjectsInRadius = 2f;
 
     // Collectable and actions related
     [SerializeField] public string carriedCollectable;
@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
         "Banana",
         "Disinfectant",
         "Flour",
+        "Milk",
         "ToiletRoll",
         "Yeast",
     };
@@ -186,6 +187,7 @@ public class Player : MonoBehaviour
                 Destroy(objectInRadius.gameObject);
                 secondaryAction = actionsWithCollectable[carriedCollectable][0];
                 tertiaryAction = actionsWithCollectable[carriedCollectable][1];
+                break;
             };
         }
     }
@@ -220,6 +222,7 @@ public class Player : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+
 
     private void ResetCollectableValues()
     {

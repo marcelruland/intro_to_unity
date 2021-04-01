@@ -73,6 +73,7 @@ public class UserInterface : MonoBehaviour
         /*
          * TODO: only execute this Method when a Collectable is picked up or
          * hoarded/thrown/etc. Maybe via message sending?
+         * I think the whole GetComponent stuff is quite costly.
          */
 
         var secondaryAction = playableCharacter.GetComponent<Player>().secondaryAction;
