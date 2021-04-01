@@ -21,7 +21,8 @@ public class Controller : MonoBehaviour
     private bool tertiaryActionButton;
 
     // movement
-    [SerializeField] private float rotationSpeed = 0.7f;
+    // TODO: rotationSpeed doesn't do anything, no idea why
+    [SerializeField] private float rotationSpeed = 50;
     protected float inputRotationX; // ]0, 360]
     protected float inputRotationY; // ]-80, 80[
 
@@ -74,7 +75,7 @@ public class Controller : MonoBehaviour
 
         // rotation for camera position
         inputRotationX = (mousePos.x * rotationSpeed) % 360f;
-        inputRotationY = Mathf.Clamp(-mousePos.y / 2 * rotationSpeed, -80f, 80f);
+        inputRotationY = Mathf.Clamp(-mousePos.y * rotationSpeed, -80f, 80f);
 
         // forward and left relative to the player
         // useful for calculating run and look direction
