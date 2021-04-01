@@ -1,4 +1,5 @@
 /*
+ * DEPRECATED DO NOT USE
  * Collectables are objects the player may pick up and then perform an action
  * with.
  */
