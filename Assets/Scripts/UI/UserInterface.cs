@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class UI : MonoBehaviour
+public class UserInterface : MonoBehaviour
 {
     private const float initialTime = 60f;
     float timeRemaining = 0f;
