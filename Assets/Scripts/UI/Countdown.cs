@@ -8,12 +8,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using UnityEngine.SceneManagement;
+using System;
 
 public class Countdown : MonoBehaviour
 {
     private const float initialTime = 60f;
     float timeRemaining = 0f;
     [SerializeField] Text CountdownText;
+    [SerializeField] Text CarriedCollectable;
 
 
     private void Start()
@@ -23,6 +25,11 @@ public class Countdown : MonoBehaviour
 
 
     private void Update()
+    {
+        updateCountdown();
+    }
+
+    private void updateCountdown()
     {
         // set timer to zero once time is up, else count down
         if (timeRemaining <= 0)
