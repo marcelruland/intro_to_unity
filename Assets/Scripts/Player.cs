@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private readonly float detectObjectsInRadius = 4f;
 
     // carrying collectables
-    [SerializeField] private string carriedCollectable;
+    [SerializeField] public string carriedCollectable;
 
     protected Rigidbody Rigidbody;
     protected Quaternion lookRotation;
@@ -81,41 +81,12 @@ public class Player : MonoBehaviour
     
 
     // FixedUpdate is called once every physics update
-     void FixedUpdate()
+    void FixedUpdate()
     {
         UpdatePosition();
         UpdateRotation();
     }
 
-
-
-
-    private void PickUpCollectable()
-    {
-        /*
-         * 1. find closest Collectable
-         * 2. destroy it
-         * 3. put value into carriedObject variable
-         */
-        if (!Input.PrimaryActionButton)
-            return;
-
-        // check for objects within radius
-        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
-
-        //iterate over found objects
-        foreach (var objectInRadius in objectsInRadius){
-            // if one of the objects within radius is a collectable
-
-            var isCollectable = Array.Exists(collectables, element => element == objectInRadius.tag);
-            if (isCollectable)
-            {
-                // write tag to carriedObject variable and destroy gameObject
-                carriedCollectable = objectInRadius.tag;
-                Destroy(objectInRadius.gameObject);
-            };
-        }
-    }
 
 
 
@@ -171,6 +142,33 @@ public class Player : MonoBehaviour
         transform.rotation = lookRotation;
     }
 
+
+    private void PickUpCollectable()
+    {
+        /*
+         * 1. find closest Collectable
+         * 2. destroy it
+         * 3. put value into carriedObject variable
+         */
+        if (!Input.PrimaryActionButton)
+            return;
+
+        // check for objects within radius
+        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
+
+        //iterate over found objects
+        foreach (var objectInRadius in objectsInRadius){
+            // if one of the objects within radius is a collectable
+
+            var isCollectable = Array.Exists(collectables, element => element == objectInRadius.tag);
+            if (isCollectable)
+            {
+                // write tag to carriedObject variable and destroy gameObject
+                carriedCollectable = objectInRadius.tag;
+                Destroy(objectInRadius.gameObject);
+            };
+        }
+    }
 
 
     private void PerformActionWithCollectable()
