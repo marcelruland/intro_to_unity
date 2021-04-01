@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
 
     // Collectable and actions related
     [SerializeField] public string carriedCollectable;
-    //[SerializeField] public string primaryAction;
     [SerializeField] public string secondaryAction;
     [SerializeField] public string tertiaryAction;
 
@@ -45,9 +44,9 @@ public class Player : MonoBehaviour
 
     // all the things we can collect (definitely not the ideal way but idc)
     private readonly string[] collectables = new string[] {
-        "Banana",
-        "Disinfectant",
-        "Flour",
+        //"Banana",
+        //"Disinfectant",
+        //"Flour",
         "Milk",
         "ToiletRoll",
         "Yeast",
