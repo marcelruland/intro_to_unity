@@ -880,7 +880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CountdownText: {fileID: 1537227141}
   CarriedCollectable: {fileID: 786652426}
-  PossibleActions: {fileID: 0}
+  PossibleActions: {fileID: 735240382}
 --- !u!1001 &90129767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4745,7 +4745,7 @@ GameObject:
   - component: {fileID: 735240383}
   - component: {fileID: 735240382}
   m_Layer: 5
-  m_Name: Actions
+  m_Name: PossibleActions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4803,11 +4803,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Primary
+  m_Text: 'E: primary
 
-    Secondary
+    R: secondary
 
-    Tertiary'
+    T: tertiary'
 --- !u!222 &735240383
 CanvasRenderer:
   m_ObjectHideFlags: 0
