@@ -10,7 +10,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     /*
-     * This input string contains all information necessary for character
+     * This input struct contains all information necessary for character
      * movement. The input can either be provided by the user or by some other
      * game logic (for NPCs).
      */
@@ -34,8 +34,11 @@ public class Player : MonoBehaviour
     private readonly float throwForce = 8f;
     private readonly float detectObjectsInRadius = 4f;
 
-    // carrying collectables
+    // Collectable and actions related
     [SerializeField] public string carriedCollectable;
+    //[SerializeField] public string primaryAction;
+    [SerializeField] public string secondaryAction;
+    [SerializeField] public string tertiaryAction;
 
     protected Rigidbody Rigidbody;
     protected Quaternion lookRotation;
@@ -47,6 +50,21 @@ public class Player : MonoBehaviour
         "Flour",
         "ToiletRoll",
         "Yeast",
+    };
+
+    /*
+     * look up actions for Collectable
+     * NOTE: primary action is ALWAYS throw so this stores only secondary and
+     * tertiary actions
+     */
+    private readonly Dictionary<string, string[]> actionsWithCollectable = new Dictionary<string, string[]>
+    {
+        { "Banana", new string[] {"", "" } },
+        { "Disinfectant",new string[] {"hoard", "drink" } },
+        { "Flour", new string[] {"hoard", "" }  },
+        { "Milk", new string[] {"hoard", "drink" }  },
+        { "ToiletRoll", new string[] {"hoard", "" }  },
+        { "Yeast", new string[] {"hoard", "" }  },
     };
 
 
@@ -87,7 +105,6 @@ public class Player : MonoBehaviour
         UpdatePosition();
         UpdateRotation();
     }
-
 
 
 
@@ -167,6 +184,8 @@ public class Player : MonoBehaviour
                 // write tag to carriedObject variable and destroy gameObject
                 carriedCollectable = objectInRadius.tag;
                 Destroy(objectInRadius.gameObject);
+                secondaryAction = actionsWithCollectable[carriedCollectable][0];
+                tertiaryAction = actionsWithCollectable[carriedCollectable][1];
             };
         }
     }
@@ -177,12 +196,37 @@ public class Player : MonoBehaviour
         if (Input.PrimaryActionButton)
         {
             ThrowCollectable();
+            ResetCollectableValues();
         } else if (Input.SecondaryActionButton)
         {
-            HoardCollectable();
+            PerformSecondaryAction();
+            ResetCollectableValues();
+        } else if (Input.TertiaryActionButton)
+        {
+            PerformTertiaryAction();
+            ResetCollectableValues();
         }
     }
 
+    private void PerformSecondaryAction()
+    {
+        if (secondaryAction == "hoard")
+            HoardCollectable();
+        else
+            throw new NotImplementedException();
+    }
+
+    private void PerformTertiaryAction()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ResetCollectableValues()
+    {
+        carriedCollectable = "";
+        secondaryAction = "";
+        tertiaryAction = "";
+    }
 
     private void HoardCollectable()
     {
