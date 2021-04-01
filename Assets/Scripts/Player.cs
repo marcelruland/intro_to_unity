@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
          * INSTANTIATION
          * instantiate carried collectable
          */
-        var pathToPrefab = "Prefabs/" + carriedCollectable;
+        var pathToPrefab = "Prefabs/Collectables/" + carriedCollectable;
         var thrownCollectable = Instantiate(Resources.Load(pathToPrefab, typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
         // can't carry what you threw away can ya?
         carriedCollectable = "";
