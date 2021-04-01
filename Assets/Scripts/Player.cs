@@ -97,11 +97,8 @@ public class Player : MonoBehaviour
          * 2. destroy it
          * 3. put value into carriedObject variable
          */
-
-        // do nothing if already carrying something
-        if (carriedCollectable != "")
+        if (!Input.PrimaryActionButton)
             return;
-
 
         // check for objects within radius
         Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
@@ -111,7 +108,7 @@ public class Player : MonoBehaviour
             // if one of the objects within radius is a collectable
 
             var isCollectable = Array.Exists(collectables, element => element == objectInRadius.tag);
-            if (isCollectable && Input.PrimaryActionButton)
+            if (isCollectable)
             {
                 // write tag to carriedObject variable and destroy gameObject
                 carriedCollectable = objectInRadius.tag;
@@ -181,7 +178,16 @@ public class Player : MonoBehaviour
         if (Input.PrimaryActionButton)
         {
             ThrowCollectable();
+        } else if (Input.SecondaryActionButton)
+        {
+            HoardCollectable();
         }
+    }
+
+
+    private void HoardCollectable()
+    {
+        throw new NotImplementedException();
     }
 
 
@@ -202,8 +208,8 @@ public class Player : MonoBehaviour
         */
         thrownCollectable.transform.position =
             transform.position
-            + transform.forward
-            + transform.right
+            + transform.forward * 0f
+            + transform.right * 0.5f
             + Vector3.up;
 
         // VELOCITY
