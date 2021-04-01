@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
         public bool JumpButton;
         public bool PrimaryActionButton;
         public bool SecondaryActionButton;
+        public bool TertiaryActionButton;
     }
 
     // How fast should a player be and how high should they jump?

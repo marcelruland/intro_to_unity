@@ -18,6 +18,7 @@ public class Controller : MonoBehaviour
     private bool jumpButton;
     private bool primaryActionButton;
     private bool secondaryActionButton;
+    private bool tertiaryActionButton;
 
     // movement
     [SerializeField] private float rotationSpeed = 0.7f;
@@ -50,10 +51,12 @@ public class Controller : MonoBehaviour
         jumpButton = Input.GetKeyDown(KeyCode.Space);
         primaryActionButton = Input.GetKeyDown(KeyCode.E);
         secondaryActionButton = Input.GetKeyDown(KeyCode.R);
+        tertiaryActionButton = Input.GetKeyDown(KeyCode.T);
 
         Player.Input.JumpButton = jumpButton;
         Player.Input.PrimaryActionButton = primaryActionButton;
         Player.Input.SecondaryActionButton = secondaryActionButton;
+        Player.Input.TertiaryActionButton = tertiaryActionButton;
     }
 
     // FixedUpdate is called once every physics update
