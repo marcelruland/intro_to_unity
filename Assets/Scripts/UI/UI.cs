@@ -10,22 +10,20 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class Countdown : MonoBehaviour
+public class UI : MonoBehaviour
 {
     private const float initialTime = 60f;
     float timeRemaining = 0f;
     GameObject playableCharacter;
     [SerializeField] Text CountdownText;
     [SerializeField] Text CarriedCollectable;
+    [SerializeField] Text PossibleActions;
 
 
     private void Start()
     {
         timeRemaining = initialTime;
         playableCharacter = GameObject.FindGameObjectsWithTag("GameController")[0];
-        //Debug.Log(playableCharacter.tag);
-        //CarriedCollectable.text = playableCharacter.tag;
-        //CarriedCollectable.text = "blablabla";
     }
 
 
@@ -33,6 +31,7 @@ public class Countdown : MonoBehaviour
     {
         updateCountdown();
         updateCarriedCollectable();
+        updatePossibleActions();
     }
 
 
@@ -66,6 +65,12 @@ public class Countdown : MonoBehaviour
     private void updateCarriedCollectable()
     {
         CarriedCollectable.text = playableCharacter.GetComponent<Player>().carriedCollectable;
+    }
+
+
+    private void updatePossibleActions()
+    {
+        // bla
     }
 
 }
