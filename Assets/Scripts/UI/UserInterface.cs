@@ -70,7 +70,21 @@ public class UserInterface : MonoBehaviour
 
     private void updatePossibleActions()
     {
-        // bla
+        /*
+         * TODO: only execute this Method when a Collectable is picked up or
+         * hoarded/thrown/etc. Maybe via message sending?
+         */
+
+        var secondaryAction = playableCharacter.GetComponent<Player>().secondaryAction;
+        var tertiaryAction = playableCharacter.GetComponent<Player>().tertiaryAction;
+
+        if (secondaryAction == "" && tertiaryAction == "")
+        {
+            PossibleActions.text = "\n\n";
+            return;
+        }
+        var outString = "E: throw\nR: " + secondaryAction + "\nT: " + tertiaryAction;
+        PossibleActions.text = outString;
     }
 
 }
