@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     // all the things we can collect (definitely not the ideal way but idc)
     private readonly string[] collectables = new string[] {
-        //"Banana",
+        "Banana",
         //"Disinfectant",
         "Flour",
         "Milk",
