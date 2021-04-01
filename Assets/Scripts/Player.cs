@@ -198,7 +198,16 @@ public class Player : MonoBehaviour
          * instantiate carried collectable
          */
         var pathToPrefab = "Prefabs/Collectables/" + carriedCollectable;
-        var thrownCollectable = Instantiate(Resources.Load(pathToPrefab, typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+        var thrownCollectable =
+            Instantiate(
+                Resources.Load(
+                    pathToPrefab,
+                    typeof(GameObject)
+                ),
+                transform.position,
+                Quaternion.identity
+            )
+            as GameObject;
         // can't carry what you threw away can ya?
         carriedCollectable = "";
 
@@ -206,11 +215,12 @@ public class Player : MonoBehaviour
         * POSITION
         * move instantiated collectable in front of player
         */
-        thrownCollectable.transform.position =
+        var throwPosition = 
             transform.position
             + transform.forward * 0f
             + transform.right * 0.5f
             + Vector3.up;
+        thrownCollectable.transform.position = throwPosition;
 
         // VELOCITY
         // same velocity as player
