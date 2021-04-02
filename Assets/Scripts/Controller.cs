@@ -75,7 +75,7 @@ public class Controller : MonoBehaviour
 
         // rotation for camera position
         inputRotationX = (mousePos.x * rotationSpeed) % 360f;
-        inputRotationY = Mathf.Clamp(-mousePos.y * rotationSpeed, -80f, 80f);
+        inputRotationY = Mathf.Clamp(-(mousePos.y - 300) * rotationSpeed, -80f, 80f);
 
         // forward and left relative to the player
         // useful for calculating run and look direction
