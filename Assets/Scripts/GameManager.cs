@@ -62,13 +62,13 @@ public class GameManager : MonoBehaviour
     public enum State
     {
         MENU,
-        INITIALIZE,      // initialise game, remove leftovers from previous
-                         // levels, set cursor visibility, etc
+        INITIALIZE,      // prepare loading of new level
         LOADLEVEL,       // load a level
         PLAY,            // level is being played
         LEVELCOMPLETED,  // level is completed, summary screen, then switch to
                          // load next level
-        GAMEOVER         // you're done
+        GAMEOVER,        // you're done
+        END,             // you made it
     }
 
     private State _state;
