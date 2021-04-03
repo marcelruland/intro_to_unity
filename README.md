@@ -20,9 +20,11 @@ We use Unity LTS 2020.3.1f1
 
 ## Keybindings
 
-| function | key   |
-|----------|-------|
-| jump     | space |
-| pick up  | E     |
-| throw    | R (change to E) |
-| hoard    | F     |
+(Mega wenig Aufwand das zu ändern.)
+
+| function       | key   |
+|----------------|-------|
+| jump           | space |
+| primary action | E     |
+| secondary      | R     |
+| tertiary       | T     |
