@@ -2,7 +2,7 @@
  * GAME MANAGER
  * Central script that manages the game (who would've thought?).
  * It manages the UI, keeps track of metrics like the player score, hoarded
- * objects eetc, and manages the state of the game.
+ * objects etc, and manages the state of the game.
  */
 
 
@@ -15,10 +15,15 @@ public class GameManager : MonoBehaviour
     /*
      * VARIABLES
      */
+    public static GameManager Instance { get; private set; }
+    public GameObject[] levels;
+    GameObject _currentLevel;
 
     // Prefabs
+    public GameObject prefabPlayer;
+
     public GameObject prefabBanana;
-    //public GameObject prefabDisinfectant;
+    //public GameObject prefabDisinfectant;  // not yet implemented
     public GameObject prefabFlour;
     public GameObject prefabMilk;
     public GameObject prefabToiletRoll;
@@ -30,6 +35,23 @@ public class GameManager : MonoBehaviour
     public GameObject panelLevelCompleted;
     public GameObject panelGameOver;
 
+    // get and set stuff
+    private int _level;
+    public int Level
+    {
+        get { return _level; }
+        set { _level = value;
+            //levelText.text = "LEVEL: " + _level;
+        }
+    }
+    private int _score;
+    public int Score
+    {
+        get { return _score; }
+        set { _score = value;
+            //scoreText.text = "SCORE: " + _score;
+        }
+    }
 
     /*
      * GAME STATES
@@ -37,7 +59,6 @@ public class GameManager : MonoBehaviour
      * Depending on the current state, and whenever one state ends and another
      * state begins, the GameManager performs certain actions.
      */
-    public static GameManager Instance { get; private set; }
     public enum State
     {
         MENU,
@@ -55,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void SwitchState(State newState, float delay = 0)
     {
+        Debug.Log("Old " + _state.ToString() + "   New: " + newState.ToString());
         StartCoroutine(SwitchDelay(newState, delay));
     }
 
@@ -75,7 +97,10 @@ public class GameManager : MonoBehaviour
      */
     void Start()
     {
-        
+        // make accessing this script easier
+        Instance = this;
+        // begin in the (main) menu
+        SwitchState(State.MENU);
     }
 
     void BeginState(State newState)
@@ -83,6 +108,8 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case State.MENU:
+                panelMenu.SetActive(true);
+                SwitchState(State.LOADLEVEL, 3f);
                 break;
             case State.INITIALIZE:
                 break;
@@ -91,6 +118,8 @@ public class GameManager : MonoBehaviour
             case State.LEVELCOMPLETED:
                 break;
             case State.LOADLEVEL:
+                _currentLevel = Instantiate(levels[Level]);
+                SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
                 break;
@@ -121,6 +150,7 @@ public class GameManager : MonoBehaviour
         switch (_state)
         {
             case State.MENU:
+                panelMenu.SetActive(false);
                 break;
             case State.INITIALIZE:
                 break;
