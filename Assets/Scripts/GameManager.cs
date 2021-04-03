@@ -109,9 +109,14 @@ public class GameManager : MonoBehaviour
         {
             case State.MENU:
                 panelMenu.SetActive(true);
-                SwitchState(State.LOADLEVEL, 3f);
+                SwitchState(State.INITIALIZE, 3f);
                 break;
             case State.INITIALIZE:
+                Cursor.visible = false;
+                panelPlay.SetActive(true);
+                if (_currentLevel != null)
+                    Destroy(_currentLevel);
+                SwitchState(State.LOADLEVEL);
                 break;
             case State.PLAY:
                 break;
