@@ -13,11 +13,11 @@ using System;
 public class UserInterface : MonoBehaviour
 {
     private const float initialTime = 60f;
-    float timeRemaining = 0f;
-    GameObject playableCharacter;
-    [SerializeField] Text CountdownText;
-    [SerializeField] Text CarriedCollectable;
-    [SerializeField] Text PossibleActions;
+    private float timeRemaining = 0f;
+    private GameObject playableCharacter;
+    [SerializeField] private Text CountdownText;
+    [SerializeField] private Text CarriedCollectable;
+    [SerializeField] private Text PossibleActions;
 
 
     private void Start()
@@ -64,7 +64,7 @@ public class UserInterface : MonoBehaviour
 
     private void updateCarriedCollectable()
     {
-        CarriedCollectable.text = playableCharacter.GetComponent<Player>().carriedCollectable;
+        CarriedCollectable.text = "bla";//playableCharacter.GetComponent<Player>().carriedCollectable;
     }
 
 
@@ -76,8 +76,8 @@ public class UserInterface : MonoBehaviour
          * I think the whole GetComponent stuff is quite costly.
          */
 
-        var secondaryAction = playableCharacter.GetComponent<Player>().secondaryAction;
-        var tertiaryAction = playableCharacter.GetComponent<Player>().tertiaryAction;
+        var secondaryAction = "bla";//playableCharacter.GetComponent<Player>().secondaryAction;
+        var tertiaryAction = "bla";//playableCharacter.GetComponent<Player>().tertiaryAction;
 
         if (secondaryAction == "" && tertiaryAction == "")
         {
