@@ -171,17 +171,17 @@ public class Player : MonoBehaviour
 
         // check for objects within radius
         Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
-        foreach (Collider objectInRadius in objectsInRadius)
-        {
-            Debug.DrawLine(transform.position, objectInRadius.transform.position, Color.red);
-        }
+        // foreach (Collider objectInRadius in objectsInRadius)
+        // {
+        //     Debug.DrawLine(transform.position, objectInRadius.transform.position, Color.red);
+        // }
 
         //iterate over found objects
-        foreach (var objectInRadius in objectsInRadius)
+        foreach (Collider objectInRadius in objectsInRadius)
         {
             // if one of the objects within radius is a collectable
 
-            var isCollectable = Array.Exists(_collectables, element => element == objectInRadius.tag);
+            bool isCollectable = Array.Exists(_collectables, element => element == objectInRadius.tag);
             if (isCollectable)
             {
                 // write tag to carriedObject variable and destroy gameObject
