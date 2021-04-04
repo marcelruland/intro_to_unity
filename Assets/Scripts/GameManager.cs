@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     public Text textCountDown;
     public Text textCarriedCollectable;
+    public Text textMoneySpent;
 
     // properties
     private int _level;
@@ -46,15 +47,14 @@ public class GameManager : MonoBehaviour
     {
         get { return _level; }
         set { _level = value;
-            //levelText.text = "LEVEL: " + _level;
         }
     }
-    private int _score;
-    public int Score
+    private int _moneySpent;
+    public int MoneySpent
     {
-        get { return _score; }
-        set { _score = value;
-            //scoreText.text = "SCORE: " + _score;
+        get { return _moneySpent; }
+        set { _moneySpent = value;
+            textMoneySpent.text = _moneySpent.ToString("0.00") + " €";
         }
     }
 

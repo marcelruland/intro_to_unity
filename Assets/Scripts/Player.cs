@@ -243,7 +243,9 @@ public class Player : MonoBehaviour
 
     private void HoardCollectable()
     {
-        throw new NotImplementedException();
+        GameManager.Instance.MoneySpent += 1;
+        _carriedCollectable = "";
+        GameManager.Instance.CarriedCollectable = _carriedCollectable;
     }
 
 
