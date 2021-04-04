@@ -35,9 +35,9 @@ public class Player : MonoBehaviour
     private readonly float detectObjectsInRadius = 2f;
 
     // Collectable and actions related
-    [SerializeField] public string carriedCollectable;
-    [SerializeField] public string secondaryAction;
-    [SerializeField] public string tertiaryAction;
+    private string _carriedCollectable;
+    private string secondaryAction;
+    private string tertiaryAction;
 
     protected Rigidbody Rigidbody;
     protected Quaternion LookRotation;
@@ -82,14 +82,17 @@ public class Player : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        ResetCollectableValues();
+    }
 
     // Update is called once per frame
     void Update()
     {
         Jump();
 
-        bool carriesNothing = carriedCollectable == "";
+        bool carriesNothing = _carriedCollectable == "";
         if (carriesNothing)
             PickUpCollectable();
         else
@@ -185,11 +188,11 @@ public class Player : MonoBehaviour
             if (isCollectable)
             {
                 // write tag to carriedObject variable and destroy gameObject
-                carriedCollectable = objectInRadius.tag;
-                GameManager.Instance.CarriedCollectable = carriedCollectable;
+                _carriedCollectable = objectInRadius.tag;
+                GameManager.Instance.CarriedCollectable = _carriedCollectable;
                 Destroy(objectInRadius.gameObject);
-                secondaryAction = _actionsWithCollectable[carriedCollectable][0];
-                tertiaryAction = _actionsWithCollectable[carriedCollectable][1];
+                secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
+                tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
                 break;
             }
 
@@ -233,7 +236,7 @@ public class Player : MonoBehaviour
 
     private void ResetCollectableValues()
     {
-        carriedCollectable = "";
+        _carriedCollectable = "";
         secondaryAction = "";
         tertiaryAction = "";
     }
@@ -250,7 +253,7 @@ public class Player : MonoBehaviour
          * INSTANTIATION
          * instantiate carried collectable
          */
-        var pathToPrefab = "Prefabs/Collectables/" + carriedCollectable;
+        var pathToPrefab = "Prefabs/Collectables/" + _carriedCollectable;
         var thrownCollectable =
             Instantiate(
                     Resources.Load(
@@ -262,8 +265,8 @@ public class Player : MonoBehaviour
                 )
                 as GameObject;
         // can't carry what you threw away can ya?
-        carriedCollectable = "";
-        GameManager.Instance.CarriedCollectable = carriedCollectable;
+        _carriedCollectable = "";
+        GameManager.Instance.CarriedCollectable = _carriedCollectable;
 
         /*
         * POSITION
