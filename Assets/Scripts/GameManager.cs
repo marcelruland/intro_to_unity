@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     public Text countDownText;
 
-    // get and set stuff
+    // properties
     private int _level;
     public int Level
     {
