@@ -19,13 +19,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject[] levels;
     private GameObject _currentLevel;
-    public float _timeRemaining;
+    private float _timeRemaining;
 
     // Prefabs
     public GameObject prefabPlayer;
 
     public GameObject prefabBanana;
-    //public GameObject prefabDisinfectant;  // not yet implemented
+    //public GameObject prefabDisinfectant;  // TODO not yet implemented
     public GameObject prefabFlour;
     public GameObject prefabMilk;
     public GameObject prefabToiletRoll;
@@ -91,9 +91,9 @@ public class GameManager : MonoBehaviour
     private State _state;
     private bool _isSwitchingState;
 
-    public void SwitchState(State newState, float delay = 0)
+    private void SwitchState(State newState, float delay = 0)
     {
-        Debug.Log("Old " + _state.ToString() + "   New: " + newState.ToString());
+        Debug.Log(_state.ToString() + " --> " + newState.ToString());
         StartCoroutine(SwitchDelay(newState, delay));
     }
 
@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
             case State.PLAY:
                 break;
             case State.LEVELCOMPLETED:
+                panelLevelCompleted.SetActive(true);
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
@@ -179,6 +180,8 @@ public class GameManager : MonoBehaviour
             case State.INITIALIZE:
                 break;
             case State.PLAY:
+                Destroy(_currentLevel);
+                panelPlay.SetActive(false);
                 break;
             case State.LEVELCOMPLETED:
                 break;
@@ -198,7 +201,7 @@ public class GameManager : MonoBehaviour
     {
         // set timer to zero once time is up, else count down
         if (_timeRemaining == 0f)
-            return;
+            SwitchState(State.LEVELCOMPLETED);
         else if (_timeRemaining <= 0)
         {
             _timeRemaining = 0f;
