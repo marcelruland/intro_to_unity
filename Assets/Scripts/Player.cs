@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     {
         Jump();
 
-        var carriesNothing = carriedCollectable == "";
+        bool carriesNothing = carriedCollectable == "";
         if (carriesNothing)
             PickUpCollectable();
         else
@@ -120,8 +120,8 @@ public class Player : MonoBehaviour
              * downwards by 0.1. The Raycast function returns true if the ray
              * collides with a collider, false otherwise
              */
-            var grounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, 1);
-            if (grounded)
+            bool isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, 1);
+            if (isGrounded)
                 Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, jumpForce, Rigidbody.velocity.z);
         }
     }
@@ -171,6 +171,10 @@ public class Player : MonoBehaviour
 
         // check for objects within radius
         Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
+        foreach (Collider objectInRadius in objectsInRadius)
+        {
+            Debug.DrawLine(transform.position, objectInRadius.transform.position, Color.red);
+        }
 
         //iterate over found objects
         foreach (var objectInRadius in objectsInRadius)
