@@ -29,15 +29,15 @@ public class Player : MonoBehaviour
     }
 
     // How fast should a player be and how high should they jump?
-    private readonly float speed = 3f;
-    private readonly float jumpForce = 4f;
-    private readonly float throwForce = 8f;
-    private readonly float detectObjectsInRadius = 2f;
+    private const float _SPEED = 3f;
+    private const float _JUMP_FORCE = 4f;
+    private const float _THROW_FORCE = 8f;
+    private const float _DETECTION_RADIUS = 2f;
 
     // Collectable and actions related
     private string _carriedCollectable;
-    private string secondaryAction;
-    private string tertiaryAction;
+    private string _secondaryAction;
+    private string _tertiaryAction;
 
     protected Rigidbody Rigidbody;
     protected Quaternion LookRotation;
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
              */
             bool isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, 1);
             if (isGrounded)
-                Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, jumpForce, Rigidbody.velocity.z);
+                Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, _JUMP_FORCE, Rigidbody.velocity.z);
         }
     }
 
@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
          * than the value stored in the Speed variable.
          */
         var inputRun = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
-        Rigidbody.velocity = new Vector3(inputRun.x * speed, Rigidbody.velocity.y, inputRun.z * speed);
+        Rigidbody.velocity = new Vector3(inputRun.x * _SPEED, Rigidbody.velocity.y, inputRun.z * _SPEED);
     }
 
 
@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
             return;
 
         // check for objects within radius
-        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
+        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, _DETECTION_RADIUS);
         // foreach (Collider objectInRadius in objectsInRadius)
         // {
         //     Debug.DrawLine(transform.position, objectInRadius.transform.position, Color.red);
@@ -191,8 +191,8 @@ public class Player : MonoBehaviour
                 _carriedCollectable = objectInRadius.tag;
                 GameManager.Instance.CarriedCollectable = _carriedCollectable;
                 Destroy(objectInRadius.gameObject);
-                secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
-                tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
+                _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
+                _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
                 break;
             }
 
@@ -222,7 +222,7 @@ public class Player : MonoBehaviour
 
     private void PerformSecondaryAction()
     {
-        if (secondaryAction == "hoard")
+        if (_secondaryAction == "hoard")
             HoardCollectable();
         else
             throw new NotImplementedException();
@@ -237,8 +237,8 @@ public class Player : MonoBehaviour
     private void ResetCollectableValues()
     {
         _carriedCollectable = "";
-        secondaryAction = "";
-        tertiaryAction = "";
+        _secondaryAction = "";
+        _tertiaryAction = "";
     }
 
     private void HoardCollectable()
@@ -283,6 +283,6 @@ public class Player : MonoBehaviour
         // same velocity as player
         var currentPlayerVelocity = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
 
-        thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + transform.forward * throwForce;
+        thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + transform.forward * _THROW_FORCE;
     }
 }
