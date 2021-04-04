@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
      * movement. The input can either be provided by the user or by some other
      * game logic (for NPCs).
      */
-    [HideInInspector]
-    public InputStr Input;
+    [HideInInspector] public InputStr Input;
+
     public struct InputStr
     {
         public float LookX;
@@ -40,10 +40,11 @@ public class Player : MonoBehaviour
     [SerializeField] public string tertiaryAction;
 
     protected Rigidbody Rigidbody;
-    protected Quaternion lookRotation;
+    protected Quaternion LookRotation;
 
     // all the things we can collect (definitely not the ideal way but idc)
-    private readonly string[] collectables = new string[] {
+    private readonly string[] _collectables = new string[]
+    {
         "Banana",
         //"Disinfectant",
         "Flour",
@@ -57,14 +58,14 @@ public class Player : MonoBehaviour
      * NOTE: primary action is ALWAYS throw so this stores only secondary and
      * tertiary actions
      */
-    private readonly Dictionary<string, string[]> actionsWithCollectable = new Dictionary<string, string[]>
+    private readonly Dictionary<string, string[]> _actionsWithCollectable = new Dictionary<string, string[]>
     {
-        { "Banana", new string[] {"", "" } },
-        { "Disinfectant",new string[] {"hoard", "drink" } },
-        { "Flour", new string[] {"hoard", "" }  },
-        { "Milk", new string[] {"hoard", "drink" }  },
-        { "ToiletRoll", new string[] {"hoard", "" }  },
-        { "Yeast", new string[] {"hoard", "" }  },
+        {"Banana", new string[] {"", ""}},
+        {"Disinfectant", new string[] {"hoard", "drink"}},
+        {"Flour", new string[] {"hoard", ""}},
+        {"Milk", new string[] {"hoard", "drink"}},
+        {"ToiletRoll", new string[] {"hoard", ""}},
+        {"Yeast", new string[] {"hoard", ""}},
     };
 
 
@@ -81,23 +82,20 @@ public class Player : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void Start() { }
 
     // Update is called once per frame
     void Update()
     {
         Jump();
-        
+
         var carriesNothing = carriedCollectable == "";
         if (carriesNothing)
             PickUpCollectable();
         else
             PerformActionWithCollectable();
     }
-    
+
 
     // FixedUpdate is called once every physics update
     void FixedUpdate()
@@ -105,7 +103,6 @@ public class Player : MonoBehaviour
         UpdatePosition();
         UpdateRotation();
     }
-
 
 
     private void Jump()
@@ -155,9 +152,10 @@ public class Player : MonoBehaviour
         if (inputLook.magnitude > 0.01f)
         {
             float angle = Vector3.SignedAngle(Vector3.forward, inputLook, Vector3.up);
-            lookRotation = Quaternion.AngleAxis(angle, Vector3.up);
+            LookRotation = Quaternion.AngleAxis(angle, Vector3.up);
         }
-        transform.rotation = lookRotation;
+
+        transform.rotation = LookRotation;
     }
 
 
@@ -175,19 +173,22 @@ public class Player : MonoBehaviour
         Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, detectObjectsInRadius);
 
         //iterate over found objects
-        foreach (var objectInRadius in objectsInRadius){
+        foreach (var objectInRadius in objectsInRadius)
+        {
             // if one of the objects within radius is a collectable
 
-            var isCollectable = Array.Exists(collectables, element => element == objectInRadius.tag);
+            var isCollectable = Array.Exists(_collectables, element => element == objectInRadius.tag);
             if (isCollectable)
             {
                 // write tag to carriedObject variable and destroy gameObject
                 carriedCollectable = objectInRadius.tag;
                 Destroy(objectInRadius.gameObject);
-                secondaryAction = actionsWithCollectable[carriedCollectable][0];
-                tertiaryAction = actionsWithCollectable[carriedCollectable][1];
+                secondaryAction = _actionsWithCollectable[carriedCollectable][0];
+                tertiaryAction = _actionsWithCollectable[carriedCollectable][1];
                 break;
-            };
+            }
+
+            ;
         }
     }
 
@@ -198,11 +199,13 @@ public class Player : MonoBehaviour
         {
             ThrowCollectable();
             ResetCollectableValues();
-        } else if (Input.SecondaryActionButton)
+        }
+        else if (Input.SecondaryActionButton)
         {
             PerformSecondaryAction();
             ResetCollectableValues();
-        } else if (Input.TertiaryActionButton)
+        }
+        else if (Input.TertiaryActionButton)
         {
             PerformTertiaryAction();
             ResetCollectableValues();
@@ -245,14 +248,14 @@ public class Player : MonoBehaviour
         var pathToPrefab = "Prefabs/Collectables/" + carriedCollectable;
         var thrownCollectable =
             Instantiate(
-                Resources.Load(
-                    pathToPrefab,
-                    typeof(GameObject)
-                ),
-                transform.position,
-                Quaternion.identity
-            )
-            as GameObject;
+                    Resources.Load(
+                        pathToPrefab,
+                        typeof(GameObject)
+                    ),
+                    transform.position,
+                    Quaternion.identity
+                )
+                as GameObject;
         // can't carry what you threw away can ya?
         carriedCollectable = "";
 
@@ -260,7 +263,7 @@ public class Player : MonoBehaviour
         * POSITION
         * move instantiated collectable in front of player
         */
-        var throwPosition = 
+        var throwPosition =
             transform.position
             + transform.forward * 0f
             + transform.right * 0.5f
@@ -274,5 +277,3 @@ public class Player : MonoBehaviour
         thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + transform.forward * throwForce;
     }
 }
-
-
