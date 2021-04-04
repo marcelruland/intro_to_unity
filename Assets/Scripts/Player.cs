@@ -186,6 +186,7 @@ public class Player : MonoBehaviour
             {
                 // write tag to carriedObject variable and destroy gameObject
                 carriedCollectable = objectInRadius.tag;
+                GameManager.Instance.CarriedCollectable = carriedCollectable;
                 Destroy(objectInRadius.gameObject);
                 secondaryAction = _actionsWithCollectable[carriedCollectable][0];
                 tertiaryAction = _actionsWithCollectable[carriedCollectable][1];
@@ -262,6 +263,7 @@ public class Player : MonoBehaviour
                 as GameObject;
         // can't carry what you threw away can ya?
         carriedCollectable = "";
+        GameManager.Instance.CarriedCollectable = carriedCollectable;
 
         /*
         * POSITION

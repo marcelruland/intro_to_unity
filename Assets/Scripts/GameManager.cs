@@ -37,7 +37,8 @@ public class GameManager : MonoBehaviour
     public GameObject panelLevelCompleted;
     public GameObject panelGameOver;
 
-    public Text countDownText;
+    public Text textCountDown;
+    public Text textCarriedCollectable;
 
     // properties
     private int _level;
@@ -54,6 +55,18 @@ public class GameManager : MonoBehaviour
         get { return _score; }
         set { _score = value;
             //scoreText.text = "SCORE: " + _score;
+        }
+    }
+
+    private string _carriedCollectable;
+
+    public string CarriedCollectable
+    {
+        get { return _carriedCollectable; }
+        set
+        {
+            _carriedCollectable = value;
+            textCarriedCollectable.text = _carriedCollectable;
         }
     }
 
@@ -128,7 +141,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
-                InitiateCountdown(30f);
+                InitiateCountdown(45f);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
@@ -195,17 +208,17 @@ public class GameManager : MonoBehaviour
             _timeRemaining -= Time.deltaTime;
         }
 
-        countDownText.text = _timeRemaining.ToString("0.0");
+        textCountDown.text = _timeRemaining.ToString("0.0");
 
         // COLOUR
         // this can definitely by optimised, but idc right now
         if (_timeRemaining > 30)
-            countDownText.color = Color.black;
+            textCountDown.color = Color.black;
         else if (_timeRemaining > 20)
-            countDownText.color = Color.yellow;
+            textCountDown.color = Color.yellow;
         else if (_timeRemaining > 10)
-            countDownText.color = new Color(1, 0.65f, 0);
+            textCountDown.color = new Color(1, 0.65f, 0);
         else
-            countDownText.color = Color.red;
+            textCountDown.color = Color.red;
     }
 }
