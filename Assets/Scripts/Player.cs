@@ -82,13 +82,13 @@ public class Player : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         ResetCollectableValues();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Jump();
 
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 
 
     // FixedUpdate is called once every physics update
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         UpdatePosition();
         UpdateRotation();

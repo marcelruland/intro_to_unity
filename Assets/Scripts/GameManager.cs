@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
      */
     public static GameManager Instance { get; private set; }
     public GameObject[] levels;
-    GameObject _currentLevel;
+    private GameObject _currentLevel;
     public float _timeRemaining;
 
     // Prefabs
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SwitchDelay(newState, delay));
     }
 
-    IEnumerator SwitchDelay(State newState, float delay)
+    private IEnumerator SwitchDelay(State newState, float delay)
     {
         _isSwitchingState = true;
         yield return new WaitForSeconds(delay);
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
     /*
      * METHODS
      */
-    void Start()
+    private void Start()
     {
         // make accessing this script easier
         Instance = this;
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         SwitchState(State.MENU);
     }
 
-    void BeginState(State newState)
+    private void BeginState(State newState)
     {
         switch (newState)
         {
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         switch (_state)
         {
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void EndState()
+    private void EndState()
     {
         switch (_state)
         {
@@ -189,12 +189,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void InitiateCountdown(float initialTime)
+    private void InitiateCountdown(float initialTime)
     {
         _timeRemaining = initialTime;
     }
 
-    void UpdateCountdown()
+    private void UpdateCountdown()
     {
         // set timer to zero once time is up, else count down
         if (_timeRemaining == 0f)
