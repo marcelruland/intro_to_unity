@@ -7,8 +7,9 @@
 
 
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject[] levels;
     GameObject _currentLevel;
+    public float _timeRemaining;
 
     // Prefabs
     public GameObject prefabPlayer;
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour
     public GameObject panelPlay;
     public GameObject panelLevelCompleted;
     public GameObject panelGameOver;
+
+    public Text countDownText;
 
     // get and set stuff
     private int _level;
@@ -124,6 +128,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
+                InitiateCountdown(30f);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
@@ -140,6 +145,7 @@ public class GameManager : MonoBehaviour
             case State.INITIALIZE:
                 break;
             case State.PLAY:
+                UpdateCountdown();
                 break;
             case State.LEVELCOMPLETED:
                 break;
@@ -170,4 +176,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void InitiateCountdown(float initialTime)
+    {
+        _timeRemaining = initialTime;
+    }
+
+    void UpdateCountdown()
+    {
+        // set timer to zero once time is up, else count down
+        if (_timeRemaining == 0f)
+            return;
+        else if (_timeRemaining <= 0)
+        {
+            _timeRemaining = 0f;
+        }
+        else
+        {
+            _timeRemaining -= Time.deltaTime;
+        }
+
+        countDownText.text = _timeRemaining.ToString("0.0");
+
+        // COLOUR
+        // this can definitely by optimised, but idc right now
+        if (_timeRemaining > 30)
+            countDownText.color = Color.black;
+        else if (_timeRemaining > 20)
+            countDownText.color = Color.yellow;
+        else if (_timeRemaining > 10)
+            countDownText.color = new Color(1, 0.65f, 0);
+        else
+            countDownText.color = Color.red;
+    }
 }
