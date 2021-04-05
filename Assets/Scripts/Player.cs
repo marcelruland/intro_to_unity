@@ -67,6 +67,16 @@ public class Player : MonoBehaviour
         {"ToiletRoll", new string[] {"hoard", ""}},
         {"Yeast", new string[] {"hoard", ""}},
     };
+    
+    private Dictionary<string, float> collectableValues = new Dictionary<string, float>
+    {
+        {"Banana", 0.40f},
+        {"Disinfectant", 1.99f},
+        {"Flour", 0.79f},
+        {"Milk", 1.09f},
+        {"ToiletRoll", 0.25f},
+        {"Yeast", 0.49f},
+    };
 
 
     /*
@@ -243,7 +253,7 @@ public class Player : MonoBehaviour
 
     private void HoardCollectable()
     {
-        GameManager.Instance.MoneySpent += 1;
+        GameManager.Instance.MoneySpent += collectableValues[_carriedCollectable];
         _carriedCollectable = "";
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
     }

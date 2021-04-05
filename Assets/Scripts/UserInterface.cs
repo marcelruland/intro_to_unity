@@ -1,5 +1,7 @@
 /*
- * UI countdown
+ * THIS SCRIPT IS STUPID AND USELESS
+ * PLEASE DO NOT USE
+ * (only not deleting it because of irrational fear of deleting code)
  */
 
 using System.Collections;

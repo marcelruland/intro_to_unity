@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 //using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,35 @@ public class GameManager : MonoBehaviour
     public GameObject[] levels;
     private GameObject _currentLevel;
     private float _timeRemaining;
+    
 
+    // properties
+    private int _level;
+    public int Level
+    {
+        get { return _level; }
+        set { _level = value;
+        }
+    }
+    private float _moneySpent;
+    public float MoneySpent
+    {
+        get { return _moneySpent; }
+        set { _moneySpent = value;
+            textMoneySpent.text = _moneySpent.ToString("0.00") + " €";
+        }
+    }
+    private string _carriedCollectable;
+    public string CarriedCollectable
+    {
+        get { return _carriedCollectable; }
+        set
+        {
+            _carriedCollectable = value;
+            textCarriedCollectable.text = _carriedCollectable;
+        }
+    }
+    
     // Prefabs
     public GameObject prefabPlayer;
 
@@ -42,34 +71,6 @@ public class GameManager : MonoBehaviour
     public Text textCarriedCollectable;
     public Text textMoneySpent;
 
-    // properties
-    private int _level;
-    public int Level
-    {
-        get { return _level; }
-        set { _level = value;
-        }
-    }
-    private int _moneySpent;
-    public int MoneySpent
-    {
-        get { return _moneySpent; }
-        set { _moneySpent = value;
-            textMoneySpent.text = _moneySpent.ToString("0.00") + " €";
-        }
-    }
-
-    private string _carriedCollectable;
-
-    public string CarriedCollectable
-    {
-        get { return _carriedCollectable; }
-        set
-        {
-            _carriedCollectable = value;
-            textCarriedCollectable.text = _carriedCollectable;
-        }
-    }
 
     /*
      * GAME STATES
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void SwitchState(State newState, float delay = 0)
     {
-        Debug.Log(_state.ToString() + " --> " + newState.ToString());
+        Debug.Log(_state + " --> " + newState);
         StartCoroutine(SwitchDelay(newState, delay));
     }
 
