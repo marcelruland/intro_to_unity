@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 //using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] levels;
     private GameObject _currentLevel;
     private float _timeRemaining;
+    
 
     // properties
     private int _level;
@@ -30,8 +32,8 @@ public class GameManager : MonoBehaviour
         set { _level = value;
         }
     }
-    private int _moneySpent;
-    public int MoneySpent
+    private float _moneySpent;
+    public float MoneySpent
     {
         get { return _moneySpent; }
         set { _moneySpent = value;
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void SwitchState(State newState, float delay = 0)
     {
-        Debug.Log(_state.ToString() + " --> " + newState.ToString());
+        Debug.Log(_state + " --> " + newState);
         StartCoroutine(SwitchDelay(newState, delay));
     }
 
