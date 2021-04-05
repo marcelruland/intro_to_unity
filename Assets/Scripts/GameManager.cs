@@ -6,6 +6,7 @@
  */
 
 
+using System;
 using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine;
@@ -147,6 +148,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAMEOVER:
                 break;
+            case State.END:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
     }
 
@@ -167,6 +172,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAMEOVER:
                 break;
+            case State.END:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -182,6 +191,7 @@ public class GameManager : MonoBehaviour
             case State.PLAY:
                 Destroy(_currentLevel);
                 panelPlay.SetActive(false);
+                Cursor.visible = true;
                 break;
             case State.LEVELCOMPLETED:
                 break;
@@ -189,6 +199,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAMEOVER:
                 break;
+            case State.END:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
