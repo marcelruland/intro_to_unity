@@ -22,6 +22,33 @@ public class GameManager : MonoBehaviour
     private GameObject _currentLevel;
     private float _timeRemaining;
 
+    // properties
+    private int _level;
+    public int Level
+    {
+        get { return _level; }
+        set { _level = value;
+        }
+    }
+    private int _moneySpent;
+    public int MoneySpent
+    {
+        get { return _moneySpent; }
+        set { _moneySpent = value;
+            textMoneySpent.text = _moneySpent.ToString("0.00") + " €";
+        }
+    }
+    private string _carriedCollectable;
+    public string CarriedCollectable
+    {
+        get { return _carriedCollectable; }
+        set
+        {
+            _carriedCollectable = value;
+            textCarriedCollectable.text = _carriedCollectable;
+        }
+    }
+    
     // Prefabs
     public GameObject prefabPlayer;
 
@@ -42,34 +69,6 @@ public class GameManager : MonoBehaviour
     public Text textCarriedCollectable;
     public Text textMoneySpent;
 
-    // properties
-    private int _level;
-    public int Level
-    {
-        get { return _level; }
-        set { _level = value;
-        }
-    }
-    private int _moneySpent;
-    public int MoneySpent
-    {
-        get { return _moneySpent; }
-        set { _moneySpent = value;
-            textMoneySpent.text = _moneySpent.ToString("0.00") + " €";
-        }
-    }
-
-    private string _carriedCollectable;
-
-    public string CarriedCollectable
-    {
-        get { return _carriedCollectable; }
-        set
-        {
-            _carriedCollectable = value;
-            textCarriedCollectable.text = _carriedCollectable;
-        }
-    }
 
     /*
      * GAME STATES
