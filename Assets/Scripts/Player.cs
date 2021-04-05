@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        ResetCollectableValues();
+        ResetCollectableVariables();
     }
 
     // Update is called once per frame
@@ -206,17 +206,17 @@ public class Player : MonoBehaviour
         if (Input.PrimaryActionButton)
         {
             ThrowCollectable();
-            ResetCollectableValues();
+            ResetCollectableVariables();
         }
         else if (Input.SecondaryActionButton)
         {
             PerformSecondaryAction();
-            ResetCollectableValues();
+            ResetCollectableVariables();
         }
         else if (Input.TertiaryActionButton)
         {
             PerformTertiaryAction();
-            ResetCollectableValues();
+            ResetCollectableVariables();
         }
     }
 
@@ -234,7 +234,7 @@ public class Player : MonoBehaviour
     }
 
 
-    private void ResetCollectableValues()
+    private void ResetCollectableVariables()
     {
         _carriedCollectable = "";
         _secondaryAction = "";
