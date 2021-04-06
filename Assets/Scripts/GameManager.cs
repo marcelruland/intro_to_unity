@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     public Text textCountDown;
     public Text textCarriedCollectable;
     public Text textMoneySpent;
+    public Text textLevelcompletedSummary;
 
 
     /*
@@ -140,11 +141,19 @@ public class GameManager : MonoBehaviour
             case State.PLAY:
                 break;
             case State.LEVELCOMPLETED:
+                textLevelcompletedSummary.text =
+                    $"Du hast für {_moneySpent.ToString()} € gehamstert.\n" +
+                    "Gemessen am Bundesdurchschnitt hast du\n" +
+                    "- Klopapier für i Monate, j Wochen und k Tage\n" +
+                    "- Mehl für i Monate, j Wochen und k Tage\n" +
+                    "- Milch für i Monate, j Wochen und k Tage\n" +
+                    "- Hefe für i Monate, j Wochen und k Tage\n" +
+                    "- Desinfektionsmittel für i Monate, j Wochen und k Tage";
                 panelLevelCompleted.SetActive(true);
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
-                InitiateCountdown(300f);
+                InitiateCountdown(3f);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
