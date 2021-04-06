@@ -931,12 +931,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - {fileID: 937642364824810338, guid: 867a93a5298d54f03a40009b86fd29d2, type: 3}
-  prefabPlayer: {fileID: 8938493316227395383, guid: 4bb30c2a7e06d4156a1092955b5dd3f7, type: 3}
-  prefabBanana: {fileID: 6215643052531770307, guid: 0704a0b5e5ae641fc9db4d60257ca2e5, type: 3}
-  prefabFlour: {fileID: 3502390530040889139, guid: 46ec3033110c34489be13ff6630515e5, type: 3}
-  prefabMilk: {fileID: 8662258556512106578, guid: 8768913d8e716a2408503e75059f31df, type: 3}
-  prefabToiletRoll: {fileID: 0}
-  prefabYeast: {fileID: 5969207534643193040, guid: a2637185c4f0d469cb065956fad2803c, type: 3}
   panelMenu: {fileID: 540684722}
   panelPlay: {fileID: 304912828}
   panelLevelCompleted: {fileID: 487162499}

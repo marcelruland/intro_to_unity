@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject[] levels;
     private GameObject _currentLevel;
+    private float _timePerRound;
     private float _timeRemaining;
     
 
@@ -51,15 +52,15 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    // Prefabs
-    public GameObject prefabPlayer;
-
-    public GameObject prefabBanana;
-    //public GameObject prefabDisinfectant;  // TODO not yet implemented
-    public GameObject prefabFlour;
-    public GameObject prefabMilk;
-    public GameObject prefabToiletRoll;
-    public GameObject prefabYeast;
+    // // Prefabs
+    // public GameObject prefabPlayer;
+    //
+    // public GameObject prefabBanana;
+    // //public GameObject prefabDisinfectant;  // TODO not yet implemented
+    // public GameObject prefabFlour;
+    // public GameObject prefabMilk;
+    // public GameObject prefabToiletRoll;
+    // public GameObject prefabYeast;
 
     // User Interface
     public GameObject panelMenu;
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
      */
     private void Start()
     {
+        _timePerRound = 30f;
         // make accessing this script easier
         Instance = this;
         // begin in the (main) menu
@@ -142,7 +144,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LEVELCOMPLETED:
                 textLevelcompletedSummary.text =
-                    $"Du hast für {_moneySpent.ToString()} € gehamstert.\n" +
+                    $"Du hast für {_moneySpent:0.00} € gehamstert.\n" +
                     "Gemessen am Bundesdurchschnitt hast du\n" +
                     "- Klopapier für i Monate, j Wochen und k Tage\n" +
                     "- Mehl für i Monate, j Wochen und k Tage\n" +
@@ -153,7 +155,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
-                InitiateCountdown(3f);
+                InitiateCountdown(_timePerRound);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
