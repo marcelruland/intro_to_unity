@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
-                InitiateCountdown(45f);
+                InitiateCountdown(300f);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
