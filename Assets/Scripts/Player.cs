@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
         public bool TertiaryActionButton;
     }
 
+    protected Rigidbody Rigidbody;
+    protected Quaternion LookRotation;
+    private Animator _animator;
+
     // How fast should a player be and how high should they jump?
     private const float _SPEED = 3f;
     private const float _JUMP_FORCE = 4f;
@@ -37,9 +41,6 @@ public class Player : MonoBehaviour
     private string _carriedCollectable;
     private string _secondaryAction;
     private string _tertiaryAction;
-
-    protected Rigidbody Rigidbody;
-    protected Quaternion LookRotation;
 
     // all the things we can collect (definitely not the ideal way but idc)
     private readonly string[] _collectables = new string[]
@@ -87,6 +88,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
 
@@ -125,17 +127,15 @@ public class Player : MonoBehaviour
          * check if the character is on the ground (can't jump if airborne)
          * set y-velocity to jumpForce, leave other axes be
          */
-        if (Input.JumpButton)
-        {
-            /*
-             * The character's pivot is on the ground (y=0). We cast a ray
-             * downwards by 0.1. The Raycast function returns true if the ray
-             * collides with a collider, false otherwise
-             */
-            bool isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, 1);
-            if (isGrounded)
-                Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, _JUMP_FORCE, Rigidbody.velocity.z);
-        }
+        if (!Input.JumpButton) return;
+        /*
+         * The character's pivot is on the ground (y=0). We cast a ray
+         * downwards by 0.1. The Raycast function returns true if the ray
+         * collides with a collider, false otherwise
+         */
+        bool isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, 1);
+        if (isGrounded)
+            Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, _JUMP_FORCE, Rigidbody.velocity.z);
     }
 
 
@@ -146,7 +146,13 @@ public class Player : MonoBehaviour
          * This is necessary because the actual speed should never be higher
          * than the value stored in the Speed variable.
          */
-        var inputRun = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
+        if (Input.RunX == 0 && Input.RunZ == 0)
+        {
+            _animator.SetBool("isMoving", false);
+            return;
+        }
+        _animator.SetBool("isMoving", true);
+        Vector3 inputRun = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
         Rigidbody.velocity = new Vector3(inputRun.x * _SPEED, Rigidbody.velocity.y, inputRun.z * _SPEED);
     }
 
@@ -160,7 +166,7 @@ public class Player : MonoBehaviour
          * Or something like this, I swear I understood it at some point in the
          * middle of the night...
          */
-        var inputLook = Vector3.ClampMagnitude(new Vector3(Input.LookX, 0, Input.LookZ), 1);
+        Vector3 inputLook = Vector3.ClampMagnitude(new Vector3(Input.LookX, 0, Input.LookZ), 1);
         if (inputLook.magnitude > 0.01f)
         {
             float angle = Vector3.SignedAngle(Vector3.forward, inputLook, Vector3.up);
