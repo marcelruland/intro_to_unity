@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         {
             case State.MENU:
                 panelMenu.SetActive(true);
-                SwitchState(State.INITIALIZE, 3f);
+                SwitchState(State.INITIALIZE, 1f);
                 break;
             case State.INITIALIZE:
                 Cursor.visible = false;
