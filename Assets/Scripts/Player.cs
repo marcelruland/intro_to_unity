@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     private const float _DETECTION_RADIUS = 2f;
 
     // Collectable and actions related
+    public float _health;
     private string _carriedCollectable;
     private string _secondaryAction;
     private string _tertiaryAction;
@@ -95,6 +96,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        _health = 1f;
         ResetCollectableValues();
     }
 
