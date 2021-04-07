@@ -22,7 +22,7 @@ public class Controller : MonoBehaviour
 
     // movement
     // TODO: rotationSpeed doesn't do anything, no idea why
-    [SerializeField] private float rotationSpeed = 50;
+    [SerializeField] private float rotationSpeed = 0.7f;
     protected float inputRotationX; // ]0, 360]
     protected float inputRotationY; // ]-80, 80[
 

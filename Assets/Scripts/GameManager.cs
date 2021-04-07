@@ -9,7 +9,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -95,7 +94,7 @@ public class GameManager : MonoBehaviour
     private State _state;
     private bool _isSwitchingState;
 
-    private void SwitchState(State newState, float delay = 0)
+    private void SwitchState(State newState, float delay = 0f)
     {
         Debug.Log(_state + " --> " + newState);
         StartCoroutine(SwitchDelay(newState, delay));
