@@ -9,23 +9,23 @@ public class NonPlayableCharacter : MonoBehaviour
 {
     // input
     protected Player Player;
-    // private float horizontalKeyboardInput;
-    // private float verticalKeyboardInput;
-    // private bool jumpButton;
-    // private bool primaryActionButton;
-    // private bool secondaryActionButton;
-    // private bool tertiaryActionButton;
+    public Vector2[] walkingPoints;
 
-    // movement
-    // [SerializeField] private float rotationSpeed = 0.7f;
-    // protected float inputRotationX; // ]0, 360]
-    // protected float inputRotationY; // ]-80, 80[
-
+    // private Dictionary<Vector2, Vector2[]> pathWays = new Dictionary<Vector2, Vector2[]>
+    // {
+    //     {new Vector2(6, 4), new[]{new Vector2(10, 4), new Vector2(2, 4), new Vector2(6, 2), new Vector2(6, 6)}},
+    // };
 
     private void Awake()
     {
         // returns the first active loaded object of type Player
         Player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        Player.Input.RunX = 1f;
+        Player.Input.RunZ = 0f;
     }
 
 
@@ -40,12 +40,20 @@ public class NonPlayableCharacter : MonoBehaviour
     // FixedUpdate is called once every physics update
     private void FixedUpdate()
     {
-
+        UpdateWalkInput();
         // feed calculated values to player object
-        Player.Input.RunX = 1f;
-        Player.Input.RunZ = 0f; 
-        Player.Input.LookX = 0f; 
-        Player.Input.LookZ = 0f; 
+        // Player.Input.RunX = 1f;
+        // Player.Input.RunZ = 0f; 
+        // Player.Input.LookX = 0f; 
+        // Player.Input.LookZ = 0f; 
+    }
+
+    private void UpdateWalkInput()
+    {
+        if (transform.position == walkingPoints[0])
+        {
+            
+        }
     }
 
 }
