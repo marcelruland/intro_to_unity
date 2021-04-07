@@ -40,7 +40,7 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         // returns the first active loaded object of type Player
-        Player = FindObjectOfType<Player>();
+        Player = GetComponent<Player>();
     }
 
 
