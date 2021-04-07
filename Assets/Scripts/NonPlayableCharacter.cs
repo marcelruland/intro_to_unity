@@ -10,6 +10,7 @@ public class NonPlayableCharacter : MonoBehaviour
     // input
     protected Player Player;
     public Vector2[] walkingPoints;
+    private int _nextPointIndex;
 
     // private Dictionary<Vector2, Vector2[]> pathWays = new Dictionary<Vector2, Vector2[]>
     // {
@@ -26,6 +27,7 @@ public class NonPlayableCharacter : MonoBehaviour
     {
         Player.Input.RunX = 1f;
         Player.Input.RunZ = 0f;
+        _nextPointIndex = 1;
     }
 
 
@@ -50,10 +52,33 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void UpdateWalkInput()
     {
-        // if (transform.position == walkingPoints[0])
-        // {
-        //     
-        // }
+        var position = transform.position;
+        bool isAtPoint = (new Vector2(position.x, position.z) == walkingPoints[_nextPointIndex]);
+        if (isAtPoint)
+        {
+            WalkToPoint(_nextPointIndex);
+            _nextPointIndex++;
+            if (_nextPointIndex == 4)
+                _nextPointIndex = 0;
+        }
     }
 
+    private void WalkToPoint(float nextPointIndex)
+    {
+        // this doesn't work because for some reason the Player's position isn't changing? Whatever.
+        Vector2 nextPoint = walkingPoints[_nextPointIndex];
+        if (transform.position.x < nextPoint.x)
+            Player.Input.RunX = 1f;
+        else if (transform.position.x > nextPoint.x)
+            Player.Input.RunX = -1f;
+        else
+            Player.Input.RunX = 0f;
+        
+        if (transform.position.z < nextPoint.y)
+            Player.Input.RunX = 1f;
+        else if (transform.position.z > nextPoint.y)
+            Player.Input.RunX = -1f;
+        else
+            Player.Input.RunX = 0f;
+    }
 }
