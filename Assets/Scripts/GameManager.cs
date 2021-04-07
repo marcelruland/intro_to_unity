@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
      * GAME STATES
      * The "sections" of a game are represented by different game states.
      * Depending on the current state, and whenever one state ends and another
-     * state begins, the GameManager performs certain actions.
+     * state begins, the GameManager performs certain actions..
      */
     public enum State
     {

@@ -50,10 +50,10 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void UpdateWalkInput()
     {
-        if (transform.position == walkingPoints[0])
-        {
-            
-        }
+        // if (transform.position == walkingPoints[0])
+        // {
+        //     
+        // }
     }
 
 }
