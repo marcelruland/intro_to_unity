@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingPoints:
-  - {x: 13, y: 10}
+  - {x: 15, y: 10}
   - {x: 20, y: 10}
   - {x: 20, y: 15}
   - {x: 13, y: 15}

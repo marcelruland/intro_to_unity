@@ -10,6 +10,8 @@ public class NonPlayableCharacter : MonoBehaviour
     // input
     protected Player Player;
     public Vector2[] walkingPoints;
+    private int _numberOfWalkingPoints;
+    private int _currentPointIndex = 0;
 
     private void Awake()
     {
@@ -18,33 +20,22 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void Start()
     {
+        Player.Input.JumpButton = false;
+        Player.Input.PrimaryActionButton = false;
+        Player.Input.SecondaryActionButton = false;
+        Player.Input.TertiaryActionButton = false;
         Player.Input.RunX = 0f;
         Player.Input.RunZ = 0f;
-        WalkToPoint(new Vector2(30, 5));
+        
+        _numberOfWalkingPoints = walkingPoints.Length;
+        WalkToPoint(walkingPoints[_currentPointIndex]);
     }
 
 
     private void Update()
     {
-        Player.Input.JumpButton = false;
-        Player.Input.PrimaryActionButton = false;
-        Player.Input.SecondaryActionButton = false;
-        Player.Input.TertiaryActionButton = false;
-        if (IsAtPoint(new Vector2(30, 5)))
-        {
-            Player.Input.RunX = 0f;
-            Player.Input.RunZ = 0f;
-        }
-    }
-
-    // FixedUpdate is called once every physics update
-    private void FixedUpdate()
-    {
-        // feed calculated values to player object
-        // Player.Input.RunX = 1f;
-        // Player.Input.RunZ = 0f; 
-        // Player.Input.LookX = 0f; 
-        // Player.Input.LookZ = 0f; 
+        if (IsAtPoint(walkingPoints[_currentPointIndex]))
+            WalkToNextPoint();
     }
 
 
@@ -65,5 +56,13 @@ public class NonPlayableCharacter : MonoBehaviour
         var walkingDirection = point - position;
         Player.Input.RunX = walkingDirection.x;
         Player.Input.RunZ = walkingDirection.y;
+    }
+
+    private void WalkToNextPoint()
+    {
+        _currentPointIndex++;
+        if (_currentPointIndex >= _numberOfWalkingPoints)
+            _currentPointIndex = 0;
+        WalkToPoint(walkingPoints[_currentPointIndex]);
     }
 }
