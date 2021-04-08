@@ -22,25 +22,43 @@ public class GameManager : MonoBehaviour
     private GameObject _currentLevel;
     private float _timePerRound;
     private float _timeRemaining;
-    
+
 
     // properties
+    private int _health;
+
+    public int Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = value;
+            textHealth.text = _health.ToString("0");
+        }
+    }
+
     private int _level;
+
     public int Level
     {
         get { return _level; }
-        set { _level = value;
-        }
+        set { _level = value; }
     }
+
     private float _moneySpent;
+
     public float MoneySpent
     {
         get { return _moneySpent; }
-        set { _moneySpent = value;
+        set
+        {
+            _moneySpent = value;
             textMoneySpent.text = _moneySpent.ToString("0.00") + " €";
         }
     }
+
     private string _carriedCollectable;
+
     public string CarriedCollectable
     {
         get { return _carriedCollectable; }
@@ -50,7 +68,7 @@ public class GameManager : MonoBehaviour
             textCarriedCollectable.text = _carriedCollectable;
         }
     }
-    
+
     // // Prefabs
     // public GameObject prefabPlayer;
     //
@@ -71,8 +89,9 @@ public class GameManager : MonoBehaviour
     public Text textCarriedCollectable;
     public Text textMoneySpent;
     public Text textLevelcompletedSummary;
-    
-    
+    public Text textHealth;
+
+
 
 
     /*
@@ -84,13 +103,14 @@ public class GameManager : MonoBehaviour
     public enum State
     {
         MENU,
-        INITIALIZE,      // prepare loading of new level
-        LOADLEVEL,       // load a level
-        PLAY,            // level is being played
-        LEVELCOMPLETED,  // level is completed, summary screen, then switch to
-                         // load next level
-        GAMEOVER,        // you're done
-        END,             // you made it
+        INITIALIZE, // prepare loading of new level
+        LOADLEVEL, // load a level
+        PLAY, // level is being played
+        LEVELCOMPLETED, // level is completed, summary screen, then switch to
+
+        // load next level
+        GAMEOVER, // you're done
+        END, // you made it
     }
 
     private State _state;
@@ -119,7 +139,7 @@ public class GameManager : MonoBehaviour
      */
     private void Start()
     {
-        _timePerRound = 30f;
+        _timePerRound = 60f;
         // make accessing this script easier
         Instance = this;
         // begin in the (main) menu

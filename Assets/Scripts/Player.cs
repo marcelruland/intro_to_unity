@@ -38,11 +38,11 @@ public class Player : MonoBehaviour
     private const float _DETECTION_RADIUS = 2f;
 
     // Collectable and actions related
-    public float _health;
     private string _carriedCollectable;
     private string _secondaryAction;
     private string _tertiaryAction;
-
+    private int _health;
+            
     // all the things we can collect (definitely not the ideal way but idc)
     private readonly string[] _collectables = new string[]
     {
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _health = 1f;
+        _health = 1;
         ResetCollectableValues();
     }
 
@@ -118,6 +118,7 @@ public class Player : MonoBehaviour
     {
         UpdatePosition();
         UpdateRotation();
+        CheckSafetyDistance();
     }
 
 
@@ -303,5 +304,20 @@ public class Player : MonoBehaviour
         var currentPlayerVelocity = Vector3.ClampMagnitude(new Vector3(Input.RunX, 0, Input.RunZ), 1);
 
         thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + transform.forward * _THROW_FORCE;
+    }
+    
+    private void CheckSafetyDistance()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
+        foreach ( var hitCollider in hitColliders)
+        {
+            GetDamage();
+        }
+    }
+
+    private void GetDamage()
+    {
+        _health--;
+        GameManager.Instance.Health = _health;
     }
 }
