@@ -20,7 +20,7 @@ public class NonPlayableCharacter : MonoBehaviour
     {
         Player.Input.RunX = 0f;
         Player.Input.RunZ = 0f;
-        WalkToPoint(new Vector2(26, 3));
+        WalkToPoint(new Vector2(30, 5));
     }
 
 
@@ -30,7 +30,7 @@ public class NonPlayableCharacter : MonoBehaviour
         Player.Input.PrimaryActionButton = false;
         Player.Input.SecondaryActionButton = false;
         Player.Input.TertiaryActionButton = false;
-        if (IsAtPoint(new Vector2(26, 3)))
+        if (IsAtPoint(new Vector2(30, 5)))
         {
             Player.Input.RunX = 0f;
             Player.Input.RunZ = 0f;
@@ -50,6 +50,12 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private bool IsAtPoint(Vector2 point)
     {
+        float tolerance = 0.1f;
+        var position = new Vector2(transform.position.x, transform.position.z);
+        bool isAtX = position.x > point.x - tolerance && position.x < point.x + tolerance;
+        bool isAtZ = position.y > point.y - tolerance && position.y < point.y + tolerance;
+        if (isAtX && isAtZ)
+            return true;
         return false;
     }
 
