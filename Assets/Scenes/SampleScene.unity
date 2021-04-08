@@ -159,7 +159,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -200, y: -35}
-  m_SizeDelta: {x: 400, y: 600}
+  m_SizeDelta: {x: 500, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &48825611
 MonoBehaviour:
@@ -358,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &487162500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -524,14 +524,14 @@ RectTransform:
   m_GameObject: {fileID: 543605568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3333331, y: 1.142857, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 48825610}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -55, y: -5}
+  m_AnchoredPosition: {x: -105, y: -5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &543605570
@@ -567,11 +567,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Du hast f\xFCr x,xx\u20AC gehamstert.\nGemessen am \nBundesdurchschnitt
-    hast du\n- Klopapier f\xFCr \ni Monate, j Wochen und k Tage\n- Mehl f\xFCr \ni
-    Monate, j Wochen und k Tage\n- Milch f\xFCr\n i Monate, j Wochen und k Tage\n-
-    Hefe f\xFCr \ni Monate, j Wochen und k Tage\n- Desinfektionsmittel f\xFCr \ni
-    Monate, j Wochen und k Tage"
+  m_Text: "Du hast f\xFCr x,xx\u20AC gehamstert.\nGemessen am Bundesdurchschnitt
+    hast du\n- Klopapier f\xFCr i Monate, j Wochen und k Tage\n- Mehl f\xFCr i Monate,
+    j Wochen und k Tage\n- Milch f\xFCri Monate, j Wochen und k Tage\n- Hefe f\xFCr
+    i Monate, j Wochen und k Tage\n- Desinfektionsmittel f\xFCr i Monate, j Wochen
+    und k Tage"
 --- !u!222 &543605571
 CanvasRenderer:
   m_ObjectHideFlags: 0
