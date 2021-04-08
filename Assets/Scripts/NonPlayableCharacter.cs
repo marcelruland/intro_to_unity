@@ -10,24 +10,17 @@ public class NonPlayableCharacter : MonoBehaviour
     // input
     protected Player Player;
     public Vector2[] walkingPoints;
-    private int _nextPointIndex;
-
-    // private Dictionary<Vector2, Vector2[]> pathWays = new Dictionary<Vector2, Vector2[]>
-    // {
-    //     {new Vector2(6, 4), new[]{new Vector2(10, 4), new Vector2(2, 4), new Vector2(6, 2), new Vector2(6, 6)}},
-    // };
 
     private void Awake()
     {
-        // returns the first active loaded object of type Player
         Player = GetComponent<Player>();
     }
 
     private void Start()
     {
-        Player.Input.RunX = 1f;
+        Player.Input.RunX = 0f;
         Player.Input.RunZ = 0f;
-        _nextPointIndex = 1;
+        WalkToPoint(new Vector2(26, 3));
     }
 
 
@@ -37,12 +30,16 @@ public class NonPlayableCharacter : MonoBehaviour
         Player.Input.PrimaryActionButton = false;
         Player.Input.SecondaryActionButton = false;
         Player.Input.TertiaryActionButton = false;
+        if (IsAtPoint(new Vector2(26, 3)))
+        {
+            Player.Input.RunX = 0f;
+            Player.Input.RunZ = 0f;
+        }
     }
 
     // FixedUpdate is called once every physics update
     private void FixedUpdate()
     {
-        UpdateWalkInput();
         // feed calculated values to player object
         // Player.Input.RunX = 1f;
         // Player.Input.RunZ = 0f; 
@@ -50,35 +47,17 @@ public class NonPlayableCharacter : MonoBehaviour
         // Player.Input.LookZ = 0f; 
     }
 
-    private void UpdateWalkInput()
+
+    private bool IsAtPoint(Vector2 point)
     {
-        var position = transform.position;
-        bool isAtPoint = (new Vector2(position.x, position.z) == walkingPoints[_nextPointIndex]);
-        if (isAtPoint)
-        {
-            WalkToPoint(_nextPointIndex);
-            _nextPointIndex++;
-            if (_nextPointIndex == 4)
-                _nextPointIndex = 0;
-        }
+        return false;
     }
 
-    private void WalkToPoint(float nextPointIndex)
+    private void WalkToPoint(Vector2 point)
     {
-        // this doesn't work because for some reason the Player's position isn't changing? Whatever.
-        Vector2 nextPoint = walkingPoints[_nextPointIndex];
-        if (transform.position.x < nextPoint.x)
-            Player.Input.RunX = 1f;
-        else if (transform.position.x > nextPoint.x)
-            Player.Input.RunX = -1f;
-        else
-            Player.Input.RunX = 0f;
-        
-        if (transform.position.z < nextPoint.y)
-            Player.Input.RunX = 1f;
-        else if (transform.position.z > nextPoint.y)
-            Player.Input.RunX = -1f;
-        else
-            Player.Input.RunX = 0f;
+        var position = new Vector2(transform.position.x, transform.position.z);
+        var walkingDirection = point - position;
+        Player.Input.RunX = walkingDirection.x;
+        Player.Input.RunZ = walkingDirection.y;
     }
 }
