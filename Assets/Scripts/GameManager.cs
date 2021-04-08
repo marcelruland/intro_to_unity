@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
     public Text textCarriedCollectable;
     public Text textMoneySpent;
     public Text textLevelcompletedSummary;
+    
+    
 
 
     /*
