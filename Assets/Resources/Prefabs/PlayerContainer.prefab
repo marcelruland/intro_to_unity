@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8938493316227395382}
   - component: {fileID: 8938493316227395380}
+  - component: {fileID: -8983850192143864872}
   - component: {fileID: 8938493316227395381}
   - component: {fileID: 8938493316227395339}
   - component: {fileID: 6053873937396149649}
@@ -47,7 +48,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb1874df9ea0462ba81a9cf04965bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
+--- !u!114 &-8983850192143864872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8938493316227395383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc40735266e25643985c76a11cb3442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8938493316227395381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,9 +72,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621f281fc9c6e485eb6d5091b06e23e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0.7
-  cameraPivot: {x: 0, y: 1.42, z: 0}
-  cameraDistance: 2.2
 --- !u!54 &8938493316227395339
 Rigidbody:
   m_ObjectHideFlags: 0

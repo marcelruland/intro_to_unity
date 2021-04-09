@@ -13,6 +13,7 @@ public class Controller : MonoBehaviour
 {
     // input
     private Player _player;
+    private PlayableCharacter _playableCharacter;
     private float _horizontalKeyboardInput;
     private float _verticalKeyboardInput;
     private bool _jumpButton;
@@ -39,6 +40,7 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
+        _playableCharacter = GetComponent<PlayableCharacter>();
     }
 
 
@@ -52,13 +54,13 @@ public class Controller : MonoBehaviour
         _secondaryActionButton = Input.GetKeyDown(KeyCode.R);
         _tertiaryActionButton = Input.GetKeyDown(KeyCode.T);
 
-        _player.Input.JumpButton = _jumpButton;
-        _player.Input.PrimaryActionButton = _primaryActionButton;
-        _player.Input.SecondaryActionButton = _secondaryActionButton;
-        _player.Input.TertiaryActionButton = _tertiaryActionButton;
+        _player.ActionInput.Jump = _jumpButton;
+        _playableCharacter.Input.PrimaryActionButton = _primaryActionButton;
+        _playableCharacter.Input.SecondaryActionButton = _secondaryActionButton;
+        _playableCharacter.Input.TertiaryActionButton = _tertiaryActionButton;
     }
 
-    // FixedUpdate is called once every physics update
+    
     private void FixedUpdate()
     {
         /* 
@@ -85,10 +87,10 @@ public class Controller : MonoBehaviour
         var lookDirection = Quaternion.AngleAxis(_inputRotationY, playerLeft) * playerForward;
 
         // feed calculated values to player object
-        _player.Input.RunX = runDirection.x;
-        _player.Input.RunZ = runDirection.z;
-        _player.Input.LookX = lookDirection.x;
-        _player.Input.LookZ = lookDirection.z;
+        _player.MovementInput.RunX = runDirection.x;
+        _player.MovementInput.RunZ = runDirection.z;
+        _player.MovementInput.LookX = lookDirection.x;
+        _player.MovementInput.LookZ = lookDirection.z;
 
         // camera position
         var characterPivot = Quaternion.AngleAxis(_inputRotationX, Vector3.up) * _cameraPivot;
