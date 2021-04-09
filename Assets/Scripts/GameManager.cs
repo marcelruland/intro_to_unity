@@ -71,16 +71,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // // Prefabs
-    // public GameObject prefabPlayer;
-    //
-    // public GameObject prefabBanana;
-    // //public GameObject prefabDisinfectant;  // TODO not yet implemented
-    // public GameObject prefabFlour;
-    // public GameObject prefabMilk;
-    // public GameObject prefabToiletRoll;
-    // public GameObject prefabYeast;
-
     // User Interface
     public GameObject panelMenu;
     public GameObject panelPlay;
@@ -92,6 +82,9 @@ public class GameManager : MonoBehaviour
     public Text textMoneySpent;
     public Text textLevelcompletedSummary;
     public Text textHealth;
+    public Text textPrimaryAction;
+    public Text textSecondaryAction;
+    public Text textTertiaryAction;
 
 
 

@@ -101,13 +101,18 @@ public class PlayableCharacter : MonoBehaviour
         const int colliderLayerMask = 1 << 6;
         // check for objects within radius
         Collider[] collectablesInRadius= Physics.OverlapSphere(Rigidbody.position, _DETECTION_RADIUS, colliderLayerMask);
+        if (collectablesInRadius.Length == 0)
+            return;
 
-        Collider chosenCollectable = collectablesInRadius[random.Next(collectablesInRadius.Length) - 1];
+        Collider chosenCollectable = collectablesInRadius[random.Next(collectablesInRadius.Length - 1)];
         _carriedCollectable = chosenCollectable.tag;
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
         Destroy(chosenCollectable.gameObject);
         _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
         _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
+        GameManager.Instance.textPrimaryAction.text = "E: throw";
+        GameManager.Instance.textSecondaryAction.text = "R: " + _secondaryAction;
+        GameManager.Instance.textTertiaryAction.text = "T: " + _tertiaryAction;
     }
 
 
@@ -136,7 +141,6 @@ public class PlayableCharacter : MonoBehaviour
         _player.ActionInput.Throw = true;
         StartCoroutine(SetThrowToFalse());
         ResetCollectableValues();
-        GameManager.Instance.CarriedCollectable = _carriedCollectable;
         
         IEnumerator SetThrowToFalse()
         {
@@ -166,6 +170,10 @@ public class PlayableCharacter : MonoBehaviour
         _carriedCollectable = "";
         _secondaryAction = "";
         _tertiaryAction = "";
+        GameManager.Instance.CarriedCollectable = _carriedCollectable;
+        GameManager.Instance.textPrimaryAction.text = "E:";
+        GameManager.Instance.textSecondaryAction.text = "R:";
+        GameManager.Instance.textTertiaryAction.text = "T:";
     }
 
     private void HoardCollectable()
