@@ -25,13 +25,15 @@ public class GameManager : MonoBehaviour
 
 
     // properties
-    private float _health;
+    private float _health = 1f;
 
     public float Health
     {
         get { return _health; }
         set
         {
+            if (_health <= 0f)
+                SwitchState(State.GAMEOVER);
             _health = value;
             textHealth.text = "Health: " + _health.ToString("0.00");
         }

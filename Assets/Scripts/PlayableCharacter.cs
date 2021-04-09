@@ -98,36 +98,16 @@ public class PlayableCharacter : MonoBehaviour
 
         // see https://docs.unity3d.com/Manual/Layers.html section "Casting
         // Rays Selectively" for an explanation of how this works
-        int colliderLayerMask = 1 << 6;
+        const int colliderLayerMask = 1 << 6;
         // check for objects within radius
         Collider[] collectablesInRadius= Physics.OverlapSphere(Rigidbody.position, _DETECTION_RADIUS, colliderLayerMask);
 
-        Collider chosenCollectable = collectablesInRadius[random.Next(collectablesInRadius.Length)];
+        Collider chosenCollectable = collectablesInRadius[random.Next(collectablesInRadius.Length) - 1];
         _carriedCollectable = chosenCollectable.tag;
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
         Destroy(chosenCollectable.gameObject);
         _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
         _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
-        
-        //iterate over found objects
-        // foreach (Collider objectInRadius in objectsInRadius)
-        // {
-        //     // if one of the objects within radius is a collectable
-        //
-        //     bool isCollectable = Array.Exists(_collectables, element => element == objectInRadius.tag);
-        //     if (isCollectable)
-        //     {
-        //         // write tag to carriedObject variable and destroy gameObject
-        //         _carriedCollectable = objectInRadius.tag;
-        //         GameManager.Instance.CarriedCollectable = _carriedCollectable;
-        //         Destroy(objectInRadius.gameObject);
-        //         _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
-        //         _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
-        //         break;
-        //     }
-        //
-        //     ;
-        // }
     }
 
 
@@ -198,18 +178,15 @@ public class PlayableCharacter : MonoBehaviour
 
     private void CheckSafetyDistance()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
-        foreach (var hitCollider in hitColliders)
-        {
-            bool isOtherPlayer = false;
-            if (isOtherPlayer)
-                TakeDamage();
-        }
+        int NPCLayerMask = 1 << 7;
+        Collider[] NPCsInRadius = Physics.OverlapSphere(transform.position, _MINDESTABSTAND, NPCLayerMask);
+        if (NPCsInRadius.Length > 0)
+            TakeDamage();
     }
 
     private void TakeDamage(float amount = 0.1f)
     {
-        _health -= amount;
+        _health -= amount * Time.deltaTime;
         GameManager.Instance.Health = _health;
     }
 }
