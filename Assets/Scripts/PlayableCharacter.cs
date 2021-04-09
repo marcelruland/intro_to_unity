@@ -7,10 +7,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 
 public class PlayableCharacter : MonoBehaviour
 {
+    Random random = new System.Random();
     private Player _player;
     protected Rigidbody Rigidbody;
     public InputStr Input;
@@ -70,6 +72,7 @@ public class PlayableCharacter : MonoBehaviour
         ResetCollectableValues();
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
         GameManager.Instance.Health = _health;
+        TakeDamage();
     }
 
     void Update()
@@ -93,31 +96,38 @@ public class PlayableCharacter : MonoBehaviour
         if (!Input.PrimaryActionButton)
             return;
 
-        // check for objects within radius
         // see https://docs.unity3d.com/Manual/Layers.html section "Casting
         // Rays Selectively" for an explanation of how this works
         int colliderLayerMask = 1 << 6;
-        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, _DETECTION_RADIUS, colliderLayerMask);
+        // check for objects within radius
+        Collider[] collectablesInRadius= Physics.OverlapSphere(Rigidbody.position, _DETECTION_RADIUS, colliderLayerMask);
 
+        Collider chosenCollectable = collectablesInRadius[random.Next(collectablesInRadius.Length)];
+        _carriedCollectable = chosenCollectable.tag;
+        GameManager.Instance.CarriedCollectable = _carriedCollectable;
+        Destroy(chosenCollectable.gameObject);
+        _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
+        _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
+        
         //iterate over found objects
-        foreach (Collider objectInRadius in objectsInRadius)
-        {
-            // if one of the objects within radius is a collectable
-
-            bool isCollectable = Array.Exists(_collectables, element => element == objectInRadius.tag);
-            if (isCollectable)
-            {
-                // write tag to carriedObject variable and destroy gameObject
-                _carriedCollectable = objectInRadius.tag;
-                GameManager.Instance.CarriedCollectable = _carriedCollectable;
-                Destroy(objectInRadius.gameObject);
-                _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
-                _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
-                break;
-            }
-
-            ;
-        }
+        // foreach (Collider objectInRadius in objectsInRadius)
+        // {
+        //     // if one of the objects within radius is a collectable
+        //
+        //     bool isCollectable = Array.Exists(_collectables, element => element == objectInRadius.tag);
+        //     if (isCollectable)
+        //     {
+        //         // write tag to carriedObject variable and destroy gameObject
+        //         _carriedCollectable = objectInRadius.tag;
+        //         GameManager.Instance.CarriedCollectable = _carriedCollectable;
+        //         Destroy(objectInRadius.gameObject);
+        //         _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
+        //         _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
+        //         break;
+        //     }
+        //
+        //     ;
+        // }
     }
 
 
