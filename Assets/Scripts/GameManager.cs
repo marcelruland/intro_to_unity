@@ -9,6 +9,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
     public Text textTertiaryAction;
 
     public Button buttonMenuPlay;
+    public Button buttonGameOverPlayAgain;
 
 
 
@@ -124,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     private void SwitchState(State newState, float delay = 0f)
     {
-        Debug.Log(_state + " --> " + newState);
+        Debug.Log(_state + " --> " + newState + " " + _health.ToString());
         StartCoroutine(SwitchDelay(newState, delay));
     }
 
@@ -146,6 +148,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
+        buttonGameOverPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         // make accessing this script easier
         Instance = this;
         SwitchState(State.MENU);
@@ -230,6 +233,7 @@ public class GameManager : MonoBehaviour
                 Destroy(_currentLevel);
                 panelPlay.SetActive(false);
                 Cursor.visible = true;
+                _health = 1f;
                 break;
             case State.LEVELCOMPLETED:
                 panelLevelCompleted.SetActive(true);
@@ -237,6 +241,7 @@ public class GameManager : MonoBehaviour
             case State.LOADLEVEL:
                 break;
             case State.GAMEOVER:
+                panelGameOver.SetActive(false);
                 break;
             case State.END:
                 break;
