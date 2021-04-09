@@ -89,6 +89,10 @@ PrefabInstance:
       value: Milk
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 6d7b1b7dbbae8b04999632ec36943117, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 6d7b1b7dbbae8b04999632ec36943117, type: 3}
       propertyPath: m_TagString
       value: Milk
       objectReference: {fileID: 0}
