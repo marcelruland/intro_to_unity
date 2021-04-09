@@ -47,15 +47,10 @@ public class NonPlayableCharacter : MonoBehaviour
     }
 
 
-    private bool IsAtPoint(Vector2 point)
+    private bool IsAtPoint(Vector2 point, float tolerance = 0.1f)
     {
-        float tolerance = 0.1f;
-        Vector2 position = new Vector2(transform.position.x, transform.position.z);
-        bool isAtX = position.x > point.x - tolerance && position.x < point.x + tolerance;
-        bool isAtZ = position.y > point.y - tolerance && position.y < point.y + tolerance;
-        if (isAtX && isAtZ)
-            return true;
-        return false;
+        Vector2 position2d = new Vector2(transform.position.x, transform.position.z);
+        return Vector2.Distance(position2d, point) <= tolerance;
     }
 
     private void WalkToPoint(Vector2 point)
