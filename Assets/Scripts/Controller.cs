@@ -38,7 +38,6 @@ public class Controller : MonoBehaviour
      */
     private void Awake()
     {
-        // returns the first active loaded object of type Player
         _player = GetComponent<Player>();
     }
 
