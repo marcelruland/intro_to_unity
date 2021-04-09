@@ -21,8 +21,7 @@ public class Controller : MonoBehaviour
     private bool tertiaryActionButton;
 
     // movement
-    // TODO: rotationSpeed doesn't do anything, no idea why
-    [SerializeField] private float rotationSpeed = 0.7f;
+    private float rotationSpeed = 0.7f;
     protected float inputRotationX; // ]0, 360]
     protected float inputRotationY; // ]-80, 80[
 
