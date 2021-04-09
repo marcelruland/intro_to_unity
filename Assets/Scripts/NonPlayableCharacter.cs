@@ -38,15 +38,20 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void Update()
     {
+        WalkToPoint(walkingPoints[_currentPointIndex]);
         if (IsAtPoint(walkingPoints[_currentPointIndex]))
-            WalkToNextPoint();
+        {
+            _currentPointIndex++;
+            if (_currentPointIndex >= _numberOfWalkingPoints)
+                _currentPointIndex = 0;
+        }
     }
 
 
     private bool IsAtPoint(Vector2 point)
     {
         float tolerance = 0.1f;
-        var position = new Vector2(transform.position.x, transform.position.z);
+        Vector2 position = new Vector2(transform.position.x, transform.position.z);
         bool isAtX = position.x > point.x - tolerance && position.x < point.x + tolerance;
         bool isAtZ = position.y > point.y - tolerance && position.y < point.y + tolerance;
         if (isAtX && isAtZ)
@@ -60,14 +65,8 @@ public class NonPlayableCharacter : MonoBehaviour
         var walkingDirection = CalculateNormalizedDirection(point, position);
         _player.MovementInput.RunX = walkingDirection.x;
         _player.MovementInput.RunZ = walkingDirection.y;
-        
-        //recalculate direction every 5 seconds (approximately)
-        // StartCoroutine(RecalculateDirectionEveryNSeconds(3));
-        // IEnumerator RecalculateDirectionEveryNSeconds(int n)
-        // {
-        //     yield return new WaitForSeconds(n);
-        //     WalkToPoint((point));
-        // }
+        _player.MovementInput.LookX = walkingDirection.x;
+        _player.MovementInput.LookZ = walkingDirection.y;
     }
 
 
@@ -77,11 +76,4 @@ public class NonPlayableCharacter : MonoBehaviour
         return (a - b).normalized;
     }
 
-    private void WalkToNextPoint()
-    {
-        _currentPointIndex++;
-        if (_currentPointIndex >= _numberOfWalkingPoints)
-            _currentPointIndex = 0;
-        WalkToPoint(walkingPoints[_currentPointIndex]);
-    }
 }
