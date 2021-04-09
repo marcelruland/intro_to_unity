@@ -1,3 +1,11 @@
+/*
+ * Properties that only NPCs should have but not the playable character.
+ * - directly spawning/throwing collectables without picking anything up
+ * 
+ * NOTE: This script combines both properties and movement input for NPC's.
+ * The corresponding scripts for the playable character are PlayableCharacter.cs
+ * (properties) and Controller.cs (movement) respectively.
+ */
 
 
 using System;
@@ -7,25 +15,21 @@ using UnityEngine;
 
 public class NonPlayableCharacter : MonoBehaviour
 {
-    // input
-    protected Player Player;
+    private Player _player;
     public Vector2[] walkingPoints;
     private int _numberOfWalkingPoints;
     private int _currentPointIndex = 0;
 
     private void Awake()
     {
-        Player = GetComponent<Player>();
+        _player = GetComponent<Player>();
     }
 
     private void Start()
     {
-        Player.Input.JumpButton = false;
-        Player.Input.PrimaryActionButton = false;
-        Player.Input.SecondaryActionButton = false;
-        Player.Input.TertiaryActionButton = false;
-        Player.Input.RunX = 0f;
-        Player.Input.RunZ = 0f;
+        _player.ActionInput.Jump = false;
+        _player.MovementInput.RunX = 0f;
+        _player.MovementInput.RunZ = 0f;
         
         _numberOfWalkingPoints = walkingPoints.Length;
         WalkToPoint(walkingPoints[_currentPointIndex]);
@@ -53,9 +57,24 @@ public class NonPlayableCharacter : MonoBehaviour
     private void WalkToPoint(Vector2 point)
     {
         var position = new Vector2(transform.position.x, transform.position.z);
-        var walkingDirection = point - position;
-        Player.Input.RunX = walkingDirection.x;
-        Player.Input.RunZ = walkingDirection.y;
+        var walkingDirection = CalculateNormalizedDirection(point, position);
+        _player.MovementInput.RunX = walkingDirection.x;
+        _player.MovementInput.RunZ = walkingDirection.y;
+        
+        //recalculate direction every 5 seconds (approximately)
+        // StartCoroutine(RecalculateDirectionEveryNSeconds(3));
+        // IEnumerator RecalculateDirectionEveryNSeconds(int n)
+        // {
+        //     yield return new WaitForSeconds(n);
+        //     WalkToPoint((point));
+        // }
+    }
+
+
+    private Vector2 CalculateNormalizedDirection(Vector2 a, Vector2 b)
+    {
+        // calculates directional Vector2 FROM a TO b
+        return (a - b).normalized;
     }
 
     private void WalkToNextPoint()

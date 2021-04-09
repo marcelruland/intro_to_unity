@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
      */
     private void Start()
     {
-        _timePerRound = 60f;
+        _timePerRound = 180f;
         // make accessing this script easier
         Instance = this;
         // begin in the (main) menu
