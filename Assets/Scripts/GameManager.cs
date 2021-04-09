@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     private void SwitchState(State newState, float delay = 0f)
     {
-        Debug.Log(_state + " --> " + newState + " " + _health.ToString());
+        Debug.Log(_state + " --> " + newState);
         StartCoroutine(SwitchDelay(newState, delay));
     }
 
@@ -147,8 +147,10 @@ public class GameManager : MonoBehaviour
      */
     private void Start()
     {
+        // initialise buttons
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonGameOverPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
+        
         // make accessing this script easier
         Instance = this;
         SwitchState(State.MENU);
@@ -281,5 +283,20 @@ public class GameManager : MonoBehaviour
             textCountDown.color = new Color(1, 0.65f, 0);
         else
             textCountDown.color = Color.red;
+    }
+
+    private int[] bountyToLifeTime(float avgDailyUse, int numCollected)
+    {
+        /*
+         * TODO:
+         * Write a method that takes in two parameters:
+         * float avgDailyUse; the average number of items of this type an average
+         *                    German consumes per day
+         * int numCollected; the number of items of this type the player hoarded
+         * and outputs an array of three ints: the number of months, weeks, and
+         * days the hoarded resources will last. (for post-game end-screen
+         * "Sie haben Klopapier für n Monate etc etc...")
+         */
+        throw new NotImplementedException();
     }
 }
