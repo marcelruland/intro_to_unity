@@ -12,7 +12,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     // input
-    protected Player Player;
+    private Player _player;
     private float _horizontalKeyboardInput;
     private float _verticalKeyboardInput;
     private bool _jumpButton;
@@ -39,7 +39,7 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         // returns the first active loaded object of type Player
-        Player = GetComponent<Player>();
+        _player = GetComponent<Player>();
     }
 
 
@@ -53,10 +53,10 @@ public class Controller : MonoBehaviour
         _secondaryActionButton = Input.GetKeyDown(KeyCode.R);
         _tertiaryActionButton = Input.GetKeyDown(KeyCode.T);
 
-        Player.Input.JumpButton = _jumpButton;
-        Player.Input.PrimaryActionButton = _primaryActionButton;
-        Player.Input.SecondaryActionButton = _secondaryActionButton;
-        Player.Input.TertiaryActionButton = _tertiaryActionButton;
+        _player.Input.JumpButton = _jumpButton;
+        _player.Input.PrimaryActionButton = _primaryActionButton;
+        _player.Input.SecondaryActionButton = _secondaryActionButton;
+        _player.Input.TertiaryActionButton = _tertiaryActionButton;
     }
 
     // FixedUpdate is called once every physics update
@@ -86,10 +86,10 @@ public class Controller : MonoBehaviour
         var lookDirection = Quaternion.AngleAxis(_inputRotationY, playerLeft) * playerForward;
 
         // feed calculated values to player object
-        Player.Input.RunX = runDirection.x;
-        Player.Input.RunZ = runDirection.z;
-        Player.Input.LookX = lookDirection.x;
-        Player.Input.LookZ = lookDirection.z;
+        _player.Input.RunX = runDirection.x;
+        _player.Input.RunZ = runDirection.z;
+        _player.Input.LookX = lookDirection.x;
+        _player.Input.LookZ = lookDirection.z;
 
         // camera position
         var characterPivot = Quaternion.AngleAxis(_inputRotationX, Vector3.up) * _cameraPivot;
