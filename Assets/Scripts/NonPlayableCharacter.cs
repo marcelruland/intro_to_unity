@@ -61,8 +61,11 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void WalkToPoint(Vector2 point)
     {
-        var position = new Vector2(transform.position.x, transform.position.z);
-        var walkingDirection = CalculateNormalizedDirection(point, position);
+        // awkward but fast(-er than before) access
+        Vector3 position3d = transform.position;
+        Vector2 position2d = new Vector2(position3d.x, position3d.z);
+        Vector2 walkingDirection = CalculateNormalizedDirection(point, position2d);
+        
         _player.MovementInput.RunX = walkingDirection.x;
         _player.MovementInput.RunZ = walkingDirection.y;
         _player.MovementInput.LookX = walkingDirection.x;
