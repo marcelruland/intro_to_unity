@@ -32,7 +32,6 @@ public class NonPlayableCharacter : MonoBehaviour
         _player.MovementInput.RunZ = 0f;
         
         _numberOfWalkingPoints = walkingPoints.Length;
-        WalkToPoint(walkingPoints[_currentPointIndex]);
     }
 
 
