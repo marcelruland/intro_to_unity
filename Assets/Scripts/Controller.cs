@@ -13,12 +13,12 @@ public class Controller : MonoBehaviour
 {
     // input
     protected Player Player;
-    private float horizontalKeyboardInput;
-    private float verticalKeyboardInput;
-    private bool jumpButton;
-    private bool primaryActionButton;
-    private bool secondaryActionButton;
-    private bool tertiaryActionButton;
+    private float _horizontalKeyboardInput;
+    private float _verticalKeyboardInput;
+    private bool _jumpButton;
+    private bool _primaryActionButton;
+    private bool _secondaryActionButton;
+    private bool _tertiaryActionButton;
 
     // movement
     private float _rotationSpeed = 0.7f;
@@ -48,15 +48,15 @@ public class Controller : MonoBehaviour
         /*
          * Get input for jumping and throwing and pass on.
          */
-        jumpButton = Input.GetKeyDown(KeyCode.Space);
-        primaryActionButton = Input.GetKeyDown(KeyCode.E);
-        secondaryActionButton = Input.GetKeyDown(KeyCode.R);
-        tertiaryActionButton = Input.GetKeyDown(KeyCode.T);
+        _jumpButton = Input.GetKeyDown(KeyCode.Space);
+        _primaryActionButton = Input.GetKeyDown(KeyCode.E);
+        _secondaryActionButton = Input.GetKeyDown(KeyCode.R);
+        _tertiaryActionButton = Input.GetKeyDown(KeyCode.T);
 
-        Player.Input.JumpButton = jumpButton;
-        Player.Input.PrimaryActionButton = primaryActionButton;
-        Player.Input.SecondaryActionButton = secondaryActionButton;
-        Player.Input.TertiaryActionButton = tertiaryActionButton;
+        Player.Input.JumpButton = _jumpButton;
+        Player.Input.PrimaryActionButton = _primaryActionButton;
+        Player.Input.SecondaryActionButton = _secondaryActionButton;
+        Player.Input.TertiaryActionButton = _tertiaryActionButton;
     }
 
     // FixedUpdate is called once every physics update
@@ -68,8 +68,8 @@ public class Controller : MonoBehaviour
          * - mousePosition for view rotation (Probably not the best way in the
          *   world but Siriusly who cares if it works?)
          */
-        horizontalKeyboardInput = Input.GetAxis("Horizontal");
-        verticalKeyboardInput = Input.GetAxis("Vertical");
+        _horizontalKeyboardInput = Input.GetAxis("Horizontal");
+        _verticalKeyboardInput = Input.GetAxis("Vertical");
         Vector3 mousePos = Input.mousePosition;
 
         // rotation for camera position
@@ -82,7 +82,7 @@ public class Controller : MonoBehaviour
         var playerLeft = Quaternion.AngleAxis(_inputRotationX + 90, Vector3.up) * Vector3.forward;
 
         // run and look direction
-        var runDirection = playerForward * verticalKeyboardInput + playerLeft * horizontalKeyboardInput;
+        var runDirection = playerForward * _verticalKeyboardInput + playerLeft * _horizontalKeyboardInput;
         var lookDirection = Quaternion.AngleAxis(_inputRotationY, playerLeft) * playerForward;
 
         // feed calculated values to player object
