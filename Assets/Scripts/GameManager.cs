@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject[] levels;
     private GameObject _currentLevel;
-    private float _timePerRound;
+    private float _timePerRound = 50f;
     private float _timeRemaining;
     
     public Dictionary<string, int> Bounty = new Dictionary<string, int>()
@@ -95,6 +95,8 @@ public class GameManager : MonoBehaviour
     public Text textSecondaryAction;
     public Text textTertiaryAction;
 
+    public Button buttonMenuPlay;
+
 
 
 
@@ -143,10 +145,9 @@ public class GameManager : MonoBehaviour
      */
     private void Start()
     {
-        _timePerRound = 50f;
+        buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         // make accessing this script easier
         Instance = this;
-        // begin in the (main) menu
         SwitchState(State.MENU);
     }
 
@@ -156,7 +157,6 @@ public class GameManager : MonoBehaviour
         {
             case State.MENU:
                 panelMenu.SetActive(true);
-                SwitchState(State.INITIALIZE, 1f);
                 break;
             case State.INITIALIZE:
                 Cursor.visible = false;
@@ -232,6 +232,7 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
                 break;
             case State.LEVELCOMPLETED:
+                panelLevelCompleted.SetActive(true);
                 break;
             case State.LOADLEVEL:
                 break;

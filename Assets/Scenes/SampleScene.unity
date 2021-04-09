@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 836281281}
   - component: {fileID: 836281280}
   m_Layer: 5
-  m_Name: Play
+  m_Name: ButtonMenuPlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1537,6 +1537,7 @@ MonoBehaviour:
   textPrimaryAction: {fileID: 1699579847}
   textSecondaryAction: {fileID: 1257541927}
   textTertiaryAction: {fileID: 1670422467}
+  buttonMenuPlay: {fileID: 836281280}
 --- !u!4 &1638231545
 Transform:
   m_ObjectHideFlags: 0
