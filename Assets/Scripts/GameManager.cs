@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
 
 
     // properties
-    private int _health;
+    private float _health;
 
-    public int Health
+    public float Health
     {
         get { return _health; }
         set
@@ -37,13 +37,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private int _level;
-
-    public int Level
-    {
-        get { return _level; }
-        set { _level = value; }
-    }
+    public int Level { get; set; }
 
     private float _moneySpent;
 

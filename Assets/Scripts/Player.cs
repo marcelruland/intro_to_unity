@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 {
     // information for movement (position and rotation)
     public MovementInputStr MovementInput;
+
     public struct MovementInputStr
     {
         public float LookX;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
 
     // information for jumping and throwing
     public ActionInputStr ActionInput;
+
     public struct ActionInputStr
     {
         public bool Jump;
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
     private const float _SPEED = 3f;
     private const float _JUMP_FORCE = 4f;
     private const float _THROW_FORCE = 8f;
-    private int _health;
+    private float _health;
 
     /*
      * Awake is called when
@@ -56,7 +58,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _health = 1;
+        _health = 1f;
     }
 
     // Update is called once per frame
@@ -180,7 +182,7 @@ public class Player : MonoBehaviour
 
     private void GetDamage()
     {
-        _health--;
+        _health -= 0.1f;
         GameManager.Instance.Health = _health;
     }
 }
