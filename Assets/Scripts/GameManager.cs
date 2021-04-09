@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
 
 
     // properties
-    private int _health;
+    private float _health;
 
-    public int Health
+    public float Health
     {
         get { return _health; }
         set
