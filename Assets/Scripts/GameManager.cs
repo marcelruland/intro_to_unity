@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 
     public Button buttonMenuPlay;
     public Button buttonGameOverPlayAgain;
-
+    public Button buttonReplayLevel;
 
 
 
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
         // initialise buttons
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonGameOverPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
-        
+        buttonReplayLevel.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         // make accessing this script easier
         Instance = this;
         SwitchState(State.MENU);
@@ -230,6 +230,7 @@ public class GameManager : MonoBehaviour
                 panelMenu.SetActive(false);
                 break;
             case State.INITIALIZE:
+                panelLevelCompleted.SetActive(false);
                 break;
             case State.PLAY:
                 Destroy(_currentLevel);
