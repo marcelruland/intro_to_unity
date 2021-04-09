@@ -31,27 +31,18 @@ public class PlayableCharacter : MonoBehaviour
     private const float _MINDESTABSTAND = 1.5f;
     private float _health = 1.0f;
 
-    private readonly string[] _collectables = new string[]
-    {
-        "Banana",
-        //"Disinfectant",
-        "Flour",
-        "Milk",
-        "ToiletRoll",
-        "Yeast",
-    };
 
     private readonly Dictionary<string, string[]> _actionsWithCollectable = new Dictionary<string, string[]>
     {
-        {"Banana", new string[] {"", ""}},
-        {"Disinfectant", new string[] {"hoard", "drink"}},
-        {"Flour", new string[] {"hoard", ""}},
-        {"Milk", new string[] {"hoard", "drink"}},
-        {"ToiletRoll", new string[] {"hoard", ""}},
-        {"Yeast", new string[] {"hoard", ""}},
+        {"Banana", new[] {"", ""}},
+        {"Disinfectant", new[] {"hoard", "drink"}},
+        {"Flour", new[] {"hoard", ""}},
+        {"Milk", new[] {"hoard", "drink"}},
+        {"ToiletRoll", new[] {"hoard", ""}},
+        {"Yeast", new[] {"hoard", ""}},
     };
 
-    private Dictionary<string, float> collectableValues = new Dictionary<string, float>
+    private readonly Dictionary<string, float> _collectableValues = new Dictionary<string, float>
     {
         {"Banana", 0.40f},
         {"Disinfectant", 1.99f},
@@ -106,10 +97,13 @@ public class PlayableCharacter : MonoBehaviour
 
         Collider chosenCollectable = collectablesInRadius[random.Next(collectablesInRadius.Length - 1)];
         _carriedCollectable = chosenCollectable.tag;
-        GameManager.Instance.CarriedCollectable = _carriedCollectable;
-        Destroy(chosenCollectable.gameObject);
         _secondaryAction = _actionsWithCollectable[_carriedCollectable][0];
         _tertiaryAction = _actionsWithCollectable[_carriedCollectable][1];
+        
+        Destroy(chosenCollectable.gameObject);
+        
+        // update UI
+        GameManager.Instance.CarriedCollectable = _carriedCollectable;
         GameManager.Instance.textPrimaryAction.text = "E: throw";
         GameManager.Instance.textSecondaryAction.text = "R: " + _secondaryAction;
         GameManager.Instance.textTertiaryAction.text = "T: " + _tertiaryAction;
@@ -178,7 +172,8 @@ public class PlayableCharacter : MonoBehaviour
 
     private void HoardCollectable()
     {
-        GameManager.Instance.MoneySpent += collectableValues[_carriedCollectable];
+        GameManager.Instance.MoneySpent += _collectableValues[_carriedCollectable];
+        GameManager.Instance.Bounty[_carriedCollectable]++;
         _carriedCollectable = "";
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
     }

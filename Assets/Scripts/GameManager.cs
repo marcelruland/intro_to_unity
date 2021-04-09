@@ -22,6 +22,15 @@ public class GameManager : MonoBehaviour
     private GameObject _currentLevel;
     private float _timePerRound;
     private float _timeRemaining;
+    
+    public Dictionary<string, int> Bounty = new Dictionary<string, int>()
+    {
+        {"Banana", 0},
+        {"Flour", 0},
+        {"Milk", 0},
+        {"ToiletRoll", 0},
+        {"Yeast", 0},
+    };
 
 
     // properties
@@ -134,7 +143,7 @@ public class GameManager : MonoBehaviour
      */
     private void Start()
     {
-        _timePerRound = 180f;
+        _timePerRound = 50f;
         // make accessing this script easier
         Instance = this;
         // begin in the (main) menu
@@ -164,7 +173,7 @@ public class GameManager : MonoBehaviour
                     "Gemessen am Bundesdurchschnitt hast du\n" +
                     "- Klopapier für i Monate, j Wochen und k Tage\n" +
                     "- Mehl für i Monate, j Wochen und k Tage\n" +
-                    "- Milch für i Monate, j Wochen und k Tage\n" +
+                    $"- Milch für {Bounty["Milk"]} Monate, j Wochen und k Tage\n" +
                     "- Hefe für i Monate, j Wochen und k Tage\n" +
                     "- Desinfektionsmittel für i Monate, j Wochen und k Tage";
                 panelLevelCompleted.SetActive(true);
@@ -175,6 +184,7 @@ public class GameManager : MonoBehaviour
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
+                panelGameOver.SetActive(true);
                 break;
             case State.END:
                 break;
