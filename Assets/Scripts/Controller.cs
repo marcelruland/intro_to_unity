@@ -21,9 +21,9 @@ public class Controller : MonoBehaviour
     private bool tertiaryActionButton;
 
     // movement
-    private float rotationSpeed = 0.7f;
-    protected float inputRotationX; // ]0, 360]
-    protected float inputRotationY; // ]-80, 80[
+    private float _rotationSpeed = 0.7f;
+    private float _inputRotationX; // ]0, 360]
+    private float _inputRotationY; // ]-80, 80[
 
     // camera control
     private Vector3 _cameraPivot = new Vector3(0f, 1.42f, 0f);
@@ -73,17 +73,17 @@ public class Controller : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
 
         // rotation for camera position
-        inputRotationX = (mousePos.x * rotationSpeed) % 360f;
-        inputRotationY = Mathf.Clamp(-(mousePos.y - 300) * rotationSpeed, -80f, 80f);
+        _inputRotationX = (mousePos.x * _rotationSpeed) % 360f;
+        _inputRotationY = Mathf.Clamp(-(mousePos.y - 300) * _rotationSpeed, -80f, 80f);
 
         // forward and left relative to the player
         // useful for calculating run and look direction
-        var playerForward = Quaternion.AngleAxis(inputRotationX, Vector3.up) * Vector3.forward;
-        var playerLeft = Quaternion.AngleAxis(inputRotationX + 90, Vector3.up) * Vector3.forward;
+        var playerForward = Quaternion.AngleAxis(_inputRotationX, Vector3.up) * Vector3.forward;
+        var playerLeft = Quaternion.AngleAxis(_inputRotationX + 90, Vector3.up) * Vector3.forward;
 
         // run and look direction
         var runDirection = playerForward * verticalKeyboardInput + playerLeft * horizontalKeyboardInput;
-        var lookDirection = Quaternion.AngleAxis(inputRotationY, playerLeft) * playerForward;
+        var lookDirection = Quaternion.AngleAxis(_inputRotationY, playerLeft) * playerForward;
 
         // feed calculated values to player object
         Player.Input.RunX = runDirection.x;
@@ -92,7 +92,7 @@ public class Controller : MonoBehaviour
         Player.Input.LookZ = lookDirection.z;
 
         // camera position
-        var characterPivot = Quaternion.AngleAxis(inputRotationX, Vector3.up) * _cameraPivot;
+        var characterPivot = Quaternion.AngleAxis(_inputRotationX, Vector3.up) * _cameraPivot;
         StartCoroutine(SetCamera(lookDirection, characterPivot));
     }
 
