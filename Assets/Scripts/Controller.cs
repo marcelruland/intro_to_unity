@@ -26,8 +26,8 @@ public class Controller : MonoBehaviour
     protected float inputRotationY; // ]-80, 80[
 
     // camera control
-    public Vector3 cameraPivot = new Vector3(0f, 1.42f, 0f);
-    public float cameraDistance = 2.2f;  // 0 for first, 3 for third person
+    private Vector3 _cameraPivot = new Vector3(0f, 1.42f, 0f);
+    private float _cameraDistance = 2.2f;  // 0 for first, 3 for third person
 
 
     /*
@@ -92,7 +92,7 @@ public class Controller : MonoBehaviour
         Player.Input.LookZ = lookDirection.z;
 
         // camera position
-        var characterPivot = Quaternion.AngleAxis(inputRotationX, Vector3.up) * cameraPivot;
+        var characterPivot = Quaternion.AngleAxis(inputRotationX, Vector3.up) * _cameraPivot;
         StartCoroutine(SetCamera(lookDirection, characterPivot));
     }
 
@@ -101,7 +101,7 @@ public class Controller : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
 
-        Camera.main.transform.position = (transform.position + characterPivot) - lookDirection * cameraDistance;
+        Camera.main.transform.position = (transform.position + characterPivot) - lookDirection * _cameraDistance;
         Camera.main.transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
     }
 }
