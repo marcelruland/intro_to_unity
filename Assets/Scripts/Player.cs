@@ -3,8 +3,6 @@
  * - movment (position and rotation)
  * - jumping
  * - throwing collectables
- * - health
- * - checking safety distance and decrease health if violated
  */
 
 using UnityEngine;
@@ -38,7 +36,6 @@ public class Player : MonoBehaviour
     private const float _SPEED = 3f;
     private const float _JUMP_FORCE = 4f;
     private const float _THROW_FORCE = 8f;
-    private int _health;
 
     /*
      * Awake is called when
@@ -50,13 +47,6 @@ public class Player : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
-    }
-
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        _health = 1;
     }
 
     // Update is called once per frame
@@ -72,7 +62,6 @@ public class Player : MonoBehaviour
     {
         UpdatePosition();
         UpdateRotation();
-        CheckSafetyDistance();
     }
 
 
@@ -165,22 +154,5 @@ public class Player : MonoBehaviour
         var currentPlayerVelocity = Vector3.ClampMagnitude(new Vector3(MovementInput.RunX, 0, MovementInput.RunZ), 1);
 
         thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + transform.forward * _THROW_FORCE;
-    }
-
-    private void CheckSafetyDistance()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
-        foreach (var hitCollider in hitColliders)
-        {
-            bool isOtherPlayer = false;
-            if (isOtherPlayer)
-                GetDamage();
-        }
-    }
-
-    private void GetDamage()
-    {
-        _health--;
-        GameManager.Instance.Health = _health;
     }
 }

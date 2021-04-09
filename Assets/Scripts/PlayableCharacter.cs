@@ -26,6 +26,8 @@ public class PlayableCharacter : MonoBehaviour
     private string _secondaryAction;
     private string _tertiaryAction;
     private const float _DETECTION_RADIUS = 2f;
+    private const float _MINDESTABSTAND = 1.5f;
+    private float _health = 1.0f;
 
     private readonly string[] _collectables = new string[]
     {
@@ -67,6 +69,7 @@ public class PlayableCharacter : MonoBehaviour
     {
         ResetCollectableValues();
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
+        GameManager.Instance.Health = _health;
     }
 
     void Update()
@@ -76,6 +79,7 @@ public class PlayableCharacter : MonoBehaviour
             PickUpCollectable();
         else
             PerformActionWithCollectable();
+        CheckSafetyDistance();
     }
 
 
@@ -90,7 +94,10 @@ public class PlayableCharacter : MonoBehaviour
             return;
 
         // check for objects within radius
-        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, _DETECTION_RADIUS);
+        // see https://docs.unity3d.com/Manual/Layers.html section "Casting
+        // Rays Selectively" for an explanation of how this works
+        int colliderLayerMask = 1 << 6;
+        Collider[] objectsInRadius = Physics.OverlapSphere(Rigidbody.position, _DETECTION_RADIUS, colliderLayerMask);
 
         //iterate over found objects
         foreach (Collider objectInRadius in objectsInRadius)
@@ -179,4 +186,20 @@ public class PlayableCharacter : MonoBehaviour
     }
 
 
+    private void CheckSafetyDistance()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
+        foreach (var hitCollider in hitColliders)
+        {
+            bool isOtherPlayer = false;
+            if (isOtherPlayer)
+                TakeDamage();
+        }
+    }
+
+    private void TakeDamage(float amount = 0.1f)
+    {
+        _health -= amount;
+        GameManager.Instance.Health = _health;
+    }
 }

@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         set
         {
             _health = value;
-            textHealth.text = _health.ToString("0");
+            textHealth.text = "Health: " + _health.ToString("0.00");
         }
     }
 
