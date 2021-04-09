@@ -807,6 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2923590150519341220}
+  - component: {fileID: 2277673057402263098}
   m_Layer: 0
   m_Name: shopcart
   m_TagString: Untagged
@@ -821,8 +822,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2583233764557134366}
-  m_LocalRotation: {x: -0.7064338, y: -0.030843575, z: -0.030843575, w: 0.7064338}
-  m_LocalPosition: {x: 44.35, y: 0.443, z: 15.36}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 44.390915, y: 0.443, z: 15.328032}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 5492377395352855500}
@@ -866,7 +867,20 @@ Transform:
   - {fileID: 467764671583645882}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: -30, z: 25}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
+--- !u!65 &2277673057402263098
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2583233764557134366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3849039, y: 0.5957314, z: 0.79463977}
+  m_Center: {x: 0.020576319, y: -0.0060512424, z: 0.11962595}
 --- !u!1 &2918300278050176786
 GameObject:
   m_ObjectHideFlags: 0
