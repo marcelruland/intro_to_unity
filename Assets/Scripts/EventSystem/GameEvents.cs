@@ -13,10 +13,16 @@ public class GameEvents : MonoBehaviour
     }
 
     public event Action onEntranceTriggerEnter;
+    public event Action onExitTriggerEnter;
 
     public void EntranceTriggerEnter()
     {
-        if (onEntranceTriggerEnter != null)
-            onEntranceTriggerEnter();
+        // roughly equivalent to if (bla != null)
+        onEntranceTriggerEnter?.Invoke();
+    }
+
+    public void ExitTriggerEnter()
+    {
+        onExitTriggerEnter?.Invoke();
     }
 }
