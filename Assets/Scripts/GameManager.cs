@@ -168,11 +168,13 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case State.MENU:
+                panelManual.SetActive(false);
                 panelMenu.SetActive(true);
                 panelScore.SetActive(false);
-                panelManual.SetActive(false);
+                
                 break;
             case State.INITIALIZE:
+                panelGameOver.SetActive(false);
                 Cursor.visible = false;
                 panelPlay.SetActive(true);
                 textCountDown.text = "";
@@ -180,7 +182,7 @@ public class GameManager : MonoBehaviour
                     Destroy(_currentLevel);
                 SwitchState(State.LOADLEVEL);
                 MoneySpent=0.00f;
-                panelGameOver.SetActive(false);
+                
                 break;
             case State.PLAY:
                 break;
