@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
     public GameObject panelPlay;
     public GameObject panelLevelCompleted;
     public GameObject panelGameOver;
+    public GameObject panelScore;
 
     public Text textCountDown;
     public Text textCarriedCollectable;
@@ -99,7 +100,8 @@ public class GameManager : MonoBehaviour
     public Button buttonMenuPlay;
     public Button buttonGameOverPlayAgain;
     public Button buttonReplayLevel;
-
+    public Button buttonHowto;
+    public Button buttonBackMenu;
 
 
     /*
@@ -151,6 +153,8 @@ public class GameManager : MonoBehaviour
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonGameOverPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonReplayLevel.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
+        //buttonHowto.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
+        buttonBackMenu.onClick.AddListener(delegate { SwitchState(State.MENU); });
         // make accessing this script easier
         Instance = this;
         SwitchState(State.MENU);
@@ -162,6 +166,7 @@ public class GameManager : MonoBehaviour
         {
             case State.MENU:
                 panelMenu.SetActive(true);
+                panelScore.SetActive(false);
                 break;
             case State.INITIALIZE:
                 Cursor.visible = false;
