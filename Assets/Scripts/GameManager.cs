@@ -186,13 +186,12 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LEVELCOMPLETED:
                 textLevelcompletedSummary.text =
-                    $"Du hast für {_moneySpent:0.00} € gehamstert.\n" +
-                    "Gemessen am Bundesdurchschnitt hast du\n" +
-                    "- Klopapier für i Monate, j Wochen und k Tage\n" +
-                    "- Mehl für i Monate, j Wochen und k Tage\n" +
-                    $"- Milch für {Bounty["Milk"]} Monate, j Wochen und k Tage\n" +
-                    "- Hefe für i Monate, j Wochen und k Tage\n" +
-                    "- Desinfektionsmittel für i Monate, j Wochen und k Tage";
+                    "Du Hast für " + _moneySpent.ToString() + "€ gehamstert.\n" +
+                    "Gemessen am Bundesdruchschnitt hast du\n" +
+                    "- Klopapier" + BountyToLifeTime((float) 134 / 365, Bounty["ToiletRoll"]) +
+                    "- Mehl" + BountyToLifeTime((float) 70.6 / 365, Bounty["Yeast"]) +
+                    "- Hefe" + BountyToLifeTime((float) 2 / 365, Bounty["Flour"]);
+                    // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
                 break;
@@ -300,22 +299,13 @@ public class GameManager : MonoBehaviour
         else
             textCountDown.color = Color.red;
     }
-
-    private int[] BountyToLifeTime(float avgDailyUse, int numCollected)
+    
+    private string BountyToLifeTime(float avgDailyUse, int numCollected)
     {
-        /*
-         * TODO:
-         * Write a method that takes in two parameters:
-         * float avgDailyUse; the average number of items of this type an average
-         *                    German consumes per day
-         * int numCollected; the number of items of this type the player hoarded
-         * and outputs an array of three ints: the number of months, weeks, and
-         * days the hoarded resources will last. (for post-game end-screen
-         * "Sie haben Klopapier für n Monate etc etc...")
-         */
-        throw new NotImplementedException();
-
-        // example for "resource will last for three months, 2 weeks, and 6 days
-        return new int[] {3, 2, 6};
+        int DaysOfUse = Convert.ToInt32(numCollected / avgDailyUse);
+        int MonthsOfUse = DaysOfUse / 30;
+        int WeeksOfUse = DaysOfUse % 30 / 7;
+        DaysOfUse = DaysOfUse % 30 % 7;
+        return " für " + MonthsOfUse.ToString() + " Monate, " + WeeksOfUse.ToString() + " Wochen und " + DaysOfUse.ToString() + " Tage\n";
     }
 }
