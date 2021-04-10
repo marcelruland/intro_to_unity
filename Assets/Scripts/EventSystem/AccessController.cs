@@ -22,6 +22,6 @@ public class AccessController : MonoBehaviour
     private void OnExitOpen()
     {
         Debug.Log("at exit");
-        EntranceCollider.enabled = false;
+        EntranceCollider.enabled = true;
     }
 }
