@@ -3140,7 +3140,7 @@ MonoBehaviour:
   panelPlay: {fileID: 304912828}
   panelLevelCompleted: {fileID: 487162499}
   panelGameOver: {fileID: 932375150}
-  panelScore: {fileID: 0}
+  panelScore: {fileID: 1091402092}
   textCountDown: {fileID: 1703927035}
   textCarriedCollectable: {fileID: 2079107558}
   textMoneySpent: {fileID: 1251578144}
