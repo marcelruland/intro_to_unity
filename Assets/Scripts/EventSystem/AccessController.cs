@@ -21,6 +21,7 @@ public class AccessController : MonoBehaviour
         // lock entrance and open exit
         ExitCollider.enabled = false;
         EntranceCollider.enabled = true;
+        GameManager.Instance.InitiateCountdown(GameManager.Instance.timePerRound);
     }
 
     private void OnExitOpen()

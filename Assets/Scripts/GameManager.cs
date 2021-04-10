@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject[] levels;
     private GameObject _currentLevel;
-    private float _timePerRound = 50f;
+    [NonSerialized] public readonly float timePerRound = 50f;
     private float _timeRemaining;
     
     public Dictionary<string, int> Bounty = new Dictionary<string, int>()
@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
 
     private State _state;
     private bool _isSwitchingState;
+    private bool _countDownRunning = false;
 
     public void SwitchState(State newState, float delay = 0f)
     {
@@ -157,6 +158,7 @@ public class GameManager : MonoBehaviour
         //buttonHowto.onClick.;
         buttonBack.onClick.AddListener(delegate { SwitchState(State.LEVELCOMPLETED); });
         buttonBackMenuHowTo.onClick.AddListener(delegate { SwitchState(State.MENU); });
+        
         // make accessing this script easier
         Instance = this;
         SwitchState(State.MENU);
@@ -195,7 +197,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
-                InitiateCountdown(_timePerRound);
+                // InitiateCountdown(_timePerRound);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
@@ -263,13 +265,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void InitiateCountdown(float initialTime)
+    public void InitiateCountdown(float initialTime)
     {
         _timeRemaining = initialTime;
+        _countDownRunning = true;
     }
 
     private void UpdateCountdown()
     {
+        if (!_countDownRunning)
+            return;
         // set timer to zero once time is up, else count down
         if (_timeRemaining == 0f)
             SwitchState(State.LEVELCOMPLETED);
