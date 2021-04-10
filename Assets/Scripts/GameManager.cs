@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour
                 if (_currentLevel != null)
                     Destroy(_currentLevel);
                 SwitchState(State.LOADLEVEL);
+                MoneySpent=0.00f;
                 break;
             case State.PLAY:
                 break;
