@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
     private State _state;
     private bool _isSwitchingState;
 
-    private void SwitchState(State newState, float delay = 0f)
+    public void SwitchState(State newState, float delay = 0f)
     {
         Debug.Log(_state + " --> " + newState);
         StartCoroutine(SwitchDelay(newState, delay));
@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
             SwitchState(State.LEVELCOMPLETED);
         else if (_timeRemaining <= 0)
         {
-            _timeRemaining = 0f;
+            SwitchState(State.GAMEOVER);
         }
         else
         {
