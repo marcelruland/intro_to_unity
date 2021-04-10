@@ -6,6 +6,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using Random = System.Random;
 
@@ -179,6 +180,8 @@ public class PlayableCharacter : MonoBehaviour
     }
 
 
+    // make ReSharper shut up already
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     private void CheckSafetyDistance()
     {
         int NPCLayerMask = 1 << 7;
