@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
             case State.INITIALIZE:
                 Cursor.visible = false;
                 panelPlay.SetActive(true);
+                textCountDown.text = "";
                 if (_currentLevel != null)
                     Destroy(_currentLevel);
                 SwitchState(State.LOADLEVEL);
@@ -197,7 +198,6 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
-                // InitiateCountdown(_timePerRound);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:
