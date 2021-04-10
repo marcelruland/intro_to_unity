@@ -188,13 +188,13 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LEVELCOMPLETED:
                 textLevelcompletedSummary.text =
-                    "Du Hast für " + _moneySpent + "€ gehamstert.\n" +
-                    "Gemessen am Bundesdruchschnitt hast du\n" +
-                    "- Klopapier" + BountyToLifeTime(134f / 365, Bounty["ToiletRoll"]) +
-                    "- Mehl" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
-                    "- Hefe" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
+                    "You have hoarded food for " + _moneySpent + "€ \n" +
+                    "Measured against the national average you have\n" +
+                    "- toiletpaper" + BountyToLifeTime(134f / 365, Bounty["ToiletRoll"]) +
+                    "- flour" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
+                    "- yeast" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
                     // ja, es ist wirklich so wenig: https://milchindustrie.de/wp-content/uploads/2018/11/ProkopfDeutschland_Mopro_2010-2018x_Homepage.pdf
-                    "- Milch" + BountyToLifeTime(0.13f / 365, Bounty["Milk"]);
+                    "- milk" + BountyToLifeTime(0.13f / 365, Bounty["Milk"]);
                     // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
@@ -310,6 +310,6 @@ public class GameManager : MonoBehaviour
         int monthsOfUse = daysOfUse / 30;
         int weeksOfUse = daysOfUse % 30 / 7;
         daysOfUse = daysOfUse % 30 % 7;
-        return " für " + monthsOfUse + " Monate, " + weeksOfUse + " Wochen und " + daysOfUse + " Tage\n";
+        return " for " + monthsOfUse + " months, " + weeksOfUse + " weeks " + daysOfUse + " days!\n";
     }
 }
