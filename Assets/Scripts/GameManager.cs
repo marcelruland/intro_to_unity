@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
     public GameObject panelLevelCompleted;
     public GameObject panelGameOver;
     public GameObject panelScore;
+    public GameObject panelManual;
 
     public Text textCountDown;
     public Text textCarriedCollectable;
@@ -101,7 +102,8 @@ public class GameManager : MonoBehaviour
     public Button buttonGameOverPlayAgain;
     public Button buttonReplayLevel;
     public Button buttonHowto;
-    public Button buttonBackMenu;
+    public Button buttonBack;
+    public Button buttonBackMenuHowTo;
 
 
     /*
@@ -143,7 +145,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     /*
      * METHODS
      */
@@ -153,8 +154,9 @@ public class GameManager : MonoBehaviour
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonGameOverPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonReplayLevel.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
-        //buttonHowto.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
-        buttonBackMenu.onClick.AddListener(delegate { SwitchState(State.MENU); });
+        //buttonHowto.onClick.;
+        buttonBack.onClick.AddListener(delegate { SwitchState(State.LEVELCOMPLETED); });
+        buttonBackMenuHowTo.onClick.AddListener(delegate { SwitchState(State.MENU); });
         // make accessing this script easier
         Instance = this;
         SwitchState(State.MENU);
@@ -167,6 +169,7 @@ public class GameManager : MonoBehaviour
             case State.MENU:
                 panelMenu.SetActive(true);
                 panelScore.SetActive(false);
+                panelManual.SetActive(false);
                 break;
             case State.INITIALIZE:
                 Cursor.visible = false;
@@ -187,6 +190,7 @@ public class GameManager : MonoBehaviour
                     "- Hefe für i Monate, j Wochen und k Tage\n" +
                     "- Desinfektionsmittel für i Monate, j Wochen und k Tage";
                 panelLevelCompleted.SetActive(true);
+                panelScore.SetActive(false);
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
