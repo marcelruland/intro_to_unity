@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AccessController : MonoBehaviour
 {
+    public Collider EntranceCollider;
+    public Collider ExitCollider;
     private void Start()
     {
         GameEvents.current.onEntranceTriggerEnter += OnEntranceOpen;
@@ -14,10 +16,12 @@ public class AccessController : MonoBehaviour
     private void OnEntranceOpen()
     {
         Debug.Log("at entrance");
+        ExitCollider.enabled = false;
     }
 
     private void OnExitOpen()
     {
         Debug.Log("at exit");
+        EntranceCollider.enabled = false;
     }
 }
