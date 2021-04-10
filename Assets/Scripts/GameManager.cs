@@ -299,5 +299,8 @@ public class GameManager : MonoBehaviour
          * "Sie haben Klopapier für n Monate etc etc...")
          */
         throw new NotImplementedException();
+
+        // example for "resource will last for three months, 2 weeks, and 6 days
+        return new int[] {3, 2, 6};
     }
 }
