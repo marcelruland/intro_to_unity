@@ -9,7 +9,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +23,7 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public readonly float timePerRound = 50f;
     private float _timeRemaining;
     
-    public Dictionary<string, int> Bounty = new Dictionary<string, int>()
+    public Dictionary<string, int> Bounty = new Dictionary<string, int>
     {
         {"Banana", 0},
         {"Flour", 0},
@@ -127,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     private State _state;
     private bool _isSwitchingState;
-    private bool _countDownRunning = false;
+    private bool _countDownRunning;
 
     public void SwitchState(State newState, float delay = 0f)
     {
@@ -187,11 +186,12 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LEVELCOMPLETED:
                 textLevelcompletedSummary.text =
-                    "Du Hast für " + _moneySpent.ToString() + "€ gehamstert.\n" +
+                    "Du Hast für " + _moneySpent + "€ gehamstert.\n" +
                     "Gemessen am Bundesdruchschnitt hast du\n" +
-                    "- Klopapier" + BountyToLifeTime((float) 134 / 365, Bounty["ToiletRoll"]) +
-                    "- Mehl" + BountyToLifeTime((float) 70.6 / 365, Bounty["Yeast"]) +
-                    "- Hefe" + BountyToLifeTime((float) 2 / 365, Bounty["Flour"]);
+                    "- Klopapier" + BountyToLifeTime(134f / 365, Bounty["ToiletRoll"]) +
+                    "- Mehl" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
+                    "- Hefe" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
+                    "- Milch" + BountyToLifeTime(0.13f / 365, Bounty["Milk"]);
                     // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
@@ -303,10 +303,10 @@ public class GameManager : MonoBehaviour
     
     private string BountyToLifeTime(float avgDailyUse, int numCollected)
     {
-        int DaysOfUse = Convert.ToInt32(numCollected / avgDailyUse);
-        int MonthsOfUse = DaysOfUse / 30;
-        int WeeksOfUse = DaysOfUse % 30 / 7;
-        DaysOfUse = DaysOfUse % 30 % 7;
-        return " für " + MonthsOfUse.ToString() + " Monate, " + WeeksOfUse.ToString() + " Wochen und " + DaysOfUse.ToString() + " Tage\n";
+        int daysOfUse = (int) (numCollected / avgDailyUse);
+        int monthsOfUse = daysOfUse / 30;
+        int weeksOfUse = daysOfUse % 30 / 7;
+        daysOfUse = daysOfUse % 30 % 7;
+        return " für " + monthsOfUse + " Monate, " + weeksOfUse + " Wochen und " + daysOfUse + " Tage\n";
     }
 }
