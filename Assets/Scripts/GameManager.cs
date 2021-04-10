@@ -181,6 +181,7 @@ public class GameManager : MonoBehaviour
                     Destroy(_currentLevel);
                 SwitchState(State.LOADLEVEL);
                 MoneySpent=0.00f;
+                panelGameOver.SetActive(false);
                 break;
             case State.PLAY:
                 break;
