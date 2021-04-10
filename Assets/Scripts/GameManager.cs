@@ -190,6 +190,7 @@ public class GameManager : MonoBehaviour
                     "- Klopapier" + BountyToLifeTime(134f / 365, Bounty["ToiletRoll"]) +
                     "- Mehl" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
                     "- Hefe" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
+                    // ja, es ist wirklich so wenig: https://milchindustrie.de/wp-content/uploads/2018/11/ProkopfDeutschland_Mopro_2010-2018x_Homepage.pdf
                     "- Milch" + BountyToLifeTime(0.13f / 365, Bounty["Milk"]);
                     // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
