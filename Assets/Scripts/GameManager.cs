@@ -286,7 +286,7 @@ public class GameManager : MonoBehaviour
             textCountDown.color = Color.red;
     }
 
-    private int[] bountyToLifeTime(float avgDailyUse, int numCollected)
+    private int[] BountyToLifeTime(float avgDailyUse, int numCollected)
     {
         /*
          * TODO:
