@@ -302,10 +302,10 @@ public class GameManager : MonoBehaviour
     
     private string BountyToLifeTime(float avgDailyUse, int numCollected)
     {
-        int DaysOfUse = Convert.ToInt32(numCollected / avgDailyUse);
-        int MonthsOfUse = DaysOfUse / 30;
-        int WeeksOfUse = DaysOfUse % 30 / 7;
-        DaysOfUse = DaysOfUse % 30 % 7;
-        return " für " + MonthsOfUse.ToString() + " Monate, " + WeeksOfUse.ToString() + " Wochen und " + DaysOfUse.ToString() + " Tage\n";
+        int daysOfUse = Convert.ToInt32(numCollected / avgDailyUse);
+        int monthsOfUse = daysOfUse / 30;
+        int weeksOfUse = daysOfUse % 30 / 7;
+        daysOfUse = daysOfUse % 30 % 7;
+        return " für " + monthsOfUse + " Monate, " + weeksOfUse + " Wochen und " + daysOfUse + " Tage\n";
     }
 }
