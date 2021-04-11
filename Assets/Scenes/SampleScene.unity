@@ -3500,7 +3500,7 @@ MonoBehaviour:
   textTertiaryAction: {fileID: 1670422467}
   textScore: {fileID: 621187026}
   buttonMenuPlay: {fileID: 836281280}
-  buttonGameOverPlayAgain: {fileID: 486599445}
+  buttonPlayAgain: {fileID: 486599445}
   buttonReplayLevel: {fileID: 267564382}
   buttonHowto: {fileID: 1563844115}
   buttonBack: {fileID: 1316527462}
