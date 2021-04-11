@@ -215,7 +215,7 @@ public class GameManager : MonoBehaviour
                 textLevelcompletedSummary.text =
                     "You have hoarded food for " + _moneySpent + "€ \n" +
                     "Measured against the national average you have\n" +
-                    "- toiletpaper" + BountyToLifeTime(134f / 365, Bounty["ToiletRoll"]) +
+                    "- toiletpaper" + BountyToLifeTime(46f / 365, Bounty["ToiletRoll"]) +
                     "- flour" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
                     "- yeast" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
                     // ja, es ist wirklich so wenig: https://milchindustrie.de/wp-content/uploads/2018/11/ProkopfDeutschland_Mopro_2010-2018x_Homepage.pdf
