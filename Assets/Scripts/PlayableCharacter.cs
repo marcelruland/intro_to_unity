@@ -81,7 +81,6 @@ public class PlayableCharacter : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            Debug.Log("HIT BY TOILET ROLL");
             TakeInstantDamage();
         }
     }
