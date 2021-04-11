@@ -42,9 +42,9 @@ public class GameManager : MonoBehaviour
         get { return _health; }
         set
         {
+            _health = value;
             if (_health <= 0f)
                 SwitchState(State.GAMEOVER);
-            _health = value;
             textHealth.text = "Health: " + _health.ToString("0.00");
         }
     }
