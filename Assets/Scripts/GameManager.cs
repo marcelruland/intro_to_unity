@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
                     // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
+                textScore.text = "Your Score is " + "5" + "! \n"+ "Do not forget to take a shopping card. ";
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
