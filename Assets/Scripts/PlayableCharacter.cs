@@ -181,8 +181,8 @@ public class PlayableCharacter : MonoBehaviour
         else if (_carriedCollectable == "Milk")
         {
             _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrink);
-            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxRecharge);
-            StartCoroutine(TemporarilyIncreaseSpeed(3f, 1f));
+            // _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxRecharge);
+            StartCoroutine(TemporarilyIncreaseSpeed(3f, 3f));
         }
 
         IEnumerator TemporarilyIncreaseSpeed(float durationInSeconds, float amount)
