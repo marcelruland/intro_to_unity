@@ -181,6 +181,7 @@ public class PlayableCharacter : MonoBehaviour
         else if (_carriedCollectable == "Milk")
         {
             _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrink);
+            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxRecharge);
             StartCoroutine(TemporarilyIncreaseSpeed(3f, 1f));
         }
 
@@ -231,6 +232,7 @@ public class PlayableCharacter : MonoBehaviour
     
     private void TakeInstantDamage(float amount = 0.3f)
     {
+        _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxTakeDamage);
         _health -= amount;
         GameManager.Instance.Health = _health;
     }

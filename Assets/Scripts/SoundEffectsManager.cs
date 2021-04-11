@@ -7,6 +7,8 @@ public class SoundEffectsManager : MonoBehaviour
 {
     public AudioSource SoundEffects;
     public AudioClip sfxDrink;
+    public AudioClip sfxRecharge;
+    public AudioClip sfxTakeDamage;
 
     public void PlaySoundEffect(AudioClip soundEffect)
     {
