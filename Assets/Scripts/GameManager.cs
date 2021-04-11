@@ -338,8 +338,16 @@ public class GameManager : MonoBehaviour
 
     private float CalculateScore(float money, float healthleft)
     {
-        float score = (money * 100 - (1 - healthleft) * 100);
-        return score;
+        float score = (money * 100 - (1 - healthleft) * 1000);
+        if (score <= 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return score;
+        }
+        
     }
 
     private string KeptRules(float healthleft)
