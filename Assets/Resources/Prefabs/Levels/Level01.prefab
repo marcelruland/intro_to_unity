@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 937642364505379464}
   - component: {fileID: 937642364505379465}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: RoomCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
