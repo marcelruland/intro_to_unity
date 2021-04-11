@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     public Button buttonReplayLevel;
     public Button buttonHowto;
     public Button buttonBack;
-    public Button buttonBackMenuHowTo;
+    public Button buttonBackMenu;
 
 
     /*
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
         buttonReplayLevel.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         //buttonHowto.onClick.;
         buttonBack.onClick.AddListener(delegate { SwitchState(State.LEVELCOMPLETED); });
-        buttonBackMenuHowTo.onClick.AddListener(delegate { SwitchState(State.MENU); });
+        buttonBackMenu.onClick.AddListener(delegate { SwitchState(State.MENU); });
         
         // make accessing this script easier
         Instance = this;
@@ -177,9 +177,10 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case State.MENU:
-                panelManual.SetActive(false);
+                
                 panelMenu.SetActive(true);
                 panelScore.SetActive(false);
+                panelManual.SetActive(false);
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicMenu);
                 
                 break;
