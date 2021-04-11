@@ -7015,6 +7015,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: FruitAndVeggieShelf (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
 --- !u!4 &4523853083675692630 stripped
@@ -8503,6 +8519,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: FruitAndVeggieShelf (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
 --- !u!4 &359977413577613456 stripped
@@ -8763,6 +8795,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: FruitAndVeggieShelf
       objectReference: {fileID: 0}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
 --- !u!4 &155774378524895799 stripped
@@ -10717,6 +10765,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: FruitAndVeggieShelf (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
+    - target: {fileID: 4001860433502115496, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 818dea1ac2a3f1f4b9690bd3355adef8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298584c919b8aa9408ce368f6c9723b0, type: 3}
 --- !u!4 &1375361644000324118 stripped
