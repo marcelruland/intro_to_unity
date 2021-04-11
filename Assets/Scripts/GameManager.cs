@@ -177,19 +177,24 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case State.INITIALIZE:
-                panelGameOver.SetActive(false);
-                Cursor.visible = false;
+                // this should be sufficient in endstate of GAMEOVER
+                // panelGameOver.SetActive(false);
                 panelPlay.SetActive(true);
+                Cursor.visible = false;
+                _countDownRunning = false;
+                MoneySpent=0.00f;
                 textCountDown.text = "";
+                
                 if (_currentLevel != null)
                     Destroy(_currentLevel);
+                
                 SwitchState(State.LOADLEVEL);
-                MoneySpent=0.00f;
                 
                 break;
             case State.PLAY:
                 break;
             case State.LEVELCOMPLETED:
+                _audioManager.ChangeBackgroundMusic(_audioManager.musicMenu);
                 textLevelcompletedSummary.text =
                     "You have hoarded food for " + _moneySpent + "€ \n" +
                     "Measured against the national average you have\n" +
