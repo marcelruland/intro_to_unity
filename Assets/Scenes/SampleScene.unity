@@ -3534,7 +3534,7 @@ MonoBehaviour:
   buttonReplayLevel: {fileID: 267564382}
   buttonHowto: {fileID: 1563844115}
   buttonBack: {fileID: 1316527462}
-  buttonBackMenuHowTo: {fileID: 905117689}
+  buttonBackMenu: {fileID: 905117689}
 --- !u!4 &1638231545
 Transform:
   m_ObjectHideFlags: 0
