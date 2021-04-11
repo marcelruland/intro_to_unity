@@ -77,6 +77,14 @@ public class PlayableCharacter : MonoBehaviour
         CheckSafetyDistance();
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 10)
+        {
+            Debug.Log("HIT BY TOILET ROLL");
+            TakeInstantDamage();
+        }
+    }
 
     private void PickUpCollectable()
     {
@@ -193,6 +201,12 @@ public class PlayableCharacter : MonoBehaviour
     private void TakeDamage(float amount = 0.1f)
     {
         _health -= amount * Time.deltaTime;
+        GameManager.Instance.Health = _health;
+    }
+    
+    private void TakeInstantDamage(float amount = 0.2f)
+    {
+        _health -= amount;
         GameManager.Instance.Health = _health;
     }
 }

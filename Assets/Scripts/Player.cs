@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
         Vector3 currentPlayerVelocity = Vector3.ClampMagnitude(new Vector3(MovementInput.RunX, 0, MovementInput.RunZ), 1);
 
         Vector3 forward = transform1.forward;
-        Vector3 throwDirection = new Vector3(forward.x, 1f, forward.z).normalized;
+        Vector3 throwDirection = new Vector3(forward.x, 0.2f, forward.z).normalized;
         thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + throwDirection * _THROW_FORCE;
     }
 }
