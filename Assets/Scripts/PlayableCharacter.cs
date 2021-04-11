@@ -230,7 +230,7 @@ public class PlayableCharacter : MonoBehaviour
         GameManager.Instance.Health = _health;
     }
     
-    private void TakeInstantDamage(float amount = 0.3f)
+    private void TakeInstantDamage(float amount = 0.1f)
     {
         _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxTakeDamage);
         _health -= amount;
