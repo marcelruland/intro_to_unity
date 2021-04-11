@@ -46,12 +46,11 @@ public class PlayableCharacter : MonoBehaviour
 
     private readonly Dictionary<string, float> _collectableValues = new Dictionary<string, float>
     {
-        {"Banana", 0.40f},
         {"Disinfectant", 1.99f},
-        {"Flour", 0.79f},
         {"Milk", 1.09f},
-        {"ToiletRoll", 0.25f},
+        {"Flour", 0.79f},
         {"Yeast", 0.49f},
+        {"ToiletRoll", 0.25f},
     };
 
     private void Awake()
