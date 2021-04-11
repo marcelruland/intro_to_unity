@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     public Text textScore;
 
     public Button buttonMenuPlay;
-    public Button buttonGameOverPlayAgain;
+    public Button buttonPlayAgain;
     public Button buttonReplayLevel;
     public Button buttonHowto;
     public Button buttonBack;
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
         _audioManager = FindObjectOfType<AudioManager>();
         // initialise buttons
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
-        buttonGameOverPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
+        buttonPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonReplayLevel.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         //buttonHowto.onClick.;
         buttonBack.onClick.AddListener(delegate { SwitchState(State.LEVELCOMPLETED); });
