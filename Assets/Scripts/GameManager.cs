@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
                     "- flour" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
                     "- yeast" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
                     // ja, es ist wirklich so wenig: https://milchindustrie.de/wp-content/uploads/2018/11/ProkopfDeutschland_Mopro_2010-2018x_Homepage.pdf
-                    "- milk" + BountyToLifeTime(0.13f / 365, Bounty["Milk"]);
+                    "- milk" + BountyToLifeTime(49.5f / 365, Bounty["Milk"]);
                     // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
