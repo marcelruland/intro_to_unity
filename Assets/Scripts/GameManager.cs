@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
      * VARIABLES
      */
     public static GameManager Instance { get; private set; }
+    private AudioManager _audioManager;
     public GameObject[] levels;
     private GameObject _currentLevel;
     [NonSerialized] public readonly float timePerRound = 50f;
@@ -150,6 +151,7 @@ public class GameManager : MonoBehaviour
      */
     private void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         // initialise buttons
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonGameOverPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
@@ -171,6 +173,7 @@ public class GameManager : MonoBehaviour
                 panelManual.SetActive(false);
                 panelMenu.SetActive(true);
                 panelScore.SetActive(false);
+                _audioManager.ChangeBackgroundMusic(_audioManager.musicMenu);
                 
                 break;
             case State.INITIALIZE:
@@ -201,6 +204,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
+                _audioManager.ChangeBackgroundMusic(_audioManager.musicLobby);
                 SwitchState(State.PLAY);
                 break;
             case State.GAMEOVER:

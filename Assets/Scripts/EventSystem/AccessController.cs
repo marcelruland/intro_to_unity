@@ -5,16 +5,19 @@ using UnityEngine;
 
 public class AccessController : MonoBehaviour
 {
-    
     public Collider EntranceCollider;
     public Collider ExitCollider;
+    
+    private AudioManager _audioManager;
+    
     private void Start()
     {
-        GameEvents.current.onEntranceTriggerEnter += OnEntranceOpen;
-        GameEvents.current.onExitTriggerEnter += OnExitOpen;
+        _audioManager = FindObjectOfType<AudioManager>();
+        GameEvents.current.onEntranceTriggerEnter += OnEntranceStartRound;
+        GameEvents.current.onExitTriggerEnter += OnExitEndRound;
     }
 
-    private void OnEntranceOpen()
+    private void OnEntranceStartRound()
     {
         Debug.Log("at entrance");
         
@@ -22,9 +25,10 @@ public class AccessController : MonoBehaviour
         ExitCollider.enabled = false;
         EntranceCollider.enabled = true;
         GameManager.Instance.InitiateCountdown(GameManager.Instance.timePerRound);
+        _audioManager.ChangeBackgroundMusic(_audioManager.musicRound);
     }
 
-    private void OnExitOpen()
+    private void OnExitEndRound()
     {
         Debug.Log("at exit");
         GameManager.Instance.SwitchState(GameManager.State.LEVELCOMPLETED);
