@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundEffects: {fileID: 145867136}
-  sfxDrink: {fileID: 0}
+  sfxDrink: {fileID: 8300000, guid: bc74074c1a7124561802a45e66f88360, type: 3}
 --- !u!82 &145867136
 AudioSource:
   m_ObjectHideFlags: 0

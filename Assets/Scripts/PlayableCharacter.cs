@@ -14,6 +14,7 @@ using Random = System.Random;
 public class PlayableCharacter : MonoBehaviour
 {
     Random random = new System.Random();
+    private SoundEffectsManager _soundEffectsManager;
     private Player _player;
     protected Rigidbody Rigidbody;
     public InputStr Input;
@@ -61,6 +62,7 @@ public class PlayableCharacter : MonoBehaviour
     
     void Start()
     {
+        _soundEffectsManager = FindObjectOfType<SoundEffectsManager>();
         ResetCollectableValues();
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
         GameManager.Instance.Health = _health;
@@ -178,6 +180,7 @@ public class PlayableCharacter : MonoBehaviour
         }
         else if (_carriedCollectable == "Milk")
         {
+            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrink);
             StartCoroutine(TemporarilyIncreaseSpeed(3f, 1f));
         }
 
