@@ -57,6 +57,14 @@ public class GameManager : MonoBehaviour
         set { _level = value; }
     }
 
+    private float _score;
+
+   // public float Score
+    //{
+      //  get { return _score;}
+      //  set { _score = _moneySpent*100+_health; }
+   // }
+
     private float _moneySpent;
 
     public float MoneySpent
@@ -108,7 +116,7 @@ public class GameManager : MonoBehaviour
     public Button buttonMenuPlay;
     public Button buttonPlayAgain;
     public Button buttonReplayLevel;
-    public Button buttonHowto;
+    //public Button buttonHowto;
     public Button buttonBack;
     public Button buttonBackMenu;
 
@@ -215,7 +223,7 @@ public class GameManager : MonoBehaviour
                     // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
-                textScore.text = "Your Score is " + "5" + "! \n"+ "Do not forget to take a shopping card. ";
+                textScore.text = "Your Score is " + CalculateScore(MoneySpent, Health) + "! \n"+ "Do not forget to take a shopping card. \n"+ KeptRules(Health);
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
@@ -322,6 +330,26 @@ public class GameManager : MonoBehaviour
             textCountDown.color = new Color(1, 0.65f, 0);
         else
             textCountDown.color = Color.red;
+    }
+
+    private float CalculateScore(float money, float healthleft)
+    {
+        float score = (money * 100 - (1 - healthleft) * 100);
+        return score;
+    }
+
+    private string KeptRules(float healthleft)
+    {
+        if (healthleft != 1.00f)
+        {
+            return "Please be aware to keep distance!";
+        }
+        else
+        {
+            return "Thank you!";
+        }
+            
+        
     }
     
     private string BountyToLifeTime(float avgDailyUse, int numCollected)
