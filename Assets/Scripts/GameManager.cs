@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
                 MoneySpent=0.00f;
                 //Score = 0f;
                 textCountDown.text = "";
-                
+                _health = 1f;
                 if (_currentLevel != null)
                     Destroy(_currentLevel);
                 
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
                     // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
-                textScore.text = "Your Score is " + CalculateScore(MoneySpent, Health) + "! \n"+ "Do not forget to take a shopping card. \n"+ KeptRules(Health);
+                textScore.text = "Your Score is " + CalculateScore(MoneySpent, _health) + "! \n"+ "Do not forget to take a shopping card. \n"+ KeptRules(_health);
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
@@ -279,7 +279,7 @@ public class GameManager : MonoBehaviour
                 Destroy(_currentLevel);
                 panelPlay.SetActive(false);
                 Cursor.visible = true;
-                _health = 1f;
+                
                 break;
             case State.LEVELCOMPLETED:
                 panelLevelCompleted.SetActive(true);
@@ -340,13 +340,14 @@ public class GameManager : MonoBehaviour
 
     private string KeptRules(float healthleft)
     {
-        if (healthleft != 1.00f)
+        if (healthleft == 1f)
         {
-            return "Please be aware to keep distance!";
+            return "Thank you!";
+            
         }
         else
         {
-            return "Thank you!";
+            return "Please be aware to keep distance!";
         }
             
         
