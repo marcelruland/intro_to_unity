@@ -34,7 +34,7 @@ public class NonPlayableCharacter : MonoBehaviour
         _player.MovementInput.RunZ = 0f;
         _numberOfWalkingPoints = walkingPoints.Length;
         
-        InvokeRepeating(nameof(ThrowWeapon), 1f, 1f);
+        InvokeRepeating(nameof(ThrowToiletRoll), 1f, 1f);
     }
 
 
@@ -70,11 +70,28 @@ public class NonPlayableCharacter : MonoBehaviour
         }
     }
     
-    private void ThrowWeapon()
+    private void ThrowToiletRoll()
     {
-        if (_pcFound)
+        if (!_pcFound) return;
+        
+        Debug.Log("THROW");
+        _player.ActionInput.ThrownCollectable = "ToiletRoll";
+        _player.ActionInput.Throw = true;
+        StartCoroutine(ThrowNpcWeapon());
+        
+        IEnumerator ThrowNpcWeapon()
         {
-            Debug.Log("THROW");
+            yield return null;
+            _player.ActionInput.Throw = false;
+            _player.ActionInput.ThrownCollectable = "NPCWeapon";
+            _player.ActionInput.Throw = true;
+            StartCoroutine(SetThrowToFalse());
+        }
+        
+        IEnumerator SetThrowToFalse()
+        {
+            yield return null;
+            _player.ActionInput.Throw = false;
         }
     }
 
