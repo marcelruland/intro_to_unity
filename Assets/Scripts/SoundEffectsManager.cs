@@ -6,9 +6,10 @@ using UnityEngine;
 public class SoundEffectsManager : MonoBehaviour
 {
     public AudioSource SoundEffects;
-    public AudioClip sfxDrink;
+    public AudioClip sfxDrinkMilk;
     public AudioClip sfxRecharge;
     public AudioClip sfxTakeDamage;
+    public AudioClip sfxDrinkDisinfectant;
 
     public void PlaySoundEffect(AudioClip soundEffect)
     {

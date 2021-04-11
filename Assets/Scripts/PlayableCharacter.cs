@@ -175,14 +175,15 @@ public class PlayableCharacter : MonoBehaviour
     {
         if (_carriedCollectable == "Disinfectant")
         {
+            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrinkMilk);
             _health = 0.1f;
             GameManager.Instance.Health = _health;
         }
         else if (_carriedCollectable == "Milk")
         {
-            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrink);
+            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrinkMilk);
             // _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxRecharge);
-            StartCoroutine(TemporarilyIncreaseSpeed(3f, 3f));
+            StartCoroutine(TemporarilyIncreaseSpeed(3f, 5f));
         }
 
         IEnumerator TemporarilyIncreaseSpeed(float durationInSeconds, float amount)
