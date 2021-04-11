@@ -193,15 +193,19 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case State.INITIALIZE:
-                // this should be sufficient in endstate of GAMEOVER
-                // panelGameOver.SetActive(false);
-                panelPlay.SetActive(true);
-                Cursor.visible = false;
+                // reset values
+                foreach(string key in Bounty.Keys)
+                {
+                    Bounty[key] = 0;
+                }
                 _countDownRunning = false;
                 MoneySpent=0.00f;
-                //Score = 0f;
-                textCountDown.text = "";
                 _health = 1f;
+                textCountDown.text = "";
+                
+                panelPlay.SetActive(true);
+                Cursor.visible = false;
+                
                 if (_currentLevel != null)
                     Destroy(_currentLevel);
                 
