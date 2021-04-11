@@ -222,6 +222,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAMEOVER:
                 panelGameOver.SetActive(true);
+                _audioManager.ChangeBackgroundMusic(_audioManager.musicMenu);
                 break;
             case State.END:
                 break;
