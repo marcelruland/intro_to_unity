@@ -146,12 +146,17 @@ public class Player : MonoBehaviour
         * POSITION
         * move instantiated collectable in front of player
         */
-        var throwPosition = transform.position + new Vector3(0.5f, 1f, 0f);
+        Transform transform1 = transform;
+        Vector3 throwPosition =
+            transform1.position
+            + transform1.forward * 0f
+            + transform1.right * 0.5f
+            + Vector3.up;
         thrownCollectable.transform.position = throwPosition;
 
         // VELOCITY
         // same velocity as player
-        var currentPlayerVelocity = Vector3.ClampMagnitude(new Vector3(MovementInput.RunX, 0, MovementInput.RunZ), 1);
+        Vector3 currentPlayerVelocity = Vector3.ClampMagnitude(new Vector3(MovementInput.RunX, 0, MovementInput.RunZ), 1);
 
         thrownCollectable.GetComponent<Rigidbody>().velocity = currentPlayerVelocity + transform.forward * _THROW_FORCE;
     }
