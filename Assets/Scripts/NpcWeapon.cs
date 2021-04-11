@@ -6,7 +6,7 @@ public class NpcWeapon : MonoBehaviour
 {
     private void Awake()
     {
-        StartCoroutine(DestroyAfterNSeconds(5f));
+        StartCoroutine(DestroyAfterNSeconds(3f));
         
         IEnumerator DestroyAfterNSeconds(float delay)
         {

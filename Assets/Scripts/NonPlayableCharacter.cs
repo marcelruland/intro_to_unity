@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class NonPlayableCharacter : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class NonPlayableCharacter : MonoBehaviour
     private int _currentPointIndex = 0;
     private const int DETECTION_RADIUS = 5;
     private bool _pcFound;
+    private Random _rand = new Random();
+
 
     private void Awake()
     {
@@ -33,7 +36,7 @@ public class NonPlayableCharacter : MonoBehaviour
         _player.MovementInput.RunX = 0f;
         _player.MovementInput.RunZ = 0f;
         _numberOfWalkingPoints = walkingPoints.Length;
-        
+
         InvokeRepeating(nameof(ThrowToiletRoll), 1f, 1f);
     }
 
@@ -51,7 +54,7 @@ public class NonPlayableCharacter : MonoBehaviour
             var pc = pcArr[0];
             var pcPosition = pc.transform.position;
             var directionToPc = DirectionToPoint(new Vector2(pcPosition.x, pcPosition.z));
-            
+
             _player.MovementInput.LookX = directionToPc.x;
             _player.MovementInput.LookZ = directionToPc.y;
         }
@@ -60,8 +63,8 @@ public class NonPlayableCharacter : MonoBehaviour
             _player.MovementInput.LookX = walkingDirection.x;
             _player.MovementInput.LookZ = walkingDirection.y;
         }
-        
-        
+
+
         if (IsAtPoint(walkingPoints[_currentPointIndex]))
         {
             _currentPointIndex++;
@@ -69,15 +72,24 @@ public class NonPlayableCharacter : MonoBehaviour
                 _currentPointIndex = 0;
         }
     }
-    
+
     private void ThrowToiletRoll()
     {
         if (!_pcFound) return;
-        
-        _player.ActionInput.ThrownCollectable = "ToiletRollNpcWeapon";
+        string[] arsenal = new string[]
+        {
+            "Banana",
+            "Flour",
+            "Milk",
+            "ToiletRoll",
+            "Yeast",
+        };
+
+        int choice = _rand.Next(5);
+        _player.ActionInput.ThrownCollectable = "NpcWeapons/" + arsenal[choice] + "NpcWeapon";
         _player.ActionInput.Throw = true;
         StartCoroutine(SetThrowToFalse());
-        
+
         IEnumerator SetThrowToFalse()
         {
             yield return null;
@@ -98,7 +110,6 @@ public class NonPlayableCharacter : MonoBehaviour
         Vector3 position3d = transform.position;
         Vector2 position2d = new Vector2(position3d.x, position3d.z);
         return CalculateNormalizedDirection(point, position2d);
-        
     }
 
 
@@ -107,5 +118,4 @@ public class NonPlayableCharacter : MonoBehaviour
         // calculates directional Vector2 FROM a TO b
         return (a - b).normalized;
     }
-
 }

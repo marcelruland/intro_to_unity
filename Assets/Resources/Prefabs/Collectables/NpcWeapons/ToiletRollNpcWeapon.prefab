@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4307798009980519249}
   - component: {fileID: 4741029343539498871}
   - component: {fileID: 834642883543209701}
-  - component: {fileID: -1553130892540687772}
+  - component: {fileID: 3128765663178217922}
   m_Layer: 10
-  m_Name: ToiletRollNPCWeapon
+  m_Name: ToiletRollNpcWeapon
   m_TagString: ToiletRoll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -814,7 +814,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.11, y: 0.09, z: 0.11}
   m_Center: {x: -0.055, y: 0.045, z: 0}
---- !u!114 &-1553130892540687772
+--- !u!114 &3128765663178217922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
