@@ -112,7 +112,8 @@ public class GameManager : MonoBehaviour
     public Text textSecondaryAction;
     public Text textTertiaryAction;
     public Text textScore;
-
+    public Text textScoreBests;
+    
     public Button buttonMenuPlay;
     public Button buttonPlayAgain;
     public Button buttonReplayLevel;
@@ -228,6 +229,7 @@ public class GameManager : MonoBehaviour
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
                 textScore.text = "Your Score is " + CalculateScore(MoneySpent, _health) + "! \n"+ "Do not forget to take a shopping card. \n"+ KeptRules(_health);
+                textScoreBests.text = "1. " + CalculateScore(MoneySpent, _health) + "\n 2. All others";
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
