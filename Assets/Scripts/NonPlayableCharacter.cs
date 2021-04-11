@@ -20,6 +20,7 @@ public class NonPlayableCharacter : MonoBehaviour
     private int _numberOfWalkingPoints;
     private int _currentPointIndex = 0;
     private const int DETECTION_RADIUS = 5;
+    private bool _pcFound;
 
     private void Awake()
     {
@@ -31,8 +32,9 @@ public class NonPlayableCharacter : MonoBehaviour
         _player.ActionInput.Jump = false;
         _player.MovementInput.RunX = 0f;
         _player.MovementInput.RunZ = 0f;
-        
         _numberOfWalkingPoints = walkingPoints.Length;
+        
+        InvokeRepeating(nameof(ThrowWeapon), 1f, 1f);
     }
 
 
@@ -43,12 +45,13 @@ public class NonPlayableCharacter : MonoBehaviour
         _player.MovementInput.RunZ = walkingDirection.y;
 
         Collider[] pcArr = Physics.OverlapSphere(transform.position, DETECTION_RADIUS, 1 << 8);
-        bool pcFound = pcArr.Length != 0;
-        if (pcFound)
+        _pcFound = pcArr.Length != 0;
+        if (_pcFound)
         {
             var pc = pcArr[0];
             var pcPosition = pc.transform.position;
             var directionToPc = DirectionToPoint(new Vector2(pcPosition.x, pcPosition.z));
+            
             _player.MovementInput.LookX = directionToPc.x;
             _player.MovementInput.LookZ = directionToPc.y;
         }
@@ -64,6 +67,14 @@ public class NonPlayableCharacter : MonoBehaviour
             _currentPointIndex++;
             if (_currentPointIndex >= _numberOfWalkingPoints)
                 _currentPointIndex = 0;
+        }
+    }
+    
+    private void ThrowWeapon()
+    {
+        if (_pcFound)
+        {
+            Debug.Log("THROW");
         }
     }
 
