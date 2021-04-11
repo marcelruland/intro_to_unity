@@ -81,6 +81,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    //public float Score
+    //{
+        
+    //}
+
     // User Interface
     public GameObject panelMenu;
     public GameObject panelPlay;
@@ -97,6 +103,7 @@ public class GameManager : MonoBehaviour
     public Text textPrimaryAction;
     public Text textSecondaryAction;
     public Text textTertiaryAction;
+    public Text textScore;
 
     public Button buttonMenuPlay;
     public Button buttonGameOverPlayAgain;
@@ -183,6 +190,7 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = false;
                 _countDownRunning = false;
                 MoneySpent=0.00f;
+                //Score = 0f;
                 textCountDown.text = "";
                 
                 if (_currentLevel != null)
