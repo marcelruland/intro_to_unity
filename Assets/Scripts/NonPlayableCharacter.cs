@@ -19,6 +19,7 @@ public class NonPlayableCharacter : MonoBehaviour
     public Vector2[] walkingPoints;
     private int _numberOfWalkingPoints;
     private int _currentPointIndex = 0;
+    private const int DETECTION_RADIUS = 5;
 
     private void Awake()
     {
@@ -37,7 +38,27 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void Update()
     {
-        WalkToPoint(walkingPoints[_currentPointIndex]);
+        Vector2 walkingDirection = DirectionToPoint(walkingPoints[_currentPointIndex]);
+        _player.MovementInput.RunX = walkingDirection.x;
+        _player.MovementInput.RunZ = walkingDirection.y;
+
+        Collider[] pcArr = Physics.OverlapSphere(transform.position, DETECTION_RADIUS, 1 << 8);
+        bool pcFound = pcArr.Length != 0;
+        if (pcFound)
+        {
+            var pc = pcArr[0];
+            var pcPosition = pc.transform.position;
+            var directionToPc = DirectionToPoint(new Vector2(pcPosition.x, pcPosition.z));
+            _player.MovementInput.LookX = directionToPc.x;
+            _player.MovementInput.LookZ = directionToPc.y;
+        }
+        else
+        {
+            _player.MovementInput.LookX = walkingDirection.x;
+            _player.MovementInput.LookZ = walkingDirection.y;
+        }
+        
+        
         if (IsAtPoint(walkingPoints[_currentPointIndex]))
         {
             _currentPointIndex++;
@@ -53,17 +74,13 @@ public class NonPlayableCharacter : MonoBehaviour
         return Vector2.Distance(position2d, point) <= tolerance;
     }
 
-    private void WalkToPoint(Vector2 point)
+    private Vector2 DirectionToPoint(Vector2 point)
     {
         // awkward but fast(-er than before) access
         Vector3 position3d = transform.position;
         Vector2 position2d = new Vector2(position3d.x, position3d.z);
-        Vector2 walkingDirection = CalculateNormalizedDirection(point, position2d);
+        return CalculateNormalizedDirection(point, position2d);
         
-        _player.MovementInput.RunX = walkingDirection.x;
-        _player.MovementInput.RunZ = walkingDirection.y;
-        // _player.MovementInput.LookX = walkingDirection.x;
-        // _player.MovementInput.LookZ = walkingDirection.y;
     }
 
 
