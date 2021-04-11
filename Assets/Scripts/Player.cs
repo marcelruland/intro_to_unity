@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     private Animator _animator;
 
     // How fast should a player be and how high should they jump?
-    private const float _SPEED = 3f;
+    public float speed = 3f;
     private const float _JUMP_FORCE = 4f;
     private const float _THROW_FORCE = 8f;
 
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
 
         _animator.SetBool("isMoving", true);
         Vector3 inputRun = Vector3.ClampMagnitude(new Vector3(MovementInput.RunX, 0, MovementInput.RunZ), 1);
-        Rigidbody.velocity = new Vector3(inputRun.x * _SPEED, Rigidbody.velocity.y, inputRun.z * _SPEED);
+        Rigidbody.velocity = new Vector3(inputRun.x * speed, Rigidbody.velocity.y, inputRun.z * speed);
     }
 
 

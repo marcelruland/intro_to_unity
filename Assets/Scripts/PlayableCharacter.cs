@@ -164,7 +164,30 @@ public class PlayableCharacter : MonoBehaviour
 
     private void PerformTertiaryAction()
     {
-        throw new NotImplementedException();
+        if (_secondaryAction == "hoard")
+            DrinkCollectable();
+        else
+            throw new NotImplementedException();
+    }
+
+    private void DrinkCollectable()
+    {
+        if (_carriedCollectable == "Disinfectant")
+        {
+            _health = 0.1f;
+            GameManager.Instance.Health = _health;
+        }
+        else if (_carriedCollectable == "Milk")
+        {
+            StartCoroutine(TemporarilyIncreaseSpeed(3f, 1f));
+        }
+
+        IEnumerator TemporarilyIncreaseSpeed(float durationInSeconds, float amount)
+        {
+            _player.speed += amount;
+            yield return new WaitForSeconds(durationInSeconds);
+            _player.speed -= amount;
+        }
     }
 
 
