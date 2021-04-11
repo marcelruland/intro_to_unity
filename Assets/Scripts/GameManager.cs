@@ -355,17 +355,10 @@ public class GameManager : MonoBehaviour
 
     private string KeptRules(float healthleft)
     {
-        if (healthleft == 1f)
-        {
+        if (Math.Abs(healthleft - 1f) < 0.001f)
             return "Thank you!";
-            
-        }
-        else
-        {
-            return "Please be aware to keep distance!";
-        }
-            
-        
+
+        return "Please be aware to keep distance!";
     }
     
     private string BountyToLifeTime(float avgDailyUse, int numCollected)
