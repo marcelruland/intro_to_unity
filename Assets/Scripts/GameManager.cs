@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
             case State.PLAY:
                 break;
             case State.LEVELCOMPLETED:
-                _audioManager.ChangeBackgroundMusic(_audioManager.musicMenu);
+                _audioManager.ChangeBackgroundMusic(_audioManager.musicLevelCompleted);
                 textLevelcompletedSummary.text =
                     "You have hoarded food for " + _moneySpent + "€ \n" +
                     "Measured against the national average you have\n" +
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAMEOVER:
                 panelGameOver.SetActive(true);
-                _audioManager.ChangeBackgroundMusic(_audioManager.musicMenu);
+                _audioManager.ChangeBackgroundMusic(_audioManager.musicGameOver);
                 break;
             case State.END:
                 break;

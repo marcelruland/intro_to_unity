@@ -62,8 +62,8 @@ public class NonPlayableCharacter : MonoBehaviour
         
         _player.MovementInput.RunX = walkingDirection.x;
         _player.MovementInput.RunZ = walkingDirection.y;
-        _player.MovementInput.LookX = walkingDirection.x;
-        _player.MovementInput.LookZ = walkingDirection.y;
+        // _player.MovementInput.LookX = walkingDirection.x;
+        // _player.MovementInput.LookZ = walkingDirection.y;
     }
 
 

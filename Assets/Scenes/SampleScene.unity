@@ -4286,7 +4286,10 @@ MonoBehaviour:
   BackgroundMusic: {fileID: 2018774192}
   musicMenu: {fileID: 8300000, guid: 62682e32f2e7c4d6596d4a159ecdaf87, type: 3}
   musicLobby: {fileID: 8300000, guid: d4c6c7a4ceb914379ae438834ba342fc, type: 3}
-  musicRound: {fileID: 8300000, guid: c6da8f4f2246046ad94d3c038c2d6493, type: 3}
+  musicRound: {fileID: 8300000, guid: b34f9971b279ca749826b40f461764d3, type: 3}
+  musicGameOver: {fileID: 8300000, guid: 14abe24e0561f534aad7eb2f4db677f1, type: 3}
+  musicLevelCompleted: {fileID: 8300000, guid: 724c2df8eba411b4ab7aae334152c0a7, type: 3}
+  musicPause: {fileID: 8300000, guid: c1ef8286344d6c5478b098a2b8839e2b, type: 3}
 --- !u!1 &2079107557
 GameObject:
   m_ObjectHideFlags: 0
