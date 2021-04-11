@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 756018565438000599}
   m_Layer: 6
   m_Name: ToiletRoll12Pack
-  m_TagString: Untagged
+  m_TagString: ToiletRoll12Pack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

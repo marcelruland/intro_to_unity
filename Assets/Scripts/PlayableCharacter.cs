@@ -212,7 +212,7 @@ public class PlayableCharacter : MonoBehaviour
         GameManager.Instance.MoneySpent += _collectableValues[_carriedCollectable];
         if (_carriedCollectable == "ToiletRoll12Pack")
         {
-            GameManager.Instance.Bounty[_carriedCollectable] += 12;
+            GameManager.Instance.Bounty["ToiletRoll"] += 12;
         }
         else
         {
