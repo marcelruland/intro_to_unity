@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class AccessController : MonoBehaviour
 {
-    public Collider EntranceCollider;
-    public Collider ExitCollider;
+    public Collider entranceCollider;
+    public Collider exitCollider;
     
     private AudioManager _audioManager;
     
@@ -22,8 +22,8 @@ public class AccessController : MonoBehaviour
         Debug.Log("at entrance");
         
         // lock entrance and open exit
-        ExitCollider.enabled = false;
-        EntranceCollider.enabled = true;
+        exitCollider.enabled = false;
+        entranceCollider.enabled = true;
         GameManager.Instance.InitiateCountdown(GameManager.Instance.timePerRound);
         _audioManager.ChangeBackgroundMusic(_audioManager.musicRound);
     }
