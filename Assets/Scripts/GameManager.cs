@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         {"Milk", 0},
         {"ToiletRoll", 0},
         {"Yeast", 0},
+        {"Disinfectant", 0},
     };
 
 
@@ -224,8 +225,8 @@ public class GameManager : MonoBehaviour
                     "- flour" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
                     "- yeast" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
                     // ja, es ist wirklich so wenig: https://milchindustrie.de/wp-content/uploads/2018/11/ProkopfDeutschland_Mopro_2010-2018x_Homepage.pdf
-                    "- milk" + BountyToLifeTime(49.5f / 365, Bounty["Milk"]);
-                    // + "- Desinfektionsmittel" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
+                    "- milk" + BountyToLifeTime(49.5f / 365, Bounty["Milk"]) +
+                    "- disinfectant" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
                 textScore.text = "Your Score is " + CalculateScore(MoneySpent, _health) + "! \n"+ "Do not forget to take a shopping card. \n"+ KeptRules(_health);
