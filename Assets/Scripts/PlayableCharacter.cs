@@ -41,6 +41,7 @@ public class PlayableCharacter : MonoBehaviour
         {"Flour", new[] {"hoard", ""}},
         {"Milk", new[] {"hoard", "drink"}},
         {"ToiletRoll", new[] {"hoard", ""}},
+        {"ToiletRoll12Pack", new[] {"hoard", ""}},
         {"Yeast", new[] {"hoard", ""}},
     };
 
@@ -51,6 +52,7 @@ public class PlayableCharacter : MonoBehaviour
         {"Flour", 0.79f},
         {"Yeast", 0.49f},
         {"ToiletRoll", 0.25f},
+        {"ToiletRoll12Pack", 2.75f},
     };
 
     private void Awake()
@@ -208,7 +210,14 @@ public class PlayableCharacter : MonoBehaviour
     private void HoardCollectable()
     {
         GameManager.Instance.MoneySpent += _collectableValues[_carriedCollectable];
-        GameManager.Instance.Bounty[_carriedCollectable]++;
+        if (_carriedCollectable == "ToiletRoll12Pack")
+        {
+            GameManager.Instance.Bounty[_carriedCollectable] += 12;
+        }
+        else
+        {
+            GameManager.Instance.Bounty[_carriedCollectable]++;
+        }
         _carriedCollectable = "";
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
     }

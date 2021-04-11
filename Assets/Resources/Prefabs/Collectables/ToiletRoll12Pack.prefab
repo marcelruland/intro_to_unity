@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8696232378690294042}
   - component: {fileID: 3056992210542333899}
   - component: {fileID: 756018565438000599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ToiletRoll12Pack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
