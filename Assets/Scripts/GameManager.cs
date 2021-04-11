@@ -194,10 +194,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.INITIALIZE:
                 // reset values
-                foreach(string key in Bounty.Keys)
-                {
-                    Bounty[key] = 0;
-                }
+                // foreach(string key in Bounty.Keys)
+                // {
+                //     Bounty[key] = 0;
+                // }
                 _countDownRunning = false;
                 MoneySpent=0.00f;
                 _health = 1f;
