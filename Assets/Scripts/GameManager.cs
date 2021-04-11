@@ -112,7 +112,8 @@ public class GameManager : MonoBehaviour
     public Text textSecondaryAction;
     public Text textTertiaryAction;
     public Text textScore;
-
+    public Text textScoreBests;
+    
     public Button buttonMenuPlay;
     public Button buttonPlayAgain;
     public Button buttonReplayLevel;
@@ -193,15 +194,19 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case State.INITIALIZE:
-                // this should be sufficient in endstate of GAMEOVER
-                // panelGameOver.SetActive(false);
-                panelPlay.SetActive(true);
-                Cursor.visible = false;
+                // reset values
+                // foreach(string key in Bounty.Keys)
+                // {
+                //     Bounty[key] = 0;
+                // }
                 _countDownRunning = false;
                 MoneySpent=0.00f;
-                //Score = 0f;
-                textCountDown.text = "";
                 _health = 1f;
+                textCountDown.text = "";
+                
+                panelPlay.SetActive(true);
+                Cursor.visible = false;
+                
                 if (_currentLevel != null)
                     Destroy(_currentLevel);
                 
@@ -224,6 +229,7 @@ public class GameManager : MonoBehaviour
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
                 textScore.text = "Your Score is " + CalculateScore(MoneySpent, _health) + "! \n"+ "Do not forget to take a shopping card. \n"+ KeptRules(_health);
+                textScoreBests.text = "1. " + CalculateScore(MoneySpent, _health) + "\n 2. All others";
                 break;
             case State.LOADLEVEL:
                 _currentLevel = Instantiate(levels[Level]);
@@ -334,8 +340,16 @@ public class GameManager : MonoBehaviour
 
     private float CalculateScore(float money, float healthleft)
     {
-        float score = (money * 100 - (1 - healthleft) * 100);
-        return score;
+        float score = (money * 100 - (1 - healthleft) * 1000);
+        if (score <= 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return score;
+        }
+        
     }
 
     private string KeptRules(float healthleft)

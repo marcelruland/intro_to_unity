@@ -14,6 +14,7 @@ using Random = System.Random;
 public class PlayableCharacter : MonoBehaviour
 {
     Random random = new System.Random();
+    private SoundEffectsManager _soundEffectsManager;
     private Player _player;
     protected Rigidbody Rigidbody;
     public InputStr Input;
@@ -61,6 +62,7 @@ public class PlayableCharacter : MonoBehaviour
     
     void Start()
     {
+        _soundEffectsManager = FindObjectOfType<SoundEffectsManager>();
         ResetCollectableValues();
         GameManager.Instance.CarriedCollectable = _carriedCollectable;
         GameManager.Instance.Health = _health;
@@ -81,7 +83,6 @@ public class PlayableCharacter : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            Debug.Log("HIT BY TOILET ROLL");
             TakeInstantDamage();
         }
     }
@@ -164,7 +165,33 @@ public class PlayableCharacter : MonoBehaviour
 
     private void PerformTertiaryAction()
     {
-        throw new NotImplementedException();
+        if (_secondaryAction == "hoard")
+            DrinkCollectable();
+        else
+            throw new NotImplementedException();
+    }
+
+    private void DrinkCollectable()
+    {
+        if (_carriedCollectable == "Disinfectant")
+        {
+            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrinkMilk);
+            _health = 0.1f;
+            GameManager.Instance.Health = _health;
+        }
+        else if (_carriedCollectable == "Milk")
+        {
+            _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrinkMilk);
+            // _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxRecharge);
+            StartCoroutine(TemporarilyIncreaseSpeed(3f, 5f));
+        }
+
+        IEnumerator TemporarilyIncreaseSpeed(float durationInSeconds, float amount)
+        {
+            _player.speed += amount;
+            yield return new WaitForSeconds(durationInSeconds);
+            _player.speed -= amount;
+        }
     }
 
 
@@ -204,8 +231,9 @@ public class PlayableCharacter : MonoBehaviour
         GameManager.Instance.Health = _health;
     }
     
-    private void TakeInstantDamage(float amount = 0.3f)
+    private void TakeInstantDamage(float amount = 0.1f)
     {
+        _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxTakeDamage);
         _health -= amount;
         GameManager.Instance.Health = _health;
     }
