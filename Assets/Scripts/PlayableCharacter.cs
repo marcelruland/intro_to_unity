@@ -204,7 +204,7 @@ public class PlayableCharacter : MonoBehaviour
         GameManager.Instance.Health = _health;
     }
     
-    private void TakeInstantDamage(float amount = 0.2f)
+    private void TakeInstantDamage(float amount = 0.3f)
     {
         _health -= amount;
         GameManager.Instance.Health = _health;
