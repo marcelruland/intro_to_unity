@@ -74,18 +74,9 @@ public class NonPlayableCharacter : MonoBehaviour
     {
         if (!_pcFound) return;
         
-        _player.ActionInput.ThrownCollectable = "ToiletRoll";
+        _player.ActionInput.ThrownCollectable = "ToiletRollNpcWeapon";
         _player.ActionInput.Throw = true;
-        StartCoroutine(ThrowNpcWeapon());
-        
-        IEnumerator ThrowNpcWeapon()
-        {
-            yield return null;
-            _player.ActionInput.Throw = false;
-            _player.ActionInput.ThrownCollectable = "NPCWeapon";
-            _player.ActionInput.Throw = true;
-            StartCoroutine(SetThrowToFalse());
-        }
+        StartCoroutine(SetThrowToFalse());
         
         IEnumerator SetThrowToFalse()
         {
