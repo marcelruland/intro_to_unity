@@ -343,14 +343,10 @@ public class GameManager : MonoBehaviour
     {
         float score = (money * 100 - (1 - healthleft) * 1000);
         if (score <= 0)
-        {
             return 0;
-        }
-        else
-        {
-            return score;
-        }
-        
+
+        return score;
+
     }
 
     private string KeptRules(float healthleft)
