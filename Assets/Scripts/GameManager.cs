@@ -367,4 +367,17 @@ public class GameManager : MonoBehaviour
         daysOfUse = daysOfUse % 30 % 7;
         return " for " + monthsOfUse + " months, " + weeksOfUse + " weeks " + daysOfUse + " days!\n";
     }
+
+    public void UnlockAchievement(string description)
+    {
+        StartCoroutine(DisplayAchievement(description));
+    }
+
+    IEnumerator DisplayAchievement(string description)
+    {
+        textAchievementContent.text = description;
+        textAchievementContainer.SetActive(true);
+        yield return new WaitForSeconds(3);
+        textAchievementContainer.SetActive(false);
+    }
 }

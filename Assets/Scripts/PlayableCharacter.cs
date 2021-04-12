@@ -179,6 +179,8 @@ public class PlayableCharacter : MonoBehaviour
             _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxDrinkMilk);
             _health = 0.1f;
             GameManager.Instance.Health = _health;
+            string achievementContent = "It would be interesting to test that!";
+            GameManager.Instance.UnlockAchievement(achievementContent);
         }
         else if (_carriedCollectable == "Milk")
         {
