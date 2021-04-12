@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
     public Text textTertiaryAction;
     public Text textScore;
     public Text textScoreBests;
+    public GameObject textAchievementContainer;
     
     public Button buttonMenuPlay;
     public Button buttonPlayAgain;
