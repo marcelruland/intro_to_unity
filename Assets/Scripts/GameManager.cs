@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
         {"Yeast", 0},
         {"Disinfectant", 0},
     };
-    
-    
+
+
     // properties
     private float _health = 1f;
 
