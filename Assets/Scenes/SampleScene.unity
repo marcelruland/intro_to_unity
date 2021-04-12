@@ -376,6 +376,8 @@ MonoBehaviour:
   sfxTakeDamage: {fileID: 8300000, guid: 74222d9186a884d4a85e6831417814e7, type: 3}
   sfxDrinkDisinfectant: {fileID: 8300000, guid: fd205535722e34d3a8b696ae1f0d045a, type: 3}
   sfxButtonClick: {fileID: 8300000, guid: 3a84ac7db846204459f242d7918e0d03, type: 3}
+  sfxLevelCompleted: {fileID: 8300000, guid: d27ef4a809f6d1249a592475f06df0f8, type: 3}
+  sfxGameover: {fileID: 8300000, guid: 7723311e09b22e64c8c4949d5a173979, type: 3}
 --- !u!82 &145867136
 AudioSource:
   m_ObjectHideFlags: 0

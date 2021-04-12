@@ -245,6 +245,7 @@ public class GameManager : MonoBehaviour
             case State.GAMEOVER:
                 panelGameOver.SetActive(true);
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicGameOver);
+                _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxGameover);
                 break;
             case State.END:
                 break;

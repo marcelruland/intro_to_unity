@@ -43,6 +43,7 @@ public class SoundEffectsManager : MonoBehaviour
     public AudioClip sfxDrinkDisinfectant;
     public AudioClip sfxButtonClick;
     public AudioClip sfxLevelCompleted;
+    public AudioClip sfxGameover;
     public void PlaySoundEffect(AudioClip soundEffect)
     {
         SoundEffects.Stop();
