@@ -15,6 +15,8 @@ public class AccessController : MonoBehaviour
         _audioManager = FindObjectOfType<AudioManager>();
         GameEvents.current.onEntranceTriggerEnter += OnEntranceStartRound;
         GameEvents.current.onExitTriggerEnter += OnExitEndRound;
+        GameEvents.current.onChambersTriggerEnter += OnEntranceChambers;
+        GameEvents.current.onChambersTriggerExit += OnExitChambers;
     }
 
     private void OnEntranceStartRound()
@@ -32,5 +34,16 @@ public class AccessController : MonoBehaviour
     {
         Debug.Log("at exit");
         GameManager.Instance.SwitchState(GameManager.State.LEVELCOMPLETED);
+    }
+
+    private void OnEntranceChambers()
+    {
+        _audioManager.ChangeBackgroundMusic(_audioManager.musicChambers);
+        GameManager.Instance.UnlockAchievement("Found the holy chambers!");
+    }
+
+    private void OnExitChambers()
+    {
+        _audioManager.ChangeBackgroundMusic(_audioManager.musicLobby);
     }
 }

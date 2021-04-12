@@ -5688,7 +5688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4184210595342917087}
   - component: {fileID: 5790400298526300937}
-  - component: {fileID: 3797112232327497689}
+  - component: {fileID: 5751575339478431466}
   m_Layer: 0
   m_Name: HolyChambersExitTriggerArea (1)
   m_TagString: Untagged
@@ -5723,7 +5723,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9, y: 2, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3797112232327497689
+--- !u!114 &5751575339478431466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5732,7 +5732,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6720128041061522787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e75ebd34d64244f980baa221a2893b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a4e467170e104724962d97bd6e80ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6722509721995441954
@@ -6778,7 +6778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5634543016972654095}
   - component: {fileID: 3396851189361305169}
-  - component: {fileID: 1231407396717353667}
+  - component: {fileID: 3013121768571099905}
   m_Layer: 0
   m_Name: HolyChambersEnterTriggerArea
   m_TagString: Untagged
@@ -6813,7 +6813,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9, y: 2, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1231407396717353667
+--- !u!114 &3013121768571099905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6822,7 +6822,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7805490181317952657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e75ebd34d64244f980baa221a2893b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 927ab08e3ff3242e4ae3afbb2f0995b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!64 &3895167188232273786

@@ -14,6 +14,8 @@ public class GameEvents : MonoBehaviour
 
     public event Action onEntranceTriggerEnter;
     public event Action onExitTriggerEnter;
+    public event Action onChambersTriggerEnter;
+    public event Action onChambersTriggerExit;
 
     public void EntranceTriggerEnter()
     {
@@ -25,4 +27,16 @@ public class GameEvents : MonoBehaviour
     {
         onExitTriggerEnter?.Invoke();
     }
+    
+    public void ChambersTriggerEnter()
+    {
+        // roughly equivalent to if (bla != null)
+        onChambersTriggerEnter?.Invoke();
+    }
+
+    public void ChambersTriggerExit()
+    {
+        onChambersTriggerExit?.Invoke();
+    }
+    
 }

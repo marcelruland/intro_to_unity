@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip musicRound;
     public AudioClip musicGameOver;
     public AudioClip musicLevelCompleted;
-    public AudioClip musicPause;
+    public AudioClip musicChambers;
 
     public void ChangeBackgroundMusic(AudioClip newBackgroundMusic)
     {
