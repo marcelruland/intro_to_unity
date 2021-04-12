@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
      */
     public static GameManager Instance { get; private set; }
     private AudioManager _audioManager;
+    private SoundEffectsManager _soundEffectsManager;
     public GameObject[] levels;
     private GameObject _currentLevel;
     [NonSerialized] public readonly float timePerRound = 50f;
@@ -171,6 +172,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
+        _soundEffectsManager = FindObjectOfType<SoundEffectsManager>();
         // initialise buttons
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
@@ -220,6 +222,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LEVELCOMPLETED:
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicLevelCompleted);
+                _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxLevelCompleted);
                 textLevelcompletedSummary.text =
                     "You have hoarded food for " + _moneySpent.ToString("0.00") + "€ \n" +
                     "Measured against the national average you have\n" +
