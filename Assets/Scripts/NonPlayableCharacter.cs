@@ -28,6 +28,7 @@ public class NonPlayableCharacter : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
+        _player.speed = RandomFromDistribution.RandomNormalDistribution(3f, 1f);
     }
 
     private void Start()
@@ -118,4 +119,5 @@ public class NonPlayableCharacter : MonoBehaviour
         // calculates directional Vector2 FROM a TO b
         return (a - b).normalized;
     }
+    
 }
