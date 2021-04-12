@@ -343,7 +343,7 @@ public class GameManager : MonoBehaviour
 
     private float CalculateScore(float money, float healthleft)
     {
-        float score = (money * 100 - (1 - healthleft) * 1000);
+        float score = (money * 100 - ((1 - healthleft) * 1000));
         if (score <= 0)
             return 0;
 
