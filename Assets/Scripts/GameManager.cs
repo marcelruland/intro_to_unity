@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private SoundEffectsManager _soundEffectsManager;
     public GameObject[] levels;
     private GameObject _currentLevel;
-    [NonSerialized] public readonly float timePerRound = 50f;
+    [NonSerialized] public readonly float timePerRound = 300f;
     private float _timeRemaining;
     
     public Dictionary<string, int> Bounty = new Dictionary<string, int>
