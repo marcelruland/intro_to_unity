@@ -3784,7 +3784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1274439784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4956,6 +4956,7 @@ MonoBehaviour:
   panelGameOver: {fileID: 932375150}
   panelScore: {fileID: 1091402092}
   panelManual: {fileID: 2105525143}
+  Minimap: {fileID: 1274439783}
   textCountDown: {fileID: 1703927035}
   textCarriedCollectable: {fileID: 2079107558}
   textMoneySpent: {fileID: 1251578144}

@@ -9,6 +9,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
     public GameObject panelGameOver;
     public GameObject panelScore;
     public GameObject panelManual;
+    public GameObject Minimap;
 
     public Text textCountDown;
     public Text textCarriedCollectable;
@@ -173,6 +175,7 @@ public class GameManager : MonoBehaviour
     {
         _audioManager = FindObjectOfType<AudioManager>();
         _soundEffectsManager = FindObjectOfType<SoundEffectsManager>();
+        
         // initialise buttons
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
@@ -216,11 +219,12 @@ public class GameManager : MonoBehaviour
                     Destroy(_currentLevel);
                 
                 SwitchState(State.LOADLEVEL);
-                
+                Minimap.SetActive(true);
                 break;
             case State.PLAY:
                 break;
             case State.LEVELCOMPLETED:
+                Minimap.SetActive(false);
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicLevelCompleted);
                 _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxLevelCompleted);
                 textLevelcompletedSummary.text =
@@ -244,6 +248,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAMEOVER:
                 panelGameOver.SetActive(true);
+                Minimap.SetActive(false);
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicGameOver);
                 _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxGameover);
                 break;
