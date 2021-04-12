@@ -20,6 +20,7 @@ public class NonPlayableCharacter : MonoBehaviour
     public Vector2[] walkingPoints;
     private int _numberOfWalkingPoints;
     private int _currentPointIndex = 0;
+    private Vector2 _currentPosition = new Vector2(0,0);
     private const int DETECTION_RADIUS = 5;
     private bool _pcFound;
     private Random _rand = new Random();
@@ -38,6 +39,7 @@ public class NonPlayableCharacter : MonoBehaviour
         _numberOfWalkingPoints = walkingPoints.Length;
 
         InvokeRepeating(nameof(ThrowToiletRoll), 1f, 1f);
+        InvokeRepeating(nameof(IsNPCMoving),1f,5f);
     }
 
 
@@ -63,14 +65,12 @@ public class NonPlayableCharacter : MonoBehaviour
             _player.MovementInput.LookX = walkingDirection.x;
             _player.MovementInput.LookZ = walkingDirection.y;
         }
-
-
+        
         if (IsAtPoint(walkingPoints[_currentPointIndex]))
         {
-            _currentPointIndex++;
-            if (_currentPointIndex >= _numberOfWalkingPoints)
-                _currentPointIndex = 0;
+            ChangePointIndex();
         }
+        _currentPosition = new Vector2(transform.position.x, transform.position.z);
     }
 
     private void ThrowToiletRoll()
@@ -117,5 +117,26 @@ public class NonPlayableCharacter : MonoBehaviour
     {
         // calculates directional Vector2 FROM a TO b
         return (a - b).normalized;
+    }
+
+    private bool IsNotMoving(float tolerance = 1f)
+    {
+        Vector2 position2d = new Vector2(transform.position.x, transform.position.z);
+        return Vector2.Distance(position2d, _currentPosition) <= tolerance;
+    }
+
+    private void IsNPCMoving()
+    {
+        if (IsNotMoving())
+        {
+            ChangePointIndex();
+        }
+    }
+
+    private void ChangePointIndex()
+    {
+        Random random = new Random();
+        int randomInt = random.Next(1, _numberOfWalkingPoints);
+        _currentPointIndex = (_currentPointIndex + randomInt) % _numberOfWalkingPoints;
     }
 }
