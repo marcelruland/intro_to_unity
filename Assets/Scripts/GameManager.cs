@@ -219,12 +219,11 @@ public class GameManager : MonoBehaviour
                     Destroy(_currentLevel);
                 
                 SwitchState(State.LOADLEVEL);
-                Minimap.SetActive(true);
                 break;
             case State.PLAY:
+                Minimap.SetActive(true);
                 break;
             case State.LEVELCOMPLETED:
-                Minimap.SetActive(false);
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicLevelCompleted);
                 _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxLevelCompleted);
                 textLevelcompletedSummary.text =
@@ -233,7 +232,6 @@ public class GameManager : MonoBehaviour
                     "- toiletpaper" + BountyToLifeTime(46f / 365, Bounty["ToiletRoll"]) +
                     "- flour" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
                     "- yeast" + BountyToLifeTime(2f / 365, Bounty["Flour"]) +
-                    // ja, es ist wirklich so wenig: https://milchindustrie.de/wp-content/uploads/2018/11/ProkopfDeutschland_Mopro_2010-2018x_Homepage.pdf
                     "- milk" + BountyToLifeTime(49.5f / 365, Bounty["Milk"]) +
                     "- disinfectant" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
@@ -248,7 +246,6 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GAMEOVER:
                 panelGameOver.SetActive(true);
-                Minimap.SetActive(false);
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicGameOver);
                 _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxGameover);
                 break;
@@ -294,6 +291,7 @@ public class GameManager : MonoBehaviour
                 panelLevelCompleted.SetActive(false);
                 break;
             case State.PLAY:
+                Minimap.SetActive(false);
                 Destroy(_currentLevel);
                 panelPlay.SetActive(false);
                 Cursor.visible = true;
