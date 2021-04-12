@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
      */
     public static GameManager Instance { get; private set; }
     private AudioManager _audioManager;
+    private SoundEffectsManager _soundEffectsManager;
     public GameObject[] levels;
     private GameObject _currentLevel;
     [NonSerialized] public readonly float timePerRound = 50f;
@@ -171,6 +172,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
+        _soundEffectsManager = FindObjectOfType<SoundEffectsManager>();
         // initialise buttons
         buttonMenuPlay.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
         buttonPlayAgain.onClick.AddListener(delegate { SwitchState(State.INITIALIZE); });
@@ -220,8 +222,9 @@ public class GameManager : MonoBehaviour
                 break;
             case State.LEVELCOMPLETED:
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicLevelCompleted);
+                _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxLevelCompleted);
                 textLevelcompletedSummary.text =
-                    "You have hoarded food for " + _moneySpent + "€ \n" +
+                    "You have hoarded food for " + _moneySpent.ToString("0.00") + "€ \n" +
                     "Measured against the national average you have\n" +
                     "- toiletpaper" + BountyToLifeTime(46f / 365, Bounty["ToiletRoll"]) +
                     "- flour" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
@@ -242,6 +245,7 @@ public class GameManager : MonoBehaviour
             case State.GAMEOVER:
                 panelGameOver.SetActive(true);
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicGameOver);
+                _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxGameover);
                 break;
             case State.END:
                 break;
@@ -343,7 +347,7 @@ public class GameManager : MonoBehaviour
 
     private float CalculateScore(float money, float healthleft)
     {
-        float score = (money * 100 - (1 - healthleft) * 1000);
+        float score = (money * 100 - ((1 - healthleft) * 1000));
         if (score <= 0)
             return 0;
 
