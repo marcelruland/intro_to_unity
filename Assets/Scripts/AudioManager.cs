@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeBackgroundMusic(AudioClip newBackgroundMusic)
     {
+        if (BackgroundMusic.clip == newBackgroundMusic)
+            return;
         BackgroundMusic.Stop();
         BackgroundMusic.clip = newBackgroundMusic;
         BackgroundMusic.Play();
