@@ -23,7 +23,9 @@ public class NonPlayableCharacter : MonoBehaviour
     private const int DETECTION_RADIUS = 5;
     private bool _pcFound;
     private Random _rand = new Random();
-
+    private float _health = 1.0f;
+    private SoundEffectsManager _soundEffectsManager;
+    
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void Start()
     {
+        _soundEffectsManager = FindObjectOfType<SoundEffectsManager>();
         _player.ActionInput.Jump = false;
         _player.MovementInput.RunX = 0f;
         _player.MovementInput.RunZ = 0f;
@@ -71,6 +74,13 @@ public class NonPlayableCharacter : MonoBehaviour
             _currentPointIndex++;
             if (_currentPointIndex >= _numberOfWalkingPoints)
                 _currentPointIndex = 0;
+        }
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 10)
+        {
+            TakeInstantDamage();
         }
     }
 
@@ -120,4 +130,24 @@ public class NonPlayableCharacter : MonoBehaviour
         return (a - b).normalized;
     }
     
+    private void TakeInstantDamage(float amount = 1f)
+    {
+        Debug.Log("before sound");
+        _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxTakeDamage);
+        Debug.Log("after sound");
+        float damage = RandomFromDistribution.RandomNormalDistribution(amount, 0f);
+        damage = Math.Abs(damage);
+        _health -= damage;
+        Debug.Log("NPC got dmg");
+        if (NPCIsDying())
+        {
+           Destroy(this.gameObject, 0f);
+           Debug.Log("NPC died");
+        }
+    }
+
+    private bool NPCIsDying()
+    {
+        return _health <= 0f;
+    }
 }
