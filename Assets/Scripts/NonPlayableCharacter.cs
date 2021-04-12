@@ -17,12 +17,14 @@ using Random = System.Random;
 public class NonPlayableCharacter : MonoBehaviour
 {
     private Player _player;
+    private SoundEffectsManager _soundEffectsManager;
     public Vector2[] walkingPoints;
     private int _numberOfWalkingPoints;
     private int _currentPointIndex = 0;
     private const int DETECTION_RADIUS = 5;
     private bool _pcFound;
     private Random _rand = new Random();
+    private float _health = 1f;
 
 
     private void Awake()
@@ -33,6 +35,7 @@ public class NonPlayableCharacter : MonoBehaviour
 
     private void Start()
     {
+        _soundEffectsManager = FindObjectOfType<SoundEffectsManager>();
         _player.ActionInput.Jump = false;
         _player.MovementInput.RunX = 0f;
         _player.MovementInput.RunZ = 0f;
@@ -74,6 +77,14 @@ public class NonPlayableCharacter : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 10)
+        {
+            TakeInstantDamage();
+        }
+    }
+    
     private void ThrowToiletRoll()
     {
         if (!_pcFound) return;
@@ -120,4 +131,19 @@ public class NonPlayableCharacter : MonoBehaviour
         return (a - b).normalized;
     }
     
+    private void TakeInstantDamage(float amount = 1f)
+    {
+        _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxTakeDamage);
+        float damage = RandomFromDistribution.RandomNormalDistribution(amount, 0f);
+        damage = Math.Abs(damage);
+        _health -= damage;
+        if (NPCIsDying())
+        {
+            Destroy((this.gameObject));
+        }
+    }
+    private bool NPCIsDying()
+    {
+        return _health <= 0;
+    }
 }
