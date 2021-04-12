@@ -13,7 +13,7 @@ using Random = System.Random;
 
 public class PlayableCharacter : MonoBehaviour
 {
-    Random random = new System.Random();
+    Random random = new Random();
     private SoundEffectsManager _soundEffectsManager;
     private Player _player;
     protected Rigidbody Rigidbody;
