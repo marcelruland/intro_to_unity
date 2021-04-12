@@ -28,7 +28,7 @@ public class NonPlayableCharacter : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _player.speed = RandomFromDistribution.RandomNormalDistribution(3f, 1f);
+        _player.speed = RandomFromDistribution.RandomNormalDistribution(4f, 1f);
     }
 
     private void Start()
