@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
             case State.LEVELCOMPLETED:
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicLevelCompleted);
                 textLevelcompletedSummary.text =
-                    "You have hoarded food for " + _moneySpent + "€ \n" +
+                    "You have hoarded food for " + _moneySpent.ToString("0.00") + "€ \n" +
                     "Measured against the national average you have\n" +
                     "- toiletpaper" + BountyToLifeTime(46f / 365, Bounty["ToiletRoll"]) +
                     "- flour" + BountyToLifeTime(70.6f / 365, Bounty["Yeast"]) +
