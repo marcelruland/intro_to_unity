@@ -244,7 +244,9 @@ public class PlayableCharacter : MonoBehaviour
     private void TakeInstantDamage(float amount = 0.1f)
     {
         _soundEffectsManager.PlaySoundEffect(_soundEffectsManager.sfxTakeDamage);
-        _health -= amount;
+        float damage = RandomFromDistribution.RandomNormalDistribution(amount, 0.1f);
+        damage = Math.Abs(damage);
+        _health -= damage;
         GameManager.Instance.Health = _health;
     }
 }
