@@ -197,9 +197,10 @@ public class GameManager : MonoBehaviour
                 // initialise UI elements
                 panelPlay.SetActive(false);
                 panelLevelCompleted.SetActive(false);
-                panelGameOver.SetActive(true);
-                panelScore.SetActive(true);
-                panelManual.SetActive(true);
+                panelGameOver.SetActive(false);
+                panelScore.SetActive(false);
+                panelManual.SetActive(false);
+                panelMenu.SetActive(true);
                 Minimap.SetActive(false);
                 
                 // play a funky tune
