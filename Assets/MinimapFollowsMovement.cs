@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class minimap_follows_movement : MonoBehaviour
+public class MinimapFollowsMovement : MonoBehaviour
 {
     public Transform player;
 
