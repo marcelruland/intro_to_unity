@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
     public Text textMoneySpent;
     public Text textLevelcompletedSummary;
     public Text textHealth;
+    public Image healthBar;
     public Text textPrimaryAction;
     public Text textSecondaryAction;
     public Text textTertiaryAction;
@@ -339,18 +340,12 @@ public class GameManager : MonoBehaviour
             _timeRemaining -= Time.deltaTime;
         }
 
-        textCountDown.text = _timeRemaining.ToString("0.0");
+        textCountDown.text = "HURRY UP!! " + _timeRemaining.ToString("0.0");
 
         // COLOUR
         // this can definitely by optimised, but idc right now
-        if (_timeRemaining > 30)
-            textCountDown.color = Color.black;
-        else if (_timeRemaining > 20)
-            textCountDown.color = Color.yellow;
-        else if (_timeRemaining > 10)
-            textCountDown.color = new Color(1, 0.65f, 0);
-        else
-            textCountDown.color = Color.red;
+        if (_timeRemaining < 20)
+            textCountDown.color = new Color(0.9960784f, 0.3058824f, 0.003921569f);
     }
 
     private float CalculateScore(float money, float healthleft)
