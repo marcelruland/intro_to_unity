@@ -10,7 +10,7 @@ public class SoundEffectsManager : MonoBehaviour
     public AudioClip sfxRecharge;
     public AudioClip sfxTakeDamage;
     public AudioClip sfxDrinkDisinfectant;
-
+    public AudioClip sfxButtonClick;
     public void PlaySoundEffect(AudioClip soundEffect)
     {
         // SoundEffects.Stop();
