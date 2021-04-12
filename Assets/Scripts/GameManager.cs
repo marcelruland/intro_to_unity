@@ -194,12 +194,16 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case State.MENU:
+                // initialise UI elements
+                panelPlay.SetActive(false);
+                panelLevelCompleted.SetActive(false);
+                panelGameOver.SetActive(true);
+                panelScore.SetActive(true);
+                panelManual.SetActive(true);
+                Minimap.SetActive(false);
                 
-                panelMenu.SetActive(true);
-                panelScore.SetActive(false);
-                panelManual.SetActive(false);
+                // play a funky tune
                 _audioManager.ChangeBackgroundMusic(_audioManager.musicMenu);
-                
                 break;
             case State.INITIALIZE:
                 // reset values
