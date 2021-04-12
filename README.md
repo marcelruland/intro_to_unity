@@ -28,3 +28,5 @@ We use Unity LTS 2020.3.1f1
 | primary action | E     |
 | secondary      | R     |
 | tertiary       | T     |
+
+![Hamster](https://github.com/prestoaghitato/intro_to_unity/blob/11f424e0f0aafddebbfe7ca79a53880c3113a099/Assets/Assetstore/hamster.png)
