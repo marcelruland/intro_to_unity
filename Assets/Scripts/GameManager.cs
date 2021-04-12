@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour
                     "- disinfectant" + BountyToLifeTime((float)1.5, Bounty["Disinfectant"]);
                 panelLevelCompleted.SetActive(true);
                 panelScore.SetActive(false);
-                textScore.text = "Your Score is " + CalculateScore(MoneySpent, _health) + "! \n"+ "Do not forget to take a shopping card. \n"+ KeptRules(_health);
+                textScore.text = "Your Score is " + CalculateScore(MoneySpent, _health) + "! \n"+ "Do not forget to take a shopping cart. \n"+ KeptRules(_health);
                 textScoreBests.text = "1. " + CalculateScore(MoneySpent, _health) + "\n 2. All others";
                 break;
             case State.LOADLEVEL:
